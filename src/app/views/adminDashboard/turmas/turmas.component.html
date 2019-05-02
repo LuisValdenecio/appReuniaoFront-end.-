@@ -1,0 +1,69 @@
+<div class="container">
+
+  <!-- numero de turmas mostradas -->
+
+  <!-- estatística das turmas -->
+  <div *ngIf=display class="row">
+
+      <div class="card mt-2 col-lg-4" *ngFor="let turma of turmas">
+
+          <!-- card header -->
+          <div class="card-header">
+            <h3>{{turma.nomeClass}}</h3>
+          </div>
+      
+          <!-- card body -->
+          <div class="card-body">
+            
+            <div class="row">
+              <div class="progress-group">
+                  <div class="progress-group-header">
+                    <div>Meninas</div>
+                    <div class="ml-auto font-weight-bold">40%</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar" role="progressbar" style="width: 40%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">              
+              <div class="progress-group">
+                  <div class="progress-group-header">
+                    <div>Meninos</div>
+                    <div class="ml-auto font-weight-bold">60%</div>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+
+          <!-- card footer -->
+          <div class="card-footer">
+            <div class="row m-0">
+              
+              <div class="col-lg-12">
+                <button (click)="deleteParentView()" routerLink="1">Entrar nesta turma</button>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+  </div>
+
+  
+  <router-outlet></router-outlet>
+  
+
+</div>
+

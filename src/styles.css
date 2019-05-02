@@ -1,0 +1,36 @@
+/*as fontes vão ser formatações globais, quero que todos os componentes usem a mesma fonte*/
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Raleway-Regular;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/raleway/Raleway-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Raleway-Black;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/raleway/Raleway-Black.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Raleway-SemiBold;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/raleway/Raleway-SemiBold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Raleway-Bold;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/raleway/Raleway-Bold.ttf'); 
+  }
+    

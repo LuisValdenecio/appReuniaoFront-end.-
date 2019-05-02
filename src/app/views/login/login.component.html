@@ -1,0 +1,57 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+      
+      <!-- Error Alert -->
+      <div *ngIf=showLoginWarning class="alert alert-danger alert-dismissible fade show p-3 login-warning">
+        <strong>Erro!</strong> Conta inexistente
+        <button type="button" class="close" data-dismiss="alert" (click)="dismissWarning()">&times;</button>
+      </div>
+
+      <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-55">
+          Login
+        </span>
+
+        <div [className]="emailAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'"  data-validate = "Campo vázio ou email enválido">
+          <input class="input100" type="text" name="email" placeholder="Endereço de Email" #EmailInput >
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <span class="fa fa-envelope"></span>
+          </span>
+        </div>
+
+        <div [className]="passWordAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'" data-validate = "Campo de Texto vazio">
+          <input class="input100" type="password" name="password" placeholder="Palavra passe" #PsswordInput>
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <span class="fa fa-lock"></span>
+          </span>
+        </div>
+
+        <div class="contact100-form-checkbox m-l-4">
+          <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+          <label class="label-checkbox100" for="ckb1">
+            Lembrar-me
+          </label>
+        </div>
+        
+        <div class="container-login100-form-btn p-t-25">
+          <a class="login100-form-btn" (click)="checkForm(EmailInput.value, PsswordInput.value)">
+            Entrar
+          </a>
+        </div>
+        
+        <div class="text-center w-full p-t-115">
+          <span class="txt1">
+            Ainda não tem uma conta?
+          </span>
+
+          <a class="txt1 bo1 hov1" routerLink="../signup">
+            Crie agora!.					
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

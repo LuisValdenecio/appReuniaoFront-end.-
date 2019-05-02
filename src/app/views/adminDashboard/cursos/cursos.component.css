@@ -1,0 +1,24 @@
+.card {
+    margin-top: 10px;
+    border-radius: 0%;
+    color: #fff;
+}
+
+.btn {
+    border-radius: 0%;
+    background-image: -webkit-linear-gradient(0deg, #7be9e6 10%, #34aecf 80%);
+    border: none;
+    cursor: pointer;
+}
+
+.card-body {
+    background-image: -webkit-linear-gradient(10deg, #27c4ac 10%, #42d4be 80%);
+}
+
+.card-body h5 {
+    font-weight: bold;
+}
+
+.card img {
+    opacity: .2;
+}

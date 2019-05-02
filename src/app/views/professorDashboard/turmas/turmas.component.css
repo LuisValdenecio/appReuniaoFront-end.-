@@ -1,0 +1,35 @@
+.card {
+    border-radius: 0%;
+    background-image: -webkit-linear-gradient(0deg, #198b79 10%, #31b5a1 80%);
+    border: none;
+    color: #fff;
+}
+
+.shouldDisplay {
+    display : none;
+}
+
+.card-header, .card-footer {
+    border: none;
+}
+
+.progress {
+    width:480%;
+    height: 5px;
+    border-radius: 0%;
+}
+
+.progress-bar {
+    background-image: -webkit-linear-gradient(0deg, #7ad6f2 10%, #71a9ed 80%);
+}
+
+button {
+    border: none;
+    color: #fff;
+    padding: 5px;
+    background: #7be9e6;
+}
+
+.card-footer .row {
+    text-align: center;
+}

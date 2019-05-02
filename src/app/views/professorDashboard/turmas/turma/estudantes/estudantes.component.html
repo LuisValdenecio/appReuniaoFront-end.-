@@ -1,0 +1,47 @@
+
+
+<div class="row mt-4">
+
+  <div class="col-lg-12">
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" >Foto</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Nº</th>
+              <th scope="col" class="text-center">Falta por Ausência</th>
+              <th scope="col" class="text-center">Falta de Material</th>
+              <th scope="col" class="text-center">Falta Disciplinar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of studentData; let i = index">
+              <th scope="row">
+                <img src="https://a.wattpad.com/cover/21934685-352-k598202.jpg" class="img-student">
+              </th>
+              <td class="pt-4">
+                <span>{{student.name}}</span>
+              </td>
+              <td class="pt-4">
+               <span>{{i+1}}</span> 
+              </td>
+              <td class="text-center pt-4">
+                  <input type="checkbox">
+              </td>
+              <td class="text-center pt-4">
+                <input type="checkbox">
+              </td>
+              <td class="text-center pt-4">
+                <input type="checkbox">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+  </div>
+
+</div>

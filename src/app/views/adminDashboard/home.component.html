@@ -1,0 +1,47 @@
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Dashboard do administrador</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Serviços</p>
+            <li routerLinkActive="active">
+               <a class="nav-link" routerLink="/homeadmin/inicio"><span class="fa fa-home"></span>  Início</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/homeadmin/cursos"><span class="fa fa-th-large"></span> Cursos & níveis</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/homeadmin/turmas"><span class="fa fa-th"></span>  Turmas</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/homeadmin"><span class="fa fa-sign-out"></span>  Sair da conta</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/homeadmin/cursos"><span class="fa fa-th-large"></span> Cursos & níveis</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/homeadmin/turmas"><span class="fa fa-th"></span>  Turmas</a>
+            </li>
+
+            <li>
+                <a class="nav-link" routerLink="/login"><span class="fa fa-sign-out"></span>  Sair da conta</a>
+            </li>
+           
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+        <router-outlet></router-outlet>
+    </div>
+    
+</div>       

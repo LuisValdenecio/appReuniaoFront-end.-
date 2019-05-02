@@ -1,0 +1,17 @@
+<div class="container" >
+
+  <div class="row">
+
+    <div class="col-lg-6" *ngFor="let curso of courseData">
+        <div class="card" >
+            <img class="card-img-top" src="assets/img/2.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{curso.nomeCurso}}</h5>
+              <a (click)="createClass(curso.nomeCurso)" class="btn btn-primary">Criar uma turma</a>
+            </div>
+          </div>
+    </div>
+
+  </div>
+
+</div>
