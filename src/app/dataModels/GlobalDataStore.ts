@@ -5,8 +5,6 @@ import {Observable, from} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-const PROTOCOL = "http";
-const PORT = 3500;
 const API_URL = environment.apiUrl;
 
 @Injectable() 
@@ -26,6 +24,13 @@ export class GlobalDataStore {
     }
 
     // para efeitos de simplicidade, decidi colocar aqui todos os métodos http de manipulação dos endpoints do API
+    public getAllStudents() : any {
+        return this.http.get(API_URL + '/students').pipe(map(response => {
+            const users = response;
+            return users;
+        }))
+    }
+    
     public getAllCourses() : any {
         return this.http.get(API_URL + '/cursos').pipe(map(response => {
             const users = response;
@@ -34,7 +39,7 @@ export class GlobalDataStore {
     }
 
     public getAllClasses() : any {
-        return this.http.get(API_URL + '/turmas').pipe(map(response => {
+        return this.http.get(API_URL + '/classes').pipe(map(response => {
             const classes = response;
             return classes;
         }))

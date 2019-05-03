@@ -20,7 +20,11 @@ export class DataModelInterface {
 
     public getAllCourses() {
         return this.globalDataStore.getAllCourses();
-    }    
+    }   
+    
+    public getAllStudents() {
+        return this.globalDataStore.getAllStudents();
+    }
     
     public getAllClasses() {
         return this.globalDataStore.getAllClasses();

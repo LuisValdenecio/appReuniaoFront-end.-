@@ -8,8 +8,13 @@ import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 })
 export class CursosComponent  {
 
-  private courseData : any[];
+  private courseData : any[] = [
+    {"nomeCurso" : "Informática"},
+    {"nomeCurso" : "IAC"},
+    {"nomeCurso" : "Contabilidade"}
+  ];
 
+  /*
   constructor(private dataModelInterface : DataModelInterface) {
     this.dataModelInterface.getAllCourses().subscribe(data=>{
       this.courseData = data;
@@ -19,5 +24,6 @@ export class CursosComponent  {
    public createClass(curso : String) {
     this.dataModelInterface.createClass(curso);
    }
+   */
 
 }

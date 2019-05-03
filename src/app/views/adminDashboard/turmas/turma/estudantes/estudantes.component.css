@@ -72,9 +72,12 @@ thead {
     background: #fff; 
     border-radius: 3px;
     position: relative;
-    top: 4%;
+    top: .5%;
     left: 1.5%;
+    height: 95vh;
   }
+
+
   
   /*==================================================================
   [ Title form ]*/
@@ -86,7 +89,7 @@ thead {
     text-transform: uppercase;
   
     width: 100%;
-    min-height: 100px;
+    height: 80px;
     position: relative;
     z-index: 1;
     display: -webkit-box;

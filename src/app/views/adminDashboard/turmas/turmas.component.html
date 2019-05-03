@@ -9,7 +9,7 @@
 
           <!-- card header -->
           <div class="card-header">
-            <h3>{{turma.nomeClass}}</h3>
+            <h3>{{turma["nome_class"]}}</h3>
           </div>
       
           <!-- card body -->
@@ -50,7 +50,7 @@
             <div class="row m-0">
               
               <div class="col-lg-12">
-                <button (click)="deleteParentView()" routerLink="1">Entrar nesta turma</button>
+                <button (click)="deleteParentView()" [routerLink]="urlFriendlyFormat(turma['turma_id'])">Entrar nesta turma</button>
               </div>
 
             </div>
