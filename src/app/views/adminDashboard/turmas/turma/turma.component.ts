@@ -11,8 +11,8 @@ export class TurmaComponent  {
   private routeInfo : any;
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view da turma
 
-  constructor(activeRoute : ActivatedRoute) {
-    activeRoute.url.subscribe(data=>{
+  constructor(private activeRoute : ActivatedRoute) {
+    this.activeRoute.url.subscribe(data=>{
       this.routeInfo = data;
     });
    }

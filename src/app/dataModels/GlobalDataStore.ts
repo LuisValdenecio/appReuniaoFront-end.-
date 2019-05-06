@@ -24,10 +24,22 @@ export class GlobalDataStore {
     }
 
     // para efeitos de simplicidade, decidi colocar aqui todos os métodos http de manipulação dos endpoints do API
+    public saveTeacher(teacher : any) : Observable<any> {
+        return this.http.post<any>(API_URL + '/teachers', teacher);
+    }
+
     public getAllStudents() : any {
         return this.http.get(API_URL + '/students').pipe(map(response => {
             const users = response;
             return users;
+        }))
+    }
+
+    // -->> esta chamada é crucial para determinar qual modal mostrar em cada estudante
+    public getClassGrade(classURL : String) : any {
+        return this.http.get(API_URL + classURL).pipe(map(response =>{
+            const grade = response;
+            return grade;
         }))
     }
     
@@ -42,6 +54,13 @@ export class GlobalDataStore {
         return this.http.get(API_URL + '/classes').pipe(map(response => {
             const classes = response;
             return classes;
+        }))
+    }
+
+    public getThisClassSubjects(classURL : String) : any {
+        return this.http.get(API_URL + classURL).pipe(map(response =>{
+            const subjects = response;
+            return subjects;
         }))
     }
 

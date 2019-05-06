@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {LoginModel, UserModel, ClassModel} from './AllDataModel';
 import {GlobalDataStore} from './GlobalDataStore';
 import {LoginAuthService } from './login-auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DataModelInterface {
 
     userToAdd : UserModel;
+    
 
     constructor(private loginAuthService : LoginAuthService, private globalDataStore : GlobalDataStore) {}
 
@@ -16,6 +18,10 @@ export class DataModelInterface {
 
     public isUserAuthenticated() {
         return this.loginAuthService.authenticated;
+    }
+
+    public saveTeacher(teacher : any) : Observable<any> {
+        return this.globalDataStore.saveTeacher(teacher);
     }
 
     public getAllCourses() {
@@ -28,6 +34,14 @@ export class DataModelInterface {
     
     public getAllClasses() {
         return this.globalDataStore.getAllClasses();
+    }
+
+    public getAllSubjects(thisClassURL : String) {
+        return this.globalDataStore.getThisClassSubjects(thisClassURL);
+    }
+
+    public getClassGrade(thisClassURL : String) {
+        return this.globalDataStore.getClassGrade(thisClassURL);
     }
 
     public createClass(nomeCurso : String) {

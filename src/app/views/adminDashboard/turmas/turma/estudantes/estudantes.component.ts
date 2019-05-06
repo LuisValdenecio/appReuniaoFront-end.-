@@ -8,17 +8,28 @@ import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 })
 export class EstudantesComponent  {
 
-  private shouldDisplayModal : Boolean = false;
+  private shouldDisplayFirstModal : Boolean = false;
+  private shouldDisplaySecondModal : Boolean = false;
   private studentData : any[];
   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
   public studentDisplayed : any;
+
+  public thisClassGrade : String;
 
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
   constructor(private dataModelInterface : DataModelInterface) {
     this.dataModelInterface.getAllStudents().subscribe(data=>{
       this.studentData = data.filter(turma=> turma['turma_id'] == this.formatURL())
-      console.log(this.formatURL())
+      
+      // -->> determina qual modal mostrar para cada estudante
+      this.dataModelInterface.getClassGrade("/"+this.formatURL()+"_classe").subscribe(data=>{
+        this.thisClassGrade = data;
+        console.log(this.thisClassGrade);
+      })
+
+
+
       this.studentDisplayed = data[0];
     });
   }
@@ -38,12 +49,22 @@ export class EstudantesComponent  {
   }
 
   public openModal(index : number) {
+
+    if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
+    this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
+     || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
+      this.shouldDisplayFirstModal = true;
+    } else {
+      this.shouldDisplaySecondModal = true;
+    }
+
     this.studentDisplayed = this.studentData[index];
-    this.shouldDisplayModal = true;
+    
   }
 
   public closeModal() {
-    this.shouldDisplayModal = false;
+    this.shouldDisplayFirstModal = false;
+    this.shouldDisplaySecondModal = false;
   }
 
   public nextModal(studenObj : any) {

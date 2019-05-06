@@ -1,3 +1,61 @@
-<p>
-  professores works!
-</p>
+<div *ngIf="shouldDisplayModal" class="container-contact100">
+  <div class="wrap-contact100 row">
+      <button (click)="closeModal()" class="btn-hide-contact100"><i class="fa fa-close"></i></button>
+      <div class="contact100-form-title" style="background-image: url(public/img/1.GIF);">
+          <span>Registar um/a professor/a</span>
+      </div>
+      <div class="swiper-container">
+        
+          <form class="login100-form validate-form">
+        
+              <div [className]="emailAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'"  data-validate = "Campo vázio ou email enválido">
+                <input class="input100" type="text" name="email" placeholder="Endereço de Email" #EmailInput >
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <span class="fa fa-envelope"></span>
+                </span>
+              </div>
+      
+              <div [className]="passWordAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'" data-validate = "Campo de Texto vazio">
+                <input class="input100" type="password" name="password" placeholder="Palavra passe" #PsswordInput>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <span class="fa fa-lock"></span>
+                </span>
+              </div>
+      
+              <div class="contact100-form-checkbox m-l-4">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <label class="label-checkbox100" for="ckb1">
+                  professor coordenador?
+                </label>
+              </div>
+              
+              <div class="container-login100-form-btn p-t-25">
+                <a class="login100-form-btn" (click)="checkForm(EmailInput.value, PsswordInput.value)">
+                  Registar
+                </a>
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div *ngFor="let subject of thisClassSubjects" class="col-lg-4">
+
+    <div class="card m-4">
+      <div class="card-header">
+        <h5>{{subject["disciplina_nome"]}}</h5>
+      </div>
+      <div class="card-body">
+        <button (click)="openModal()">Registe o/a Professor/a</button>
+      </div>
+    </div>
+
+  </div>
+ 
+</div>
