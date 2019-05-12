@@ -10,13 +10,13 @@ export class TurmasComponent {
 
   private turmas : any[];
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view da turma
-  
+
   // --> Substituição urgente (dependencia com o backend)
   public newestURL : String = "";
 
   constructor(private dataModelInterface : DataModelInterface) {
     this.dataModelInterface.getAllClasses().subscribe(data=>{
-      this.turmas = data;
+      this.turmas = data;    
     });
    }
 

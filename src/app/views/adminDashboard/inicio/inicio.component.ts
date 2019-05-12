@@ -9,7 +9,7 @@ import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 export class InicioComponent {
 
   public totalEstudantes : any[];
-  public totalTurmas : any[];
+  public totalTurmas : any[] = [];
   public totalAlunas : any[];
   public totalAlunos : any[];
   public percentRapazes : String;
@@ -28,7 +28,7 @@ export class InicioComponent {
     })
 
     this.dataModelInterface.getAllClasses().subscribe(data=>{
-      this.totalTurmas = data;
+      this.totalTurmas = data.length;
     })
   }
 
