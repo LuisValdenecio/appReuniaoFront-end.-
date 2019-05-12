@@ -60,9 +60,64 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <div>
-                          
+
+                        <div class="row">
+
+                          <div class="col-lg-12">
+                            
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row pl-4">
+                                      <div class="col-lg-9">
+                                        <span>{{thisStudentGrades[0]['vectorDasDisc']}}</span>
+                                      </div>
+                                      <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[0]['class']">
+                                        <span class="fa fa-level-up"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+    
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-9">
+                                        <span>nível de meio</span>
+                                      </div>
+                                      <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[1]['class']">
+                                        <span class="fa fa-level-down"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+    
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                    <div class="card p-2 falta-categoria">
+                                      <div class="row">
+                                        <div class="col-lg-9">
+                                          <span>{{thisStudentGrades[1]['vectorDasDisc']}}</span>
+                                        </div>
+                                        <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[1]['class']">
+                                          <span class="fa fa-level-down"></span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+      
+                          </div>
+
+
                         </div>
+                        
+
+
+
                       </div>
                     </div>
                   </div>
@@ -162,60 +217,93 @@
 
                           <!-- secção do gráfico de faltas -->
                           <div class="col-lg-6">
-                            <span>
-                              secção do gráfico
-                            </span>
-                          </div>
+                             
+                            <div class="row mb-2">
+                              <div class="col-lg-12">
+                                <div class="card p-2 falta-categoria">
+                                  <div class="row">
+                                    <div class="col-lg-12">
+                                      <span>{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                </div>
+                              </div>
+    
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <span>{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
 
                           <!-- secçao dos cards das diferentes faltas -->
                           <div class="col-lg-6">
                             
                             <div class="row mb-2">
-                              <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
-                                  <div class="row">
-                                    <div class="col-lg-9">
-                                      <span>Ausência</span>
-                                    </div>
-                                    <div class="col-lg-3 numero-faltas-indicador">
-                                      <span>10</span>
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-9">
+                                        <span>Ausência</span>
+                                      </div>
+                                      <div class="col-lg-3 numero-faltas-indicador">
+                                        <span>{{thisStudentFaults.displayData.faltasAusencia}}</span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
+    
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-9">
+                                        <span>Disciplinar</span>
+                                      </div>
+                                      <div class="col-lg-3 numero-faltas-indicador negativas">
+                                        <span>{{thisStudentFaults.displayData.faltasDisciplinar}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
   
-                            <div class="row mb-2">
-                              <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
-                                  <div class="row">
-                                    <div class="col-lg-9">
-                                      <span>Disciplinar</span>
-                                    </div>
-                                    <div class="col-lg-3 numero-faltas-indicador">
-                                      <span>10</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="row mb-2">
-                              <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
-                                  <div class="row">
-                                    <div class="col-lg-9">
-                                      <span>Material</span>
-                                    </div>
-                                    <div class="col-lg-3 numero-faltas-indicador">
-                                      <span>100</span>
+                              <div class="row mb-2">
+                                <div class="col-lg-12">
+                                  <div class="card p-2 falta-categoria">
+                                    <div class="row">
+                                      <div class="col-lg-9">
+                                        <span>Material</span>
+                                      </div>
+                                      <div class="col-lg-3 numero-faltas-indicador pretas">
+                                        <span>{{thisStudentFaults.displayData.faltasMaterial}}</span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-  
-
+                          
                           </div>
                     
                         </div>
@@ -459,7 +547,7 @@
                             </div>
 
                             <div class="col-lg-2 desempenho-perc">
-                              <h6>{{thisStudentGrades[3][0].pontuacaoGlobal}}</h6>
+                              <h6>{{thisStudentGrades[thisStudentGrades.length - 1][0].pontuacaoGlobal}}</h6>
                             </div>
                             
                           </div>
@@ -468,172 +556,80 @@
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
-                            <div class="progress-bar" role="progressbar" [style.width]="thisStudentGrades[3][0].pontuacaoGlobal" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" [style.width]="thisStudentGrades[thisStudentGrades.length - 1][0].pontuacaoGlobal" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
 
+                        
                         <div class="card-body">
-                            
-                          <div class="arrow-right">
-                            <a [className]="(topLevelIndexGrades == 3 && subGroupIndexGrades == thisStudentGrades[topLevelIndexGrades].length - 1) ? 'active-faults-item' : ''" (click)="nextGradeItem()">
-                              <span class="fa fa-arrow-circle-right"></span>
-                            </a>
-                          </div>
-
-                          <div class="arrow-left">
-                            <a [className]="(topLevelIndexGrades == 0 && subGroupIndexGrades == 0) ? 'active-faults-item' : ''" (click)="previousGradeItem()">
-                              <span class="fa fa-arrow-circle-left"></span>
-                            </a>
-                          </div>
- 
-                          <!-- classificações de notas [>= 14] -->
-                          <div class="row pl-4 pr-4" *ngIf="topLevelIndexGrades == 0">
-                            <div class="col-lg-12">
-                              <div class="card mb-2 indicador-notas boasNotas">
-                                <div class="row p-2">
-                                  <div class="col-lg-2">
-                                    <span class="fa fa-level-up"></span>
-                                  </div>
-                                  <div class="col-lg-10">
-                                    <span>Positivas => 14</span>
-                                  </div>
-                                </div>
-                              </div>                              
-                            </div>
-                          </div>
-
-                           <!-- classificações de notas [< 14 && >= 10] -->
-                           <div class="row pl-4 pr-4" *ngIf="topLevelIndexGrades == 1">
-                            <div class="col-lg-12">
-                              <div class="card mb-2 indicador-notas notasPositivas">
-                                <div class="row p-2">
-                                  <div class="col-lg-2">
-                                    <span class="fa fa-level-up"></span>
-                                  </div>
-                                  <div class="col-lg-10">
-                                    <span>Positivas < 14</span>
-                                  </div>
-                                </div>
-                              </div>                              
-                            </div>
-                          </div>
-
-                          <!-- classificações de notas [< 10] -->
-                          <div class="row pl-4 pr-4" *ngIf="topLevelIndexGrades == 2">
-                            <div class="col-lg-12">
-                              <div class="card mb-2 indicador-notas negativas">
-                                <div class="row p-2">
-                                  <div class="col-lg-2">
-                                    <span class="fa fa-level-down"></span>
-                                  </div>
-                                  <div class="col-lg-10">
-                                    <span>Negativas</span>
-                                  </div>
-                                </div>
-                              </div>                              
-                            </div>
-                          </div>
                           
-                          <!-- quando para uma classificação não existirem valores -->
-                          <div [ngSwitch]="organizeGradeGroups().length == 0">
+                          <div class="row">
 
-                            <div *ngSwitchCase="true">
-                              <div class="row pl-4 pr-4">
-                                <div class="col-lg-12">
-                                  <div class="row">
+                              <div class="col-lg-12">
+                              
+                                  <div class="row mb-2">
                                     <div class="col-lg-12">
-                                      <span class="fa fa-puzzle-piece"></span>
+                                      <div class="card p-2 falta-categoria">
+                                        <div class="row pl-4">
+                                          <div class="col-lg-9">
+                                            <span>{{thisStudentGrades[0]['vectorDasDisc']}}</span>
+                                          </div>
+                                          <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[0]['class']">
+                                            <span class="fa fa-level-up"></span>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div class="row">
+        
+                                  <div class="row mb-2">
                                     <div class="col-lg-12">
-                                      <h4>Não há disciplinas nesta classificação</h4>
+                                      <div class="card p-2 falta-categoria">
+                                        <div class="row">
+                                          <div class="col-lg-9">
+                                            <span>{{thisStudentGrades[1]['vectorDasDisc']}}</span>
+                                          </div>
+                                          <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[1]['class']">
+                                            <span class="fa fa-level-down"></span>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>                                  
-                                </div>
-                              </div>
-                            </div>
+                                  </div>
+      
+                                  <div class="row mb-2">
 
-                            <div *ngSwitchCase="false">
-                              
-                              <!-- decidir mostrar ou não o resumo do critério de desempenho de notas -->
-                              <div [ngSwitch]="topLevelIndexGrades == 3">
-                                
-                                <div *ngSwitchCase="true">
-                                  <div class="row pl-4 pr-4">
-                                    
-                                    <div class="col-lg-12">
-                                      <div class="card">
-                                        <div class="row p-2">
-                                          
-                                          <div class="col-lg-5">
-                                            <div class="card">
-                                              <div class="card-header">
-                                                <span>Média</span>
-                                              </div>
-                                              <div class="card-body">
-                                                <h6>{{thisStudentGrades[3][0].mediaNotas}}</h6>
-                                              </div>
-                                            </div>
+                                    <!-- -->
+                                    <div class="col-lg-6">
+                                      <div class="card p-2 falta-categoria" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['class']">
+                                        <div class="row">
+                                          <div class="col-lg-12" >
+                                            <span>Média: {{thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['media']}}</span>
                                           </div>
+                                        </div>
+                                      </div>
+                                    </div>
 
-                                          <div class="col-lg-7">
-                                            <div class="row">
-                                              <div class="col-lg-12">
-                                                <div class="card">
-                                                  <span>% {{thisStudentGrades[3][0].percentDeSucesso}}</span>
-                                                </div>
-                                              </div>
-                                              <div class="col-lg-12">
-                                                <div class="row">
-                                                  <div class="col-lg-6">
-                                                    <div class="card">
-                                                      <span>nºpos</span>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-lg-6">
-                                                    <div class="card">
-                                                      <span>nºneg</span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
+                                    <!-- -->
+                                    <div class="col-lg-6" >
+                                      <div class="card p-2 falta-categoria" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['class']">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <span>% de Sucesso : {{thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['percent']}}</span>
                                           </div>
-
                                         </div>
                                       </div>
                                     </div>
 
                                   </div>
+        
                                 </div>
 
-                                <div *ngSwitchCase="false">
-
-                                  <div class="row pl-4 pr-4" *ngFor="let disc of organizeGradeGroups()">
-                                      <div class="col-lg-12">
-                                          <div class="card mb-1">
-                                            <div class="row p-2">
-                                                <div class="col-lg-9">
-                                                  <span>{{disc.nomeDisciplina}}</span>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                  <span>{{disc.valor}}</span>
-                                                </div>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                </div>
-                                                              
-                              </div>
-
-                            </div>
 
                           </div>
-
+                        
                         </div>
+                      
                       </div>
                     </div>
     
@@ -652,7 +648,7 @@
                             </div>
 
                             <div class="col-lg-2 desempenho-perc">
-                              <h6>{{thisStudentParticipations[1]['pontoGlobal']}}</h6>
+                              <h6>100%</h6>
                             </div>
                               
                           </div>
@@ -661,39 +657,25 @@
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
-                            <div class="progress-bar" role="progressbar" [style.width]="thisStudentParticipations[1]['pontoGlobal']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" [style.width]="'100%'" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
 
                         <div class="card-body">
                           
-                          <div class="arrow-right">
-                            <a [className]="thisStudentParticipationsIndex == thisStudentParticipations[0].length - 1 ? 'active-faults-item' : ''" (click)="nextPartsItem()" >
-                              <span class="fa fa-arrow-circle-right"></span>
-                            </a>
-                          </div>
-
-                          <div class="arrow-left">
-                            <a [className]="thisStudentParticipationsIndex == 0 ? 'active-faults-item' : ''" (click)="previousPartsItem()">
-                              <span class="fa fa-arrow-circle-left"></span>
-                            </a>
-                          </div>
-
-                          <div class="row pl-4 pr-4">
-                            <div class="col-lg-12" *ngFor="let disc of thisStudentParticipations[0][thisStudentParticipationsIndex]">
-                                <div class="card mb-1">
-                                  <div class="row p-2">
-                                      <div class="col-lg-10">
-                                        <span>{{disc['nomeDisciplina']}}</span>
-                                      </div>
-                                      <div class="col-lg-2">
-                                        <span [className]="disc['icone']"></span>
-                                      </div>
-                                  </div>
-                                </div>
+                          <div class="row">
+                            
+                              <div class="col-lg-12 mb-2">
+                                <span class="fa fa-check-circle" style="font-size:90px"></span>
                               </div>
-                          </div>
-                        
+
+                              <div class="col-lg-12 mb-2 avaliacao-disc-text">
+                                <h3 style="font-weight: bold">Satisfatória</h3>
+                                
+                              </div>
+
+                            </div>
+                         
                         </div>
                       </div>
                     </div>
@@ -732,13 +714,43 @@
 
                             <!-- secção do gráfico de faltas -->
                             <div class="col-lg-6">
-                                <canvas baseChart
-                                [datasets]="barChartData"
-                                [labels]="barChartLabels"
-                                [options]="barChartOptions"
-                                [legend]="barChartLegend"
-                                [chartType]="'pie'" height="250%">
-                              </canvas>
+                               
+                              <div class="row mb-2">
+                                  <div class="col-lg-12">
+                                    <div class="card p-2 falta-categoria">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                          <span>{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+      
+                                <div class="row mb-2">
+                                  <div class="col-lg-12">
+                                    <div class="card p-2 falta-categoria">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                          <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+    
+                                <div class="row mb-2">
+                                  <div class="col-lg-12">
+                                    <div class="card p-2 falta-categoria">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                          <span>{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
                             </div>
   
                             <!-- secçao dos cards das diferentes faltas -->
@@ -766,7 +778,7 @@
                                       <div class="col-lg-9">
                                         <span>Disciplinar</span>
                                       </div>
-                                      <div class="col-lg-3 numero-faltas-indicador">
+                                      <div class="col-lg-3 numero-faltas-indicador negativas">
                                         <span>{{thisStudentFaults.displayData.faltasDisciplinar}}</span>
                                       </div>
                                     </div>
@@ -781,7 +793,7 @@
                                       <div class="col-lg-9">
                                         <span>Material</span>
                                       </div>
-                                      <div class="col-lg-3 numero-faltas-indicador">
+                                      <div class="col-lg-3 numero-faltas-indicador pretas">
                                         <span>{{thisStudentFaults.displayData.faltasMaterial}}</span>
                                       </div>
                                     </div>
@@ -958,9 +970,7 @@
             <tr>
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
-              <th scope="col">Nº</th>
-              <th scope="col">Desempenho de Notas</th>
-              <th scope="col" class="text-center">Faltas</th>
+              <th scope="col">Nº de Ordem</th>
               <th scope="col" class="text-center">Ver Relatório</th>
             </tr>
           </thead>
@@ -974,21 +984,6 @@
               </td>
               <td class="pt-4">
                <span>{{i+1}}</span> 
-              </td>
-              <td class="pt-3">
-                  <div class="progress-group">
-                      <div class="progress-group-header">
-                        <div class="ml-auto font-weight-bold">75%</div>
-                      </div>
-                      <div class="progress-group-bars">
-                        <div class="progress progress-xs">
-                          <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                  </div>
-              </td>
-              <td class="text-center pt-4">
-               <span>10</span> 
               </td>
               <td class="text-center pt-3">
                 <button (click)="openModal(i)" class="btn"><i class="fa fa-eye"></i> Relatório</button>

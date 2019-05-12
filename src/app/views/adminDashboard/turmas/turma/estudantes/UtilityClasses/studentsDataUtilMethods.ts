@@ -8,24 +8,54 @@ export class StudentDataUtils {
 
     }
 
+    public sumTheWholeClassFaults(arrayOfData : any[]) {
+        var totalOfFaults = 0;
+        arrayOfData.forEach((each)=>{
+           totalOfFaults += each['ausencia'] + each['material'] + each['disciplinar']
+        })
+        return totalOfFaults;
+    }
+
+    public stringShortenerInArray(arrayOfData, shortIndex) {
+        var newArray = [];
+        arrayOfData.forEach((ele)=>{
+            if (arrayOfData.length == 1) {
+                if (ele.length > 12) {
+                    newArray.push(ele.slice(0,11));
+                } else {
+                    newArray.push(ele);
+                }
+                
+            } else {
+                if (ele == 'Língua Portuguesa') {   //-->> para não confundir com Língua Inglesa
+                    newArray.push(" Port");
+                } else if (ele == 'Educação Laboral') { // -->> para não confundir com uma outra disciplina que começe com Educação
+                    newArray.push(" Labo");
+                } else  if (ele == 'Educação Visual e Plástica') { // -->> para não confundir com uma outra disciplina que começe com Educação
+                    newArray.push(" EVP");
+                } else if (ele == 'Educação Moral e Cívica') { // -->> para não confundir com uma outra disciplina que começe com Educação
+                    newArray.push(" EMC");
+                } else {
+                    newArray.push(" "+ele.slice(0,shortIndex)); 
+                }
+            
+                
+            }
+            
+        })
+        return newArray;
+    }
+
     public processGradesData(arrayOfData : any[]) {
         //--> first group (notas >= 14); second group (positivas < 14); third group (negativas)
         var dataToReturn = [];    
         var firstGroup = [], secondGroup = [], thirdGroup = [];
-
-        // --> contadores para inserção de subgrupos nos grupos
-        var firstGroupCounter = 1, secondGroupCounter = 1, thirdGroupCounter = 1;
 
         // --> valores para o resumo do critério de notas
         var average = 0, percentOfGrades = 0; 
 
         // --> pontuação global em %
         var pontGlobal = 100;
-
-        // --> cada grupo é composto de subgrupos de dois elementos
-        firstGroup.push([]);
-        secondGroup.push([]);
-        thirdGroup.push([]);
 
         for (let counter = 0; counter < arrayOfData.length; counter++) {
 
@@ -34,56 +64,84 @@ export class StudentDataUtils {
             if (arrayOfData[counter]['pp1'] >= 10) {
                 percentOfGrades += 1;
             }
-
+            
             if (arrayOfData[counter]['pp1'] >= 14) {
-
-                if (firstGroupCounter <= 2) {
-                    firstGroup[firstGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                } else {
-                    firstGroup.push([]);
-                    firstGroup[firstGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                    firstGroupCounter = 1;
-                }
-
-                firstGroupCounter++;
+                firstGroup.push(arrayOfData[counter]['disciplina_nome']);
             } else if (arrayOfData[counter]['pp1'] < 14 && arrayOfData[counter]['pp1'] >= 10) {
-
-                pontGlobal = pontGlobal - ((100 / arrayOfData.length) / 2);    // -->> por cada positiva abaixo de 14 valores diminua 5 pontos
-
-                if (secondGroupCounter <= 2) {
-                    secondGroup[secondGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                } else {
-                    secondGroup.push([]);
-                    secondGroup[secondGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                    secondGroupCounter = 1;
-                }
-                secondGroupCounter++;
-
+                pontGlobal = pontGlobal - ((100 / arrayOfData.length) / 2);
+                secondGroup.push(arrayOfData[counter]['disciplina_nome']);
             } else {
-
-                pontGlobal = pontGlobal - (100 / arrayOfData.length);   //-->> por cada negativa diminua 10 pontos na classificação global
-
-                if (thirdGroupCounter <= 2) {
-                    thirdGroup[thirdGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                } else {
-                    thirdGroup.push([]);
-                    thirdGroup[thirdGroup.length-1].push({'nomeDisciplina' : arrayOfData[counter]['disciplina_nome'], 'valor' : arrayOfData[counter]['pp1']})
-                    thirdGroupCounter = 1;
-                }
-                thirdGroupCounter++;
+                pontGlobal = pontGlobal - ((100 / arrayOfData.length))
+                thirdGroup.push(arrayOfData[counter]['disciplina_nome']);
             }
         }
 
-        dataToReturn.push(firstGroup);
-        dataToReturn.push(secondGroup);
-        dataToReturn.push(thirdGroup);
+        if (firstGroup.length > 0 && secondGroup.length > 0 && thirdGroup.length > 0) {
+            dataToReturn.push({
+                'vectorDasDisc':  this.stringShortenerInArray(firstGroup.concat(secondGroup), 4).splice(0,4).toString()+((firstGroup.concat(secondGroup).length >= 4)?",...":"."),
+                'class' : 'mixPositivas'
+            });
 
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
+            });
+
+        } else if (firstGroup.length > 0 && secondGroup.length == 0 && thirdGroup.length > 0) {
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(firstGroup, 4).splice(0,4).toString()+((firstGroup.length >= 4)?",...":"."), 
+                'class' : 'soAcimaDe14'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
+            });
+
+        } else if (secondGroup.length > 0 && firstGroup.length == 0 && thirdGroup.length > 0) {
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(secondGroup, 4).splice(0,4).toString()+((secondGroup.length >= 4)?",...":"."), 
+                'class' : 'positivasAbaixoDe14'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
+            });
+
+         } else if (secondGroup.length == 0 && firstGroup.length == 0) {            
+            dataToReturn.push({
+                'vectorDasDisc': 'Sem Positivas', 
+                'class' : 'soAcimaDe14'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
+            });
+         } else if (firstGroup.length > 0 && secondGroup.length > 0 && thirdGroup.length == 0) {
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(firstGroup, 4).splice(0,4).toString()+((firstGroup.length >= 4)?",...":"."), 
+                'class' : 'soAcimaDe14'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(secondGroup, 4).splice(0,4).toString()+((secondGroup.length >= 4)?",...":"."), 
+                'class' : 'positivasAbaixoDe14'
+            });
+        } 
+        
         dataToReturn.push([
             {
-                'mediaNotas' : Math.trunc(average / arrayOfData.length),
-                'percentDeSucesso' : Math.trunc((percentOfGrades / arrayOfData.length) * 100),
-                'numeroPositivas' : percentOfGrades,
-                'numeroNegativas' : arrayOfData.length - percentOfGrades,
+                'mediaNotas' : {
+                    'media' : Math.trunc(average / arrayOfData.length), 
+                    'class' : Math.trunc(average / arrayOfData.length) >= 10 ? 
+                        (Math.trunc(average / arrayOfData.length) >= 14 ? 'soAcimaDe14' : 'positivasAbaixoDe14') : 'negativas' 
+                },
+                'percentDeSucesso' : {
+                    'percent':Math.trunc((percentOfGrades / arrayOfData.length) * 100),
+                    'class' : Math.trunc((percentOfGrades / arrayOfData.length) * 100) >= 50 ? 'soAcimaDe14' : 'negativas'
+                },
                 'pontuacaoGlobal' : Math.trunc(pontGlobal) + '%' 
             }
         ]) //-> Objecto do resumo do critério do desempenho ao nível de notas
@@ -137,31 +195,20 @@ export class StudentDataUtils {
         return [partPorDisciplina, {'pontoGlobal' : Math.trunc(pontGlobal) + '%'}];
     }
 
-    public processFaultsData(arrayOfFaults : any[], numberOfSubjects : number) {
+    public processFaultsData(arrayOfFaults : any[], numberOfSubjects : number, theClassFaults : any[]) {
 
-        var faltasAusencia = [], faltaMaterial = [], faltaDisciplinar = [] , nomeDisciplina = [], faltasTotal = [];
+        var nomeDisciplina = [], faltasTotal = [];
 
         // --> pontuação global em %
         var pontGlobal = 100;
 
+        // --> calcula o total de faltas que a turma tem
+        var totalDeFaltasDaTurma = this.sumTheWholeClassFaults(theClassFaults);
+
         for (let counter = 0; counter < arrayOfFaults.length; counter++) {
 
-            if (nomeDisciplina.indexOf(arrayOfFaults[counter]['disciplina_nome']) == -1) {
-
-                // --> vector com as faltas por ausências
-                faltasAusencia.push(
-                    this.sumUtilFaults(arrayOfFaults.filter(data => data['disciplina_nome'] == arrayOfFaults[counter]['disciplina_nome']), true)['faltasAusencia']
-                )
-
-                // --> vector com as faltas por material
-                faltaMaterial.push(
-                    this.sumUtilFaults(arrayOfFaults.filter(data => data['disciplina_nome'] == arrayOfFaults[counter]['disciplina_nome']), true)['faltasMaterial']
-                )
-
-                // --> vector com as faltas por disciplina
-                faltaDisciplinar.push(
-                    this.sumUtilFaults(arrayOfFaults.filter(data => data['disciplina_nome'] == arrayOfFaults[counter]['disciplina_nome']), true)['faltasDisciplinar']
-                )
+            if (nomeDisciplina.indexOf(arrayOfFaults[counter]['disciplina_nome']) == -1 && 
+                (arrayOfFaults[counter]['ausencia'] > 0 || arrayOfFaults[counter]['material'] > 0 || arrayOfFaults[counter]['disciplinar'] > 0 )) {
 
                 faltasTotal.push(
                     this.sumUtilFaults(arrayOfFaults.filter(data => data['disciplina_nome'] == arrayOfFaults[counter]['disciplina_nome']), true)
@@ -186,7 +233,14 @@ export class StudentDataUtils {
         pontGlobal = (pontGlobal < 0) ? 0 : pontGlobal;
 
         // --> o primeiro argumento deste objecto, será usado como valores para o constructor de um objecto gráfico para representação de faltas
-        return {'forGraphData' : [nomeDisciplina, faltasAusencia, faltaMaterial, faltaDisciplinar], 'displayData' : this.sumUtilFaults(faltasTotal, false), 'pontuacaoGlobal' : Math.trunc(pontGlobal) + '%' }            
+        return {
+            'toDisplay' : {
+                'pesoDasFaltas' : Math.trunc((this.sumUtilFaults(faltasTotal, false)['totalFaltas'] / totalDeFaltasDaTurma) * 100) + '%',
+                'discFaltosas' : this.stringShortenerInArray(nomeDisciplina, 4).splice(0,3).toString()+((nomeDisciplina.length > 3)?",...":"."),
+                'totalFaltas' : this.sumUtilFaults(faltasTotal, false)['totalFaltas']
+            }, 
+            'displayData' : this.sumUtilFaults(faltasTotal, false), 'pontuacaoGlobal' : Math.trunc(pontGlobal) + '%' 
+        }            
     }
 
     private sumUtilParts(arr : any[]) {
@@ -240,6 +294,7 @@ export class StudentDataUtils {
         dadosARetornar['faltasAusencia'] = faltaAusencia;
         dadosARetornar['faltasMaterial'] = faltaMaterial;
         dadosARetornar['faltasDisciplinar'] = faltaDisciplinar;
+        dadosARetornar['totalFaltas'] = faltaAusencia + faltaMaterial + faltaDisciplinar;
 
         return dadosARetornar;
     }

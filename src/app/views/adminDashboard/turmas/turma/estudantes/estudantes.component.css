@@ -310,22 +310,12 @@ thead {
     font-weight: bold;
   }
 
-  .boasNotas {
-    background : green;
-  }
-  
-  .notasPositivas {
-    background: orange; 
-  }
-
-  .negativas {
-    background: red;
-  }
-
   .fa-puzzle-piece {
     font-size: 35px;
   }
 
+
+  
 
   /*//////////////////////////////////////////////////////////////////
   [Toda a formataçao abaixo é para o ensino primário]*/
@@ -421,7 +411,7 @@ thead {
   }
 
   .numero-faltas-indicador {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    background: #4facfe;
     position: absolute;
     left: 78%;
     top: 5%;
@@ -483,3 +473,38 @@ thead {
   }
 
   /*Formatação para o gráfico*/
+
+
+  .notas-card-aligner {
+    left: 90%;
+  }
+
+
+
+  /***/
+  
+  .soAcimaDe14 {
+    background : green;
+  }
+  
+  .positivasAbaixoDe14 {
+    background: orange; 
+  }
+
+  .negativas {
+    background: red;
+  }
+
+  .mixPositivas {
+    background : blue;
+  }
+
+  .pretas {
+    background : black;
+  }
+
+  .soAcimaDe14, .positivasAbaixoDe14, .negativas, .mixPositivas {
+    color: #fff;
+    border: none;
+    font-weight: bold;
+  }
