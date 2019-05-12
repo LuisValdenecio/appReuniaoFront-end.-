@@ -16,14 +16,14 @@ export class DataModelInterface {
         this.loginAuthService.authenticate(email, password);
     }
 
-    public isUserAuthenticated() {
-        return this.loginAuthService.authenticated;
-    }
-
     public saveTeacher(teacher : any) : Observable<any> {
         return this.globalDataStore.saveTeacher(teacher);
     }
 
+    public isUserAuthenticated() {
+        return this.loginAuthService.authenticated;
+    }
+   
     public getAllCourses() {
         return this.globalDataStore.getAllCourses();
     }   
@@ -44,6 +44,14 @@ export class DataModelInterface {
         return this.globalDataStore.getClassGrade(thisClassURL);
     }
 
+    public getThisClassFaults(thisClassURL : String) {
+        return this.globalDataStore.getThisClassFaults(thisClassURL);
+    }
+
+    public getClassGrades(thisClassURL : String) {
+        return this.globalDataStore.getClassGrades(thisClassURL);
+    }
+    
     public createClass(nomeCurso : String) {
         var turmaCriar = new ClassModel(nomeCurso);
         this.globalDataStore.createClass(turmaCriar);

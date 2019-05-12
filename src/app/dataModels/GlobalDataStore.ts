@@ -43,6 +43,27 @@ export class GlobalDataStore {
         }))
     }
     
+    public getThisClassFaults(classURL) : any {
+        return this.http.get(API_URL + classURL).pipe(map(response =>{
+            const faults = response;
+            return faults;
+        }))
+    }
+
+    public getClassGrades(classURL) : any {
+        return this.http.get(API_URL + classURL).pipe(map(response =>{
+            const grades = response;
+            return grades;
+        }))
+    }
+
+    public getThisClassSubjects(classURL : String) : any {
+        return this.http.get(API_URL + classURL).pipe(map(response =>{
+            const subjects = response;
+            return subjects;
+        }))
+    }
+
     public getAllCourses() : any {
         return this.http.get(API_URL + '/cursos').pipe(map(response => {
             const users = response;
@@ -54,13 +75,6 @@ export class GlobalDataStore {
         return this.http.get(API_URL + '/classes').pipe(map(response => {
             const classes = response;
             return classes;
-        }))
-    }
-
-    public getThisClassSubjects(classURL : String) : any {
-        return this.http.get(API_URL + classURL).pipe(map(response =>{
-            const subjects = response;
-            return subjects;
         }))
     }
 
