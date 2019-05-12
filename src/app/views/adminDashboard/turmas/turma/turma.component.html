@@ -3,35 +3,24 @@
   <!-- -->
   <div class="row mt-4">
 
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="card">
           <div class="card-header">
             <h3>Estudantes</h3>
           </div>
           <div class="card-body">
-            <h2>0</h2>
+            <h2>{{_studentData.length}}</h2>
           </div>
         </div>
       </div>
     
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="card">
           <div class="card-header">
             <h3>Disciplinas</h3>
           </div>
           <div class="card-body">
-            <h2>12</h2>
-          </div>
-        </div>
-      </div>
-    
-      <div class="col-lg-4">
-        <div class="card">
-          <div class="card-header">
-            <h3>Professores</h3>
-          </div>
-          <div class="card-body">
-            <h2>11</h2>
+            <h2>{{_thisClassSubjects.length}}</h2>
           </div>
         </div>
       </div>
@@ -59,41 +48,6 @@
     
     </div>
     
-    <!-- -->
-    <div class="row mt-4">
-    
-      <div class="col-lg-12">
-    
-        <div class="card">
-    
-          <div class="card-header">
-            <h1>Estatísticas gerais da Turma</h1>
-          </div>
-    
-          <div class="card-body">
-            
-            <!-- graph -->
-            <div>
-                <div style="display: block">
-                  <canvas baseChart
-                          [datasets]="barChartData"
-                          [labels]="barChartLabels"
-                          [options]="barChartOptions"
-                          [legend]="barChartLegend"
-                          [chartType]="barChartType">
-                  </canvas>
-                </div>
-            </div>
-          
-          </div>
-    
-        </div>
-    
-      </div>
-    
-    </div>
-
-
 </div>
 
 <div>
