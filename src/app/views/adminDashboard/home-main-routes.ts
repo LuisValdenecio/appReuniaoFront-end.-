@@ -7,6 +7,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { TurmaComponent } from './turmas/turma/turma.component';
 import { EstudantesComponent } from './turmas/turma/estudantes/estudantes.component';
 import { ProfessoresComponent } from './turmas/turma/professores/professores.component';
+import { LivroDePontoComponent } from './turmas/turma/livro-de-ponto/livro-de-ponto.component';
+import { PautasComponent } from './turmas/turma/pautas/pautas.component';
 
 const appRoutes : Routes = [
   {
@@ -26,7 +28,9 @@ const appRoutes : Routes = [
                 component : TurmaComponent,
                 children : [
                   {path : 'estudantes', component : EstudantesComponent},
-                  {path : 'professores', component : ProfessoresComponent}
+                  {path : 'professores', component : ProfessoresComponent},
+                  {path : 'faltas', component : LivroDePontoComponent},
+                  {path : 'pautas', component : PautasComponent}
                 ]
               }
             ]  

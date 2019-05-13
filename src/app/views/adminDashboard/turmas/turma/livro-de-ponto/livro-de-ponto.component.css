@@ -1,0 +1,85 @@
+tbody {
+    background: lightgray;
+}
+
+thead {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: #fff;
+    border: none;
+}
+
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
+
+  .text-center {
+      text-align: center;
+  }
+
+.img-student {
+    width : 60px;
+    height: 45px;
+    border-radius: 5%;
+}
+
+
+.input-checkbox100 {
+    display: none;
+  }
+  
+  .label-checkbox100 {
+    font-family: Raleway-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+  
+    display: block;
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+  }
+  
+  .label-checkbox100::before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    font-size: 13px;
+    color: transparent;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background: #fff;
+    border: 2px solid blue;
+    left: 0;
+    top: 48%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+  .input-checkbox100:checked + .label-checkbox100::before {
+    color:blue;
+  }
+  
+  .faltasInput {
+      width: 60px;
+  }
