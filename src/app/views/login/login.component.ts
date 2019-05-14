@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent  {
 
-  showLoginWarning : Boolean = false;
+  public showLoginWarning : Boolean = false;
+  public warningMssg : String = "";
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router){}
 
@@ -31,8 +32,18 @@ export class LoginComponent  {
     var isPasswrdOk : Boolean = this.passWordAuth.checkTextInput();
     
     if (isEmailOk && isPasswrdOk) {
-      this.dataModelInterface.loginCheck(emailValue, passwordValue).subscribe(()=>{
-        this.router.navigateByUrl('/homeadmin');
+      this.dataModelInterface.loginCheck(emailValue, passwordValue).subscribe((data)=>{
+        if (data) {
+          this.warningMssg = data;
+          this.showLoginWarning = true;
+        }
+        
+        if (this.dataModelInterface.parseJwt(localStorage.getItem("goldToken"))['typeOfUser'] == "'admin'") {
+          this.router.navigateByUrl('/homeadmin');
+        } else {
+          this.router.navigateByUrl('/homeprof');
+        }
+        
       }, (err)=>{
         console.log(err);
       })

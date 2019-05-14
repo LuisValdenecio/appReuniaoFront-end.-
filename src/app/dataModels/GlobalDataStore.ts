@@ -14,11 +14,14 @@ export class GlobalDataStore {
     
     constructor(private http : HttpClient) {}
      
-    private request(method : 'post'|'get', type : 'login', user? : any) : Observable<any> {
+    private request(method : 'post'|'get', type : any, user? : any) : Observable<any> {
         let base;
 
         if (method === 'post') {
             base = this.http.post(API_URL + '/login', user);
+        } else if (method == 'get') {
+            // make every possible get request carry itselt with the JWT
+            base = this.http.get(`${API_URL}${type}`, { headers : {Authorization : `Bearer ${this.getToken()}`}})
         }
 
         const request = base.pipe(map((data : any)=>{
@@ -32,6 +35,12 @@ export class GlobalDataStore {
         return request;
     }
 
+    private getToken() {
+        if (!this.auth_token) {
+            return localStorage.getItem("goldToken");
+        }
+        return this.auth_token;
+    }
     
     public login(user: String, pass: String): Observable<boolean> {
         return this.request('post', 'login',  {'email' : user, 'password' : pass});
@@ -43,57 +52,73 @@ export class GlobalDataStore {
     }
 
     public getAllStudents() : any {
-        return this.http.get(API_URL + '/students').pipe(map(response => {
-            const users = response;
-            return users;
-        }))
+        return this.request('get', '/students');
     }
 
     // -->> esta chamada é crucial para determinar qual modal mostrar em cada estudante
     public getClassGrade(classURL : String) : any {
+        return this.request('get', classURL);
+        /*
         return this.http.get(API_URL + classURL).pipe(map(response =>{
             const grade = response;
             return grade;
         }))
+        */
     }
     
     public getThisClassFaults(classURL) : any {
+        return this.request('get', classURL);
+        /*
         return this.http.get(API_URL + classURL).pipe(map(response =>{
             const faults = response;
             return faults;
         }))
+        */
     }
 
     public getClassGrades(classURL) : any {
+        return this.request('get', classURL);
+        /*
         return this.http.get(API_URL + classURL).pipe(map(response =>{
             const grades = response;
             return grades;
         }))
+        */
     }
 
     public getThisClassSubjects(classURL : String) : any {
+        return this.request('get', classURL);
+        /*
         return this.http.get(API_URL + classURL).pipe(map(response =>{
             const subjects = response;
             return subjects;
         }))
+        */
     }
 
     public getAllCourses() : any {
+        return this.request('get', '/cursos');
+        /*
         return this.http.get(API_URL + '/cursos').pipe(map(response => {
             const users = response;
             return users;
         }))
+        */
     }
 
     public getAllClasses() : any {
+        return this.request('get', '/classes');
+        /*
         return this.http.get(API_URL + '/classes').pipe(map(response => {
             const classes = response;
             return classes;
         }))
+        */
     }
 
     public createClass(courseName : ClassModel) : Observable<ClassModel> {
-        return this.http.post<ClassModel>(API_URL+'/turmas', courseName);
+        return this.request('post', '/turmas');
+        //return this.http.post<ClassModel>(API_URL+'/turmas', courseName);
     }
 
     public logout() {
