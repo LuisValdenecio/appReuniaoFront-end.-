@@ -13,16 +13,30 @@ export class GlobalDataStore {
     public auth_token : String;
     
     constructor(private http : HttpClient) {}
-        
-    public authenticate(user: String, pass: String): Observable<boolean> {
-        return this.http.post<any>(API_URL + "/login", {
-            name: user, password: pass
-        }).pipe(map(response => {
-            this.auth_token = response.success ? response.token : "a string";
-            return response.success;
+     
+    private request(method : 'post'|'get', type : 'login', user? : any) : Observable<any> {
+        let base;
+
+        if (method === 'post') {
+            base = this.http.post(API_URL + '/login', user);
+        }
+
+        const request = base.pipe(map((data : any)=>{
+            if (data.token) {
+                localStorage.setItem('goldToken', data.token);
+                this.auth_token = data.token;
+            }
+            return data;
         }));
+
+        return request;
     }
 
+    
+    public login(user: String, pass: String): Observable<boolean> {
+        return this.request('post', 'login',  {'email' : user, 'password' : pass});
+    }
+    
     // para efeitos de simplicidade, decidi colocar aqui todos os métodos http de manipulação dos endpoints do API
     public saveTeacher(teacher : any) : Observable<any> {
         return this.http.post<any>(API_URL + '/teachers', teacher);
@@ -82,5 +96,15 @@ export class GlobalDataStore {
         return this.http.post<ClassModel>(API_URL+'/turmas', courseName);
     }
 
+    public logout() {
+        this.auth_token = null;
+        localStorage.clear();
+    }
 
+    public isLoggedIn() {
+        if (!this.auth_token) {
+            return localStorage.getItem('goldToken') != null;
+        }
+        return this.auth_token != null;
+    }
 }

@@ -31,7 +31,11 @@ export class LoginComponent  {
     var isPasswrdOk : Boolean = this.passWordAuth.checkTextInput();
     
     if (isEmailOk && isPasswrdOk) {
-      // autenticar o usuário aqui
+      this.dataModelInterface.loginCheck(emailValue, passwordValue).subscribe(()=>{
+        this.router.navigateByUrl('/homeadmin');
+      }, (err)=>{
+        console.log(err);
+      })
     } 
 
   }

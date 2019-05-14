@@ -12,18 +12,18 @@ export class DataModelInterface {
 
     constructor(private loginAuthService : LoginAuthService, private globalDataStore : GlobalDataStore) {}
 
-    public loginCheck(email : String, password : String) {
-        this.loginAuthService.authenticate(email, password);
+    public loginCheck(email : String, password : String) : Observable<any> {
+        return this.globalDataStore.login(email, password);
     }
 
     public saveTeacher(teacher : any) : Observable<any> {
         return this.globalDataStore.saveTeacher(teacher);
     }
 
-    public isUserAuthenticated() {
-        return this.loginAuthService.authenticated;
+    public logout() {
+        this.loginAuthService.clear();
     }
-   
+
     public getAllCourses() {
         return this.globalDataStore.getAllCourses();
     }   

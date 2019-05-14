@@ -6,12 +6,14 @@ import { InicioComponent } from './inicio/inicio.component';
 import { TurmaComponent } from './turmas/turma/turma.component';
 import { EstudantesComponent } from './turmas/turma/estudantes/estudantes.component';
 import { PautasComponent } from './turmas/turma/pautas/pautas.component';
+import { AuthGuardService } from 'src/app/dataModels/auth-guard.service';
 
 
 const appRoutes : Routes = [
   {
       path : 'homeprof', 
       component : ProfessorDashboardComponent,
+      canActivate : [AuthGuardService],
       children : [
         {
           path : 'turmas', 

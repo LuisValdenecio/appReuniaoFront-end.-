@@ -7,7 +7,15 @@
       <div class="swiper-container">
         
           <form class="login100-form validate-form">
-        
+
+              <div [className]="passWordAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'" data-validate = "Campo de Texto vazio">
+                <input class="input100" type="text" name="name" placeholder="Nome e sobrenome" #NameInput>
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <span class="fa fa-user"></span>
+                </span>
+              </div>
+              
               <div [className]="emailAuth.ResultadoAutenticacao['showWarn?'] ? 'wrap-input100 validate-input m-b-16 alert-validate' : 'wrap-input100 validate-input m-b-16'"  data-validate = "Campo vázio ou email enválido">
                 <input class="input100" type="text" name="email" placeholder="Endereço de Email" #EmailInput >
                 <span class="focus-input100"></span>
@@ -25,14 +33,14 @@
               </div>
       
               <div class="contact100-form-checkbox m-l-4">
-                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" #CheckBoxInput>
                 <label class="label-checkbox100" for="ckb1">
                   professor coordenador?
                 </label>
               </div>
               
               <div class="container-login100-form-btn p-t-25">
-                <a class="login100-form-btn" (click)="checkForm(EmailInput.value, PsswordInput.value)">
+                <a class="login100-form-btn" (click)="checkForm(EmailInput.value, PsswordInput.value, NameInput.value, CheckBoxInput.checked)">
                   Registar
                 </a>
               </div>
@@ -52,7 +60,7 @@
         <h5>{{subject["disciplina_nome"]}}</h5>
       </div>
       <div class="card-body">
-        <button (click)="openModal()">Registe o/a Professor/a</button>
+        <button (click)="openModal(subject['disciplina_nome'])">Registe o/a Professor/a</button>
       </div>
     </div>
 

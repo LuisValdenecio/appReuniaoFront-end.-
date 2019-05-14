@@ -16,6 +16,8 @@ export class ProfessoresComponent {
 
   public emailAuth : FormAuth = new FormAuth('', 'email');
   public passWordAuth : FormAuth = new FormAuth('', 'text');
+  public nameAuth : FormAuth = new FormAuth('', 'text');
+  public thisTeacherSubject : String;
   public filteredAttribute : String;
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router) {
@@ -24,7 +26,8 @@ export class ProfessoresComponent {
     })
   }
 
-  public openModal(index : number) {
+  public openModal(subjectName : String) {
+    this.thisTeacherSubject = subjectName;
     this.shouldDisplayModal = true;
   }
 
@@ -32,18 +35,27 @@ export class ProfessoresComponent {
     this.shouldDisplayModal = false;
   }
 
-  checkForm(emailValue : String, passwordValue : String) {
+  checkForm(emailValue : String, passwordValue : String, nameValue : String, isCoordenador : Boolean) {
 
     this.emailAuth.textoDoInput = emailValue;
     this.passWordAuth.textoDoInput = passwordValue;
+    this.nameAuth.textoDoInput = nameValue;
 
     var isEmailOk : Boolean =  this.emailAuth.checkEmailInput();
     var isPasswrdOk : Boolean = this.passWordAuth.checkTextInput();
+    var isNameOk : Boolean = this.nameAuth.checkTextInput();
 
-    if (isEmailOk && isPasswrdOk) {
-      console.log(emailValue+" "+passwordValue);
-      this.dataModelInterface.saveTeacher({'email' : emailValue, 'password' : passwordValue}).subscribe(()=>{
-        this.router.navigateByUrl('/turmas');
+    if (isEmailOk && isPasswrdOk && isNameOk) {
+      this.dataModelInterface.saveTeacher(
+        {
+          'email' : emailValue,
+          'password' : passwordValue,
+          'name' : nameValue,
+          'coordenador' : isCoordenador,
+          'turma_id' : this.formatURL(),
+          'nomedisciplina' : this.thisTeacherSubject
+        }).subscribe(()=>{
+        this.closeModal();
       }, (err)=>{
         console.log(err);
       })

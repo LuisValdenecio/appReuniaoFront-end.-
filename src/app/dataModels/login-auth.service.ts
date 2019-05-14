@@ -6,17 +6,13 @@ import { GlobalDataStore } from './GlobalDataStore';
 export class LoginAuthService {
 
   constructor(private globalDataStore : GlobalDataStore) { }
-
-  authenticate(username: String, password: String): Observable<boolean> {
-    return this.globalDataStore.authenticate(username, password);
-  }
   
-  get authenticated(): boolean {
-    return this.globalDataStore.auth_token != null;
+  get isAuthenticated(): boolean {
+    return this.globalDataStore.isLoggedIn();
   }
 
   clear() {
-    this.globalDataStore.auth_token = null;
+    this.globalDataStore.logout();
   }
 
 }

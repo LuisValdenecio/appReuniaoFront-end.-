@@ -9,11 +9,13 @@ import { EstudantesComponent } from './turmas/turma/estudantes/estudantes.compon
 import { ProfessoresComponent } from './turmas/turma/professores/professores.component';
 import { LivroDePontoComponent } from './turmas/turma/livro-de-ponto/livro-de-ponto.component';
 import { PautasComponent } from './turmas/turma/pautas/pautas.component';
+import { AuthGuardService } from 'src/app/dataModels/auth-guard.service';
 
 const appRoutes : Routes = [
   {
       path : 'homeadmin', 
       component : HomeComponent,
+      canActivate : [AuthGuardService],
       children : [
           {
             path : 'cursos',
