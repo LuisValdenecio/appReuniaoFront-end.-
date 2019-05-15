@@ -20,6 +20,14 @@ export class DataModelInterface {
         return this.globalDataStore.saveTeacher(teacher);
     }
 
+    public sendFaults(faultsObject : any) : Observable<any> {
+        return this.globalDataStore.sendFaults(faultsObject);
+    }
+
+    public getToken() {
+        return this.globalDataStore.getToken();
+    }
+
     public logout() {
         this.loginAuthService.clear();
     }
@@ -27,13 +35,25 @@ export class DataModelInterface {
     public getAllCourses() {
         return this.globalDataStore.getAllCourses();
     }   
-    
+ 
+    public getAllClasses() {
+        return this.globalDataStore.getAllClasses();
+    }
+
     public getAllStudents() {
         return this.globalDataStore.getAllStudents();
     }
-    
-    public getAllClasses() {
-        return this.globalDataStore.getAllClasses();
+
+    public getAllStudentsFromCLass(thisClassURL : String) {
+        return this.globalDataStore.getAllStudentsFromClass(thisClassURL);
+    }
+
+    public getThisClassTeachers(thisClassURL : String) {
+        return this.globalDataStore.getThisClassTeacher(thisClassURL);
+    }
+
+    public getThisTeachersSubjects(teacherAndClassCode : String) {
+        return this.globalDataStore.getThisTeachersSubjects(teacherAndClassCode);
     }
 
     public getAllSubjects(thisClassURL : String) {
@@ -50,6 +70,11 @@ export class DataModelInterface {
 
     public getClassGrades(thisClassURL : String) {
         return this.globalDataStore.getClassGrades(thisClassURL);
+    }
+
+    // -->> retorna as turmas onde este professor leciona
+    public getThisTeacherClasses(teacherCode : String) {
+        return this.globalDataStore.getThisTeacherClasses(teacherCode);
     }
     
     public createClass(nomeCurso : String) {

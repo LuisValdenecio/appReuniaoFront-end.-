@@ -43,9 +43,8 @@ export class EstudantesComponent  {
 
   constructor(private dataModelInterface : DataModelInterface, private studentDataUtils : StudentDataUtils) {
     
-    this.dataModelInterface.getAllStudents().subscribe(data=>{
-      this._studentData = data.filter(turma=> turma['turma_id'] == this.formatURL())
-      this.studentDisplayed = data[0];    
+    this.dataModelInterface.getAllStudentsFromCLass("/"+this.formatURL()+"_students").subscribe(data=>{
+      this._studentData = data;
     });
 
     this.dataModelInterface.getThisClassFaults("/"+this.formatURL()+"_faults").subscribe(data=>{
@@ -64,9 +63,6 @@ export class EstudantesComponent  {
     this.dataModelInterface.getClassGrade("/"+this.formatURL()+"_classe").subscribe(data=>{
       this.thisClassGrade = data;
     });
-
-    
-    
   }
   
   // --> Substituição urgente (dependencia com o backend)

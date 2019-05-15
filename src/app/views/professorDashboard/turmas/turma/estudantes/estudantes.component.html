@@ -1,8 +1,28 @@
-
-
 <div class="row mt-4">
 
   <div class="col-lg-12">
+
+    <!-- campo que seleciona a disciplina a marcar  -->
+    <div class="input-group mb-4">
+      <select class="form-control" data-index="0" #disciplinaNome>  
+        <option *ngFor="let disc of _thisClassSubjects">
+          {{disc["disciplina_nome"]}}
+        </option>
+      </select>
+    </div>
+
+    <div class="contact100-form-checkbox m-l-4">
+      <input class="input-checkbox100" id="ckb1" name="ckb1" type="checkbox" (click)="changeCheckBox()">
+      <label class="label-checkbox100" for="ckb1">
+        Checkbox
+      </label>
+      
+      <input class="input-checkbox100 " id="ckb2" name="ckb2" type="checkbox" (click)="changeManual()">
+      <label class="label-checkbox100" for="ckb2">
+        Manual
+      </label>
+    </div>
+      
 
     <div class="table-responsive">
       <table class="table table-striped">
@@ -17,30 +37,34 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let student of studentData; let i = index">
+            <tr *ngFor="let student of _studentData; let i = index">
               <th scope="row">
-                <img src="https://a.wattpad.com/cover/21934685-352-k598202.jpg" class="img-student">
+                <img [src]="'assets/img/'+student.foto" class="img-student">
               </th>
               <td class="pt-4">
-                <span>{{student.name}}</span>
+                <span>{{student.nome}}</span>
               </td>
               <td class="pt-4">
                <span>{{i+1}}</span> 
               </td>
               <td class="text-center pt-4">
-                  <input type="checkbox">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']"  (input)="alertWhenTypedAusencias($event.target, student)">
               </td>
               <td class="text-center pt-4">
-                <input type="checkbox">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']" (input)="alertWhenTypedMateriais($event.target, student)">
               </td>
               <td class="text-center pt-4">
-                <input type="checkbox">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']" (input)="alertWhenTypedDisc($event.target, student)">
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
+      <!-- botão de marcação de faltas -->
+      <div class="input-group mb-4">
+        <button class="btn p-2" (click)="marcarFaltas(disciplinaNome.value)">MARCAR FALTAS</button>
+      </div>
 
   </div>
 

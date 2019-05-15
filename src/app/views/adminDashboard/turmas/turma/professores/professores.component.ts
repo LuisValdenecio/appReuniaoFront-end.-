@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 import { FormAuth } from 'src/app/views/sharedFormAuth/form-auth';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-professores',
   templateUrl: './professores.component.html',
   styleUrls: ['./professores.component.css']
 })
-export class ProfessoresComponent {
+export class ProfessoresComponent  {
 
   private thisClassSubjects : any[];
+  private thisClassTeachers : any[];
+
   private shouldDisplayModal : Boolean = false;
   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
 
@@ -21,9 +24,23 @@ export class ProfessoresComponent {
   public filteredAttribute : String;
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router) {
+    this.dataModelInterface.getThisClassTeachers("/"+this.formatURL()+"_teachers").subscribe(data=>{
+      this.thisClassTeachers = data;
+    })
+
     this.dataModelInterface.getAllSubjects("/"+this.formatURL()).subscribe(data=>{
       this.thisClassSubjects = data;
     })
+  }
+
+  public unregistedSubjects() {
+    var arrayToDisplay = [];
+    for (let unsavedCounter = 0; unsavedCounter < this.thisClassSubjects.length; unsavedCounter++) {
+      if  (!this.thisClassTeachers.filter(subject => subject['disciplina_nome'] == this.thisClassSubjects[unsavedCounter]['disciplina_nome']).length) {
+        arrayToDisplay.push(this.thisClassSubjects[unsavedCounter]);
+      }
+    }
+    return arrayToDisplay; 
   }
 
   public openModal(subjectName : String) {
@@ -54,11 +71,14 @@ export class ProfessoresComponent {
           'coordenador' : isCoordenador,
           'turma_id' : this.formatURL(),
           'nomedisciplina' : this.thisTeacherSubject
-        }).subscribe(()=>{
-        this.closeModal();
-      }, (err)=>{
-        console.log(err);
-      })
+        }).subscribe((data)=>{
+          console.log(data);
+          this.closeModal();
+        }, (err)=>{
+          console.log(err);
+          this.closeModal();
+        }
+      )
     }
 
   }

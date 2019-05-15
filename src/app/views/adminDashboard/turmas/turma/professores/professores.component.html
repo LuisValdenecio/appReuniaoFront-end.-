@@ -53,7 +53,7 @@
 
 <div class="row">
 
-  <div *ngFor="let subject of thisClassSubjects" class="col-lg-4">
+  <div *ngFor="let subject of unregistedSubjects()" class="col-lg-4">
 
     <div class="card m-4">
       <div class="card-header">
@@ -65,5 +65,19 @@
     </div>
 
   </div>
- 
+
+  <div *ngFor="let teacher of thisClassTeachers" class="col-lg-4">
+
+    <div class="card m-4">
+      <div class="card-header">
+        <h5>{{teacher["disciplina_nome"]}}</h5>
+      </div>
+      <div class="card-body">
+        <h6>{{teacher["nome"]}}</h6>
+      </div>
+    </div>
+
+  </div>
+
+
 </div>

@@ -19,8 +19,8 @@ export class LivroDePontoComponent  {
 
   constructor(private dataModelInterface : DataModelInterface) {
 
-    this.dataModelInterface.getAllStudents().subscribe(data=>{
-      this._studentData = data.filter(turma=> turma['turma_id'] == this.formatURL())
+    this.dataModelInterface.getAllStudentsFromCLass("/"+this.formatURL()+"_students").subscribe(data=>{
+      this._studentData = data;
     });
     
     this.dataModelInterface.getAllSubjects("/"+this.formatURL()).subscribe(data=>{
