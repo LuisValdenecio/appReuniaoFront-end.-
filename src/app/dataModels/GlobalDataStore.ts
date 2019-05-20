@@ -56,8 +56,20 @@ export class GlobalDataStore {
         return this.http.post<any>(API_URL + '/faltas', {'faultsObject' : faultsObject});
     }
 
+    public sendGrades(gradeObject : any) : Observable<any> {
+        return this.http.post<any>(API_URL + '/notas', {'gradesObject' : gradeObject})
+    }
+
+    public sendFaultsDeleter(faultsObject : any) : Observable<any> {
+        return this.http.post<any>(API_URL + '/justificativo', {'faultsObject' : faultsObject})
+    }
+
     public getAllStudentsFromClass(classURL : String) : any {
         return this.request('get', classURL);
+    }
+
+    public isThisTeacherCoord(teacherAndClassCode : String) : any {
+        return this.request('get', teacherAndClassCode);
     }
 
     public getThisTeachersSubjects(teacherAndClassCode : String) : any {

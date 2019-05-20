@@ -38,7 +38,6 @@ export class PautasComponent  {
           this.tipoDePauta = "naoPrimario";
       }
 
-
     });
 
     // -->> condição que determina o tipo de minipauta a mostrar no template

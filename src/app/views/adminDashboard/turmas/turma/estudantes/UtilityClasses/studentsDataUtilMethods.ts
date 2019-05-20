@@ -3,11 +3,6 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class StudentDataUtils {
 
-    public processBehaviorData(arrayOfData : any[]) {
-    
-
-    }
-
     public sumTheWholeClassFaults(arrayOfData : any[]) {
         var totalOfFaults = 0;
         arrayOfData.forEach((each)=>{
@@ -44,6 +39,23 @@ export class StudentDataUtils {
             
         })
         return newArray;
+    }
+
+    public processQualityData(arrayOfData : any[]) {
+        var arrayOfQlyData = arrayOfData.filter(disciplina=> disciplina['disciplina_nome'] == 'Avaliação Geral');
+        
+        return {
+            'particapacao' : arrayOfQlyData[0]['participacao'],
+            'iconePart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? 'fa fa-check-circle' : 
+                (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
+            'percentPart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? '100%' : 
+            (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? '0%' : '50%',
+            'avalicaoDisciplinar' : arrayOfQlyData[0]['comportamento'],
+            'iconeComport' :  (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? 'fa fa-check-circle' : 
+            (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
+            'percentComport' : (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? '100%' : 
+            (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? '0%' : '50%',
+        }
     }
 
     public processGradesData(arrayOfData : any[]) {
@@ -87,10 +99,21 @@ export class StudentDataUtils {
                 'class' : 'negativas'
             });
 
-        } else if (firstGroup.length > 0 && secondGroup.length == 0 && thirdGroup.length > 0) {
+        } else if (firstGroup.length > 0 && secondGroup.length == 0 && thirdGroup.length == 0) {
             dataToReturn.push({
-                'vectorDasDisc': this.stringShortenerInArray(firstGroup, 4).splice(0,4).toString()+((firstGroup.length >= 4)?",...":"."), 
+                'vectorDasDisc':  this.stringShortenerInArray(firstGroup.concat(secondGroup), 4).splice(0,4).toString()+((firstGroup.concat(secondGroup).length >= 4)?",...":"."),
                 'class' : 'soAcimaDe14'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
+            });
+
+        } else if (firstGroup.length == 0 && secondGroup.length > 0 && thirdGroup.length == 0) {
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(secondGroup, 4).splice(0,4).toString()+((secondGroup.length >= 4)?",...":"."), 
+                'class' : 'positivasAbaixoDe14'
             });
 
             dataToReturn.push({
@@ -299,6 +322,154 @@ export class StudentDataUtils {
         return dadosARetornar;
     }
 
+    public _situacaoNotas(arrayOfData, faultsPoints) {
+
+        var disciplinasEmAlta = [], disciplinasEmBaixa = [], disciplinasNoMeio = [];
+        var informatica = 0, culinaria = 0, ingles = 0, teatro = 0, xadrez = 0;
+        var resolucaoTarefas = -1, avaliacaoDisciplinar = "Sem dados";
+
+        var pontuacaoGlobal = 500;
+        var pontosFaltasDescontar = 100 - Number(faultsPoints.slice(0,faultsPoints.length-1)) 
+        
+
+        arrayOfData.forEach((disciplina)=>{
+
+            // ignore avalicão geral
+            if (disciplina['disciplina_nome'] != 'Avaliação Geral') {
+
+                if (disciplina['disciplina_nome'] == 'Culinaria') {
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        culinaria = -1; 
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        culinaria = 2;
+                    } else {
+                        pontuacaoGlobal -= 5;
+                        culinaria = 1;
+                    }
+                } else if (disciplina['disciplina_nome'] == 'Iniciação à Informática') {
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        informatica = -1; 
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        informatica = 2;
+                    } else {
+                        pontuacaoGlobal -= 5;
+                        informatica = 1;
+                    }
+                } else if (disciplina['disciplina_nome'] == 'Língua Inglesa') {
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        ingles = -1; 
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        ingles = 2;
+                    } else {
+                        ingles = 1;
+                        pontuacaoGlobal -= 5;
+                    }
+                } else if (disciplina['disciplina_nome'] == 'Xadrez') {
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        xadrez = -1; 
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        xadrez = 2;
+                    } else {
+                        xadrez = 1;
+                        pontuacaoGlobal -= 5;
+                    }
+                } else if (disciplina['disciplina_nome'] == 'Teatro') {
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        teatro = -1; 
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        teatro = 2;
+                    } else {
+                        teatro = 1;
+                        pontuacaoGlobal -= 5;
+                    }
+                } else {
+
+                    if (disciplina['situacaonotas'] == 'Em Baixa') {
+                        disciplinasEmBaixa.push(disciplina['disciplina_nome']);
+                        pontuacaoGlobal -= 10;
+                    } else if (disciplina['situacaonotas'] == 'Em Alta') {
+                        disciplinasEmAlta.push(disciplina['disciplina_nome']);
+                    } else {
+                        disciplinasNoMeio.push(disciplina['disciplina_nome']);
+                        pontuacaoGlobal -= 5;
+                    }
+
+                }
+
+            } else {
+
+               if (disciplina['resolucao_de_tarefas'] == 'Nunca Resolve') {
+                    resolucaoTarefas = 0;
+                    pontuacaoGlobal -= 50;
+               } else if (disciplina['resolucao_de_tarefas'] == 'Resolve Raras vezes') {
+                    resolucaoTarefas = 1;
+                    pontuacaoGlobal -= 20;
+               } else if (disciplina['resolucao_de_tarefas'] == 'Resolve Mal') {
+                    resolucaoTarefas = 2;
+                    pontuacaoGlobal -= 10;
+               } else if (disciplina['resolucao_de_tarefas'] == 'Resolve Razoavelmente') {
+                    resolucaoTarefas = 2;
+                    pontuacaoGlobal -= 5;
+               } else if (disciplina['resolucao_de_tarefas'] == 'Resolve Bem') {
+                    resolucaoTarefas = 4;
+               } else {
+                    resolucaoTarefas = 5;
+               }   
+
+               avaliacaoDisciplinar = disciplina['avaliacaodisciplinar'];
+                if (avaliacaoDisciplinar == 'Negativa') {
+                    pontuacaoGlobal -= 100;
+                } else if (avaliacaoDisciplinar == 'Regular') {
+                        pontuacaoGlobal -= 20;
+                } 
+            }
+        })
+
+        // descontando as faltas
+        console.log(pontuacaoGlobal);
+        console.log(pontosFaltasDescontar);
+        pontuacaoGlobal = pontuacaoGlobal - pontosFaltasDescontar;
+
+        return {
+            'disciplinasEmBaixa' : {
+                'valor' : (disciplinasEmBaixa.length > 0) ? 
+                    this.stringShortenerInArray(disciplinasEmBaixa, 5).splice(0,5).toString()+((disciplinasEmBaixa.length >= 5)?" ,...":".") : 'Sem disciplinas em baixa'
+            },
+            'disciplinasEmAlta' : {
+                'valor' : (disciplinasEmAlta.length > 0) ? 
+                    this.stringShortenerInArray(disciplinasEmAlta, 5).splice(0,5).toString()+((disciplinasEmAlta.length >= 5)?" ,...":".") : 'Sem disciplinas em alta'
+            },
+            'disciplinasNoMeio' : {
+                'valor' : (disciplinasNoMeio.length > 0) ? 
+                this.stringShortenerInArray(disciplinasNoMeio, 5).splice(0,5).toString()+((disciplinasNoMeio.length >= 5)?" ,...":".") : 'Sem disciplinas no nível intermédio'
+            },
+            'disciplinasExtras' : {
+                'culinaria' : (culinaria == 0) ? 'transparente' : (culinaria == -1) ? 'vermelho' : (culinaria == 2) ? 'verde' : 'laranja',
+                'informatica' : (informatica == 0) ? 'transparente' : (informatica == -1) ? 'vermelho' : (informatica == 2) ? 'verde' : 'laranja',
+                'ingles' : (ingles == 0) ? 'transparente' : (ingles == -1) ? 'vermelho' : (ingles == 2) ? 'verde' : 'laranja',
+                'xadrez' : (xadrez == 0) ? 'transparente' : (xadrez == -1) ? 'vermelho' : (xadrez == 2) ? 'verde' : 'laranja',
+                'teatro' : (teatro == 0) ? 'transparente' : (teatro == -1) ? 'vermelho' : (teatro == 2) ? 'verde' : 'laranja'
+            },
+            'resolucaoDeTarefas' : {
+                'valor' : (resolucaoTarefas == -1) ? [] : (resolucaoTarefas == 0) ? [{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'}] : 
+                    (resolucaoTarefas == 1) ? [{'color' : 'red'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'}] :
+                    (resolucaoTarefas == 2) ? [{'color' : 'red'},{'color' : 'red'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'}] : 
+                    (resolucaoTarefas == 3) ? [{'color' : 'orange'},{'color' : 'orange'},{'color' : 'orange'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'}] : 
+                    (resolucaoTarefas == 4) ? [{'color' : 'green'},{'color' : 'green'},{'color' : 'green'},{'color' : 'green'},{'color' : '#c6e1c6'}] : 
+                        [{'color' : 'green'},{'color' : 'green'},{'color' : 'green'},{'color' : 'green'},{'color' : 'green'}]
+            },
+            'avaliacao_disciplinar' : {
+                'valor' : avaliacaoDisciplinar, 'icone' : (avaliacaoDisciplinar == 'Sem dados') ? 'fa fa-plug' : (avaliacaoDisciplinar == 'Positiva') ? 'fa fa-check-circle' : 
+                (avaliacaoDisciplinar == 'Negativa') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle'
+            },
+            'pontuacaoGlobal' : Math.trunc(pontuacaoGlobal / 5) + '%'
+        }
+    }
 
 
 

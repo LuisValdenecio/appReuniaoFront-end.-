@@ -8,7 +8,7 @@ import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 })
 export class CursosComponent  {
 
-  private courseData : any[] = [
+  public courseData : any[] = [
     {"nomeCurso" : "Informática"},
     {"nomeCurso" : "IAC"},
     {"nomeCurso" : "Contabilidade"}

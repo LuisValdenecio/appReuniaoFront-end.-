@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
+
 
 @Component({
   selector: 'app-turma',
@@ -7,36 +8,39 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./turma.component.css']
 })
 export class TurmaComponent  {
-
-  
-  private routeInfo : any;
+ 
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view da turma
+  public isThisTeacherCoor : Boolean = false;
 
-  constructor(activeRoute : ActivatedRoute) {
-    activeRoute.url.subscribe(data=>{
-      this.routeInfo = data;
-    });
-   }
+  private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
+  constructor(private dataInterface : DataModelInterface) {
+    this.dataInterface.isThisTeacherCood("/"+this.formatURL()+"_"+this.dataInterface.parseJwt(this.dataInterface.getToken())['codUser']+"_coord").subscribe(data=>{
+      this.isThisTeacherCoor = data > 0;
+    }) 
+  }
 
   // --> isto é somente um hack para fazer desaparecer o view da turma
   public deleteParentView() {
     this.display = false;
   }
   
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType = 'bar';
-  public barChartLegend = true;
-  
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
+  // --> Substituição urgente (dependencia com o backend)
+  public formatURL() {
 
+    this.filteredAttribute = "";
 
+    for (let counter = 0; counter < this.thisClassesURL.length; counter++) {
+      this.filteredAttribute += this.thisClassesURL.charAt(counter);
+      if (counter == 7 || counter == 11 || counter == 15 || counter == 19) {
+        this.filteredAttribute += "-"
+      }
+    }
+    return this.filteredAttribute;
+    
+  }
+
+ 
 
 }

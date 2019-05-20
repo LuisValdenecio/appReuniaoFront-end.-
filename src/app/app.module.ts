@@ -7,10 +7,12 @@ import { LoginModule } from './views/login/login-module';
 import { SignupModule } from './views/signin/signup-module';
 import { HomeModule} from './views/adminDashboard/home-module';
 import { HomeModuleProfDash} from './views/professorDashboard/home-module';
+import { AppSelectDisabledDirective } from './views/professorDashboard/turmas/turma/custom_directives/app-select-disabled.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppSelectDisabledDirective
   ],
   imports: [
     BrowserModule,

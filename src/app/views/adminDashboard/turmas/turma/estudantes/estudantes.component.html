@@ -648,7 +648,7 @@
                             </div>
 
                             <div class="col-lg-2 desempenho-perc">
-                              <h6>100%</h6>
+                              <h6>{{thisStudentParticipation['percentPart']}}</h6>
                             </div>
                               
                           </div>
@@ -657,7 +657,7 @@
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
-                            <div class="progress-bar" role="progressbar" [style.width]="'100%'" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" [style.width]="thisStudentParticipation['percentPart']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
 
@@ -666,11 +666,11 @@
                           <div class="row">
                             
                               <div class="col-lg-12 mb-2">
-                                <span class="fa fa-check-circle" style="font-size:90px"></span>
+                                <span [ngClass]="thisStudentParticipation['iconePart']" style="font-size:90px"></span>
                               </div>
 
                               <div class="col-lg-12 mb-2 avaliacao-disc-text">
-                                <h3 style="font-weight: bold">Satisfatória</h3>
+                                <h3 style="font-weight: bold">{{thisStudentParticipation["particapacao"]}}</h3>
                                 
                               </div>
 
@@ -831,7 +831,7 @@
                               </div>
 
                               <div class="col-lg-2 desempenho-perc">
-                                <h6>100%</h6>
+                                <h6>{{thisStudentParticipation['percentComport']}}</h6>
                               </div>
                               
                             </div>
@@ -840,7 +840,7 @@
                           <!-- barra de desempenho -->
                           <div class="progress-group-bars">
                             <div class="progress progress-xs">
-                              <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                              <div class="progress-bar" role="progressbar" [style.width]="thisStudentParticipation['percentComport']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                           </div>
 
@@ -848,11 +848,11 @@
                             <div class="row">
                               
                               <div class="col-lg-12 mb-2">
-                                <span class="fa fa-check-circle" style="font-size:90px"></span>
+                                <span [ngClass]="thisStudentParticipation['iconeComport']" style="font-size:90px"></span>
                               </div>
 
                               <div class="col-lg-12 mb-2 avaliacao-disc-text">
-                                <h3 style="font-weight: bold">Satisfatória</h3>
+                                <h3 style="font-weight: bold">{{thisStudentParticipation['avalicaoDisciplinar']}}</h3>
                                 
                               </div>
 
@@ -932,7 +932,7 @@
                         </div>
                         <div class="col-lg-4">
                           <button (click)="closeModal()" class="btn p-2" >
-                            Feixar
+                            Fechar
                             <i class="fa fa-close" aria-hidden="true"></i>
                           </button>
                         </div>

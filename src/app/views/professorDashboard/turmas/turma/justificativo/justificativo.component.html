@@ -1,0 +1,131 @@
+<!--
+  Para efeitos de simplicidade, decidi colocar aqui os dois modals
+ -->  
+
+ <!-- 2º Modal (ensino Técnico) -->
+ <div *ngIf="shoudlDisplayFaltasModal" class="container-contact100">
+    <div class="wrap-contact100 row">
+        <button (click)="closeModal()" class="btn-hide-contact100"><i class="fa fa-close"></i></button>
+        <div class="contact100-form-title" style="background-image: url(public/img/1.GIF);">
+            <span>Justificativo de Faltas</span>
+        </div>
+        <div class="swiper-container">
+
+          <div class="container-fluid">
+            <div class="row">
+
+              <!-- aviso quando se tenta justificar sem qualquer disciplina selecionada -->
+              <div class="col-lg-12" *ngIf="erroSemDisciplinas">
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">Adicione disciplinas e números de faltas antes de justificar</h4>
+                </div>
+              </div>
+
+              <!-- aviso quando se tenta adicionar uma disciplina sem o número de faltas -->
+              <div class="col-lg-12" *ngIf="erroSemNumeroFaltas">
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-heading">Adicione um número válido de faltas.</h4>
+                </div>
+              </div>
+
+              <!-- quando não há disciplinas selecionadas -->
+              <div class="col-lg-12" *ngIf="arrayOfSubjects.length == 0">
+                  <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">Adicione disciplinas e o nº de faltas</h4>
+                      <p>Adicione disciplinas e o número de faltas que pretende justificar para cada uma delas e depois clique em justificar</p>
+                    </div>
+              </div>
+
+              <!-- quando ja há disciplinas selecionadas -->
+              <div class="col-lg-12" *ngIf="arrayOfSubjects.length > 0">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Disciplinas adicionadas</h4>
+                    <div class="row pt-2">
+                      <div class="col-lg-6" *ngFor="let disc of arrayOfSubjects; let i = index">
+                        <div class="card p-1" (click)="eliminarDisciplina(i)">
+                          <div class="row">
+                            <div class="col-lg-9">
+                              <span>{{disc['nomeDisciplina']}}</span>
+                            </div>
+                            <div class="col-lg-3">
+                              <span>{{disc['numeroFaltas']}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="container-fluid">
+            
+            <div class="row">
+              <div class="col-lg-12">
+                  <form class="form-inline">
+                    <div class="form-group mb-2">
+                      <select class="form-control" #subjectSelected>
+                        <option disabled>Selecione uma disciplina</option>
+                        <option *ngFor="let disc of _thisClassSubjectsForCoord">
+                            {{disc["disciplina_nome"]}}
+                          </option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-2">
+                      <input type="text" class="form-control" id="inputPassword2" placeholder="número de faltas" #numberOfFaults>
+                    </div>
+                    <a (click)="adicionarDisciplina(subjectSelected.value, numberOfFaults.value)" class="btn btn-primary mb-2">Adicionar</a>
+                  </form>
+              </div> 
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 form-control-lg">
+                <a (click)="justificarFaltas()" class="btn btn-primary mb-2 p-3">Justificar</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+
+  <div class="col-lg-12">
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col" >Foto</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Nº de Ordem</th>
+              <th scope="col" class="text-center">Ver Relatório</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of _studentData; let i = index">
+              <th scope="row">
+                <img [src]="'assets/img/'+student.foto" class="img-student">
+              </th>
+              <td class="pt-4">
+                <span>{{student.nome}}</span>
+              </td>
+              <td class="pt-4">
+               <span>{{i+1}}</span> 
+              </td>
+              <td class="text-center pt-3">
+                <button (click)="openModal(student['estudantecod'])" class="btn"><i class="fa fa-eye"></i>Justificar Faltas</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+  </div>
+
+</div>

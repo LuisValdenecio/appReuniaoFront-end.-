@@ -1,0 +1,250 @@
+
+tbody {
+    background: lightgray;
+}
+
+thead {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    color: #fff;
+    border: none;
+}
+
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
+
+  .text-center {
+      text-align: center;
+  }
+
+.img-student {
+    width : 60px;
+    height: 45px;
+    border-radius: 5%;
+}
+
+/*
+    Importando a fonte do modal
+*/
+
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/Monseratt/Montserrat-Bold.ttf');
+}
+
+
+/*==================================================================
+[ Content container ]*/
+.container-contact100 {
+    width: 100%;  
+    min-height: 100vh;
+    
+    padding: 15px;
+    background: rgba(132,106,221,0.8);
+    position: fixed;
+     top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+   
+    z-index: 1000;
+  }
+   
+  .card {
+    border-radius : 0%;
+  }
+
+  .wrap-contact100 {
+    width: 710px;
+    background: #fff; 
+    border-radius: 3px;
+    position: relative;
+    top: 8%;
+    left: 25%;
+    height: 80vh;
+  }
+  
+  /*==================================================================
+  [ Title form ]*/
+  .contact100-form-title {
+    font-family: Montserrat-Bold;
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  
+    width: 100%;
+    height: 80px;
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    overflow: hidden;
+    
+    padding: 30px 15px 30px 15px;
+  }
+  
+  .contact100-form-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(67,67,67,0.6);
+  }
+  
+  
+  
+  /*//////////////////////////////////////////////////////////////////
+  [ Button show / hide ]*/
+  .btn-hide-contact100 {
+    font-size: 30px;
+    color: #fff;
+    opacity: 0.6;
+    position: absolute;
+    right: 0;
+    top: -44px;
+    background : transparent;
+    border: none;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .btn-hide-contact100:hover {
+    opacity: 1;
+  }
+
+  .swiper-container {
+    width: 90%;
+    position: relative;
+    left: 5%; 
+   }
+  
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+
+  /*//////////////////////////////////////////////////////////////////
+  [ RESTYLE TAG ]*/
+
+  /*---------------------------------------------*/
+  a {
+      font-family: Poppins-Regular;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #666666;
+      margin: 0px;
+      transition: all 0.4s;
+      -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+  }
+  
+  a:focus {
+      outline: none !important;
+  }
+  
+  a:hover {
+      text-decoration: none;
+    color: #d33f8d;
+  }
+  
+  /*---------------------------------------------*/
+  h1,h2,h3,h4,h5,h6 {
+      margin: 0px;
+  }
+  
+  p {
+      font-family: Poppins-Regular;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #666666;
+      margin: 0px;
+  }
+  
+  ul, li {
+      margin: 0px;
+      list-style-type: none;
+  }
+  
+  
+  /*---------------------------------------------*/
+  input {
+      outline: none;
+      border: none;
+  }
+  
+  textarea {
+    outline: none;
+    border: none;
+  }
+  
+  textarea:focus, input:focus {
+    border-color: transparent !important;
+  }
+  
+  input:focus::-webkit-input-placeholder { color:transparent; }
+  input:focus:-moz-placeholder { color:transparent; }
+  input:focus::-moz-placeholder { color:transparent; }
+  input:focus:-ms-input-placeholder { color:transparent; }
+  
+  textarea:focus::-webkit-input-placeholder { color:transparent; }
+  textarea:focus:-moz-placeholder { color:transparent; }
+  textarea:focus::-moz-placeholder { color:transparent; }
+  textarea:focus:-ms-input-placeholder { color:transparent; }
+  
+  input::-webkit-input-placeholder { color: #acacac; }
+  input:-moz-placeholder { color: #acacac; }
+  input::-moz-placeholder { color: #acacac; }
+  input:-ms-input-placeholder { color: #acacac; }
+  
+  textarea::-webkit-input-placeholder { color: #acacac; }
+  textarea:-moz-placeholder { color: #acacac; }
+  textarea::-moz-placeholder { color: #acacac; }
+  textarea:-ms-input-placeholder { color: #acacac; }
+  
+  /*---------------------------------------------*/
+  button {
+      outline: none !important;
+      border: none;
+      background: transparent;
+  }
+  
+  button:hover {
+      cursor: pointer;
+  }
+  
+  iframe {
+      border: none !important;
+  }
+  
+  
+  /*//////////////////////////////////////////////////////////////////
+  */

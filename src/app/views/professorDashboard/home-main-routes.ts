@@ -7,6 +7,9 @@ import { TurmaComponent } from './turmas/turma/turma.component';
 import { EstudantesComponent } from './turmas/turma/estudantes/estudantes.component';
 import { PautasComponent } from './turmas/turma/pautas/pautas.component';
 import { AuthGuardService } from 'src/app/dataModels/auth-guard.service';
+import { RelatorioComponent } from './turmas/turma/relatorio/relatorio.component';
+import { JustificativoComponent } from './turmas/turma/justificativo/justificativo.component';
+import { RelatoriocompletoComponent } from './turmas/turma/relatorio/relatoriocompleto/relatoriocompleto.component';
 
 
 const appRoutes : Routes = [
@@ -24,7 +27,13 @@ const appRoutes : Routes = [
               component : TurmaComponent,
               children : [
                 {path : 'estudantes', component : EstudantesComponent},
-                {path: 'pautas', component: PautasComponent}
+                {path: 'pautas', component: PautasComponent},
+                {
+                  path : 'relatorio', component: RelatorioComponent, children : [
+                    {path : 'abc', component : RelatoriocompletoComponent}
+                  ]
+                },
+                {path : 'justificativo', component: JustificativoComponent}
               ]              
             }
           ] 

@@ -1,44 +1,137 @@
-
-
 <div class="row mt-4">
 
   <div class="col-lg-12">
 
+    <!-- campo que seleciona a disciplina a marcar  -->
+    <div class="input-group mb-4">
+      <select class="form-control" data-index="0" (input)="alertWhenChangedDisciplina($event.target)" #disciplinaNome>  
+        <option *ngFor="let disc of _thisClassSubjects">
+          {{disc["disciplina_nome"]}}
+        </option>
+      </select>
+    </div>
+
     <div class="table-responsive">
-      <table class="table table-striped">
-          <thead>
-            <tr>
+      <table class="table table-striped" [ngSwitch]="tipoDePauta == 'primario'">
+          <thead [ngSwitch]="tipoDePauta == 'primario'">
+
+            <!-- 5ª,6ª,...12ª -->
+            <tr *ngSwitchCase="false">
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
               <th scope="col">Nº</th>
-              <th scope="col" class="text-center">MAC</th>
-              <th scope="col" class="text-center">PP1</th>
-              <th scope="col" class="text-center">PP2</th>
+              <th scope="col" class="text-center">Avaliação Disciplinar</th>
+              <th scope="col" class="text-center">Participação nas Aulas</th>
+              <th scope="col" class="text-center">CPP</th>
             </tr>
+
+            <!-- Iniciação,... 4ª -->
+            <tr *ngSwitchCase="true">
+              <th scope="col" >Foto</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Nº</th>
+              <th scope="col" class="text-center">Resolução de Tarefas</th>
+              <th scope="col" class="text-center">Situação de Notas</th>
+              <th scope="col" class="text-center">Outras</th>
+            </tr>
+
           </thead>
-          <tbody>
-            <tr *ngFor="let student of studentData; let i = index">
-              <th scope="row">
-                <img src="https://a.wattpad.com/cover/21934685-352-k598202.jpg" class="img-student">
-              </th>
-              <td class="pt-4">
-                <span>{{student.name}}</span>
-              </td>
-              <td class="pt-4">
-               <span>{{i+1}}</span> 
-              </td>
-              <td class="text-center pt-4">
-                  <input type="text">
-              </td>
-              <td class="text-center pt-4">
-                <input type="text">
-              </td>
-              <td class="text-center pt-4">
-                <input type="text">
-              </td>
-            </tr>
+
+          <!-- Iniciação,... 4ª -->
+          <tbody *ngSwitchCase="true">
+
+              <tr *ngFor="let student of _studentData; let i = index">
+  
+                  <th scope="row">
+                    <img [src]="'assets/img/'+student.foto" class="img-student">
+                  </th>
+                  <td class="pt-4">
+                    <span>{{student.nome}}</span>
+                  </td>
+                  <td class="pt-4">
+                    <span>{{i+1}}</span> 
+                  </td>
+                  <td class="text-center pt-4">
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="resolucaoTarefas($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
+                      <option>Nunca Resolve</option>
+                      <option>Resolve Raras vezes</option>
+                      <option>Resolve Mal</option>
+                      <option>Resolve Razoavelmente</option>
+                      <option>Resolve Bem</option>
+                      <option>Resolve Muito Bem</option>
+                    </select>
+                  </td>
+                  <td class="text-center pt-4">
+                      <select [disabled]="!flagToDisableSelect" class="form-control" data-index="0" (input)="mediaDeNotas($event.target, student)">  
+                        <option disabled>Marque uma opção</option>
+                        <option>Em Alta</option>
+                        <option>Nível Intermédio</option>
+                        <option>Em Baixa</option>
+                      </select>
+                  </td>
+                  <td class="text-center pt-4">
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="avaliacaoDisciplinar($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
+                      <option>Positiva</option>
+                      <option>Negativa</option>
+                      <option>Regular</option>
+                    </select>
+                  </td>
+    
+              </tr>
+  
           </tbody>
+
+          <!-- 5ª,6ª,...12ª -->
+          <tbody *ngSwitchCase="false">
+
+            <tr *ngFor="let student of _studentData; let i = index">
+
+                <th scope="row">
+                  <img [src]="'assets/img/'+student.foto" class="img-student">
+                </th>
+                
+                <td class="pt-4">
+                  <span>{{student.nome}}</span>
+                </td>
+                
+                <td class="pt-4">
+                  <span>{{i+1}}</span> 
+                </td>
+                
+                <td class="text-center pt-4">
+                  <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="avaliacaoDisciplinar($event.target, student)">  
+                    <option disabled>Marque uma opção</option>
+                    <option>Positiva</option>
+                    <option>Negativa</option>
+                    <option>Regular</option>
+                  </select>
+                </td>
+                
+                <td class="text-center pt-4">
+                  <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="participacaoAulas($event.target, student)">  
+                    <option disabled>Marque uma opção</option>  
+                    <option>Satistatório</option>
+                    <option>Regular</option>
+                    <option>Insatisfatório</option>
+                  </select>
+                </td>
+
+                <td class="text-center pt-4">
+                  <input [disabled]="!flagToDisableSelect" type="input" class="faltasInput" (input)="mediaDeNotas($event.target, student)">
+                </td>
+  
+            </tr>
+
+          </tbody>
+
         </table>
+      </div>
+
+      <!-- botão de marcação de faltas -->
+      <div class="input-group mb-4">
+        <button (click)="salvarNotas(disciplinaNome.value)" class="btn p-2">SALVAR NOTAS</button>
       </div>
 
 

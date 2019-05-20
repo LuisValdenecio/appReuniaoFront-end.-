@@ -11,13 +11,13 @@ import { StudentDataUtils } from './UtilityClasses/studentsDataUtilMethods';
 export class EstudantesComponent  {
 
   //-->> no cimo1 da classe vão os atributos que armazenam os dados principais (e são marcados por um underscore (_) no começo do nome)
-  private _studentData : any[];
-  private _faultsData : any[];
-  private _gradesData : any[];
-  private _thisClassSubjects : any[];
+  public _studentData : any[];
+  public _faultsData : any[];
+  public _gradesData : any[];
+  public _thisClassSubjects : any[];
 
-  private shouldDisplayFirstModal : Boolean = false;
-  private shouldDisplaySecondModal : Boolean = false;
+  public shouldDisplayFirstModal : Boolean = false;
+  public shouldDisplaySecondModal : Boolean = false;
   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
   
   //-->> a seguir vão os atributos dos data-binding 
@@ -29,6 +29,7 @@ export class EstudantesComponent  {
   public thisStudentFaults : any;
   public thisStudentGrades : any[];
   public thisStudentBehavior : any[];
+  public thisStudentParticipation : any;
   public thisStudentAvaliationInPercent : any;
   
   // -->> a seguir vão os atributos usados como indexes no data binding
@@ -99,9 +100,8 @@ export class EstudantesComponent  {
     // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
     this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
 
-    // --> o código abaixo, refere-se ao gráfico de representação de faltas
-    console.log(this._gradesData);    
-
+    this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']));
+  
     this.thisStudentPhoto = 'assets/img/';
     this.thisStudentPhoto += this._studentData[index].foto;
     this.thisStudentNumber = index + 1;
@@ -124,7 +124,9 @@ export class EstudantesComponent  {
       this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
       //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
       this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']))
-
+      // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
+      this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']));
+  
       // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
       this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
 
@@ -132,7 +134,7 @@ export class EstudantesComponent  {
       this.thisStudentPhoto += this._studentData[this._studentData.indexOf(studenObj)+1].foto;
       
       // --> o código abaixo, refere-se ao gráfico de representação de faltas
-      console.log(this._gradesData);    
+      console.log(this.thisStudentGrades);    
     
     }
     this.thisStudentNumber = (this.thisStudentNumber == this._studentData.length) ? this.thisStudentNumber + 0 : this.thisStudentNumber + 1;
@@ -150,7 +152,9 @@ export class EstudantesComponent  {
       this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
       //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
       this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']))
-
+      // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
+      this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']));
+  
       // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
       this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
 

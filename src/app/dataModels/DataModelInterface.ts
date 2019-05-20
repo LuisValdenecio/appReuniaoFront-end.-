@@ -24,6 +24,14 @@ export class DataModelInterface {
         return this.globalDataStore.sendFaults(faultsObject);
     }
 
+    public sendGrades(gradeObject : any) : Observable<any> {
+        return this.globalDataStore.sendGrades(gradeObject);
+    }
+
+    public faultsDeleter(faultsObject : any) : Observable<any> {
+        return this.globalDataStore.sendFaultsDeleter(faultsObject);
+    }
+
     public getToken() {
         return this.globalDataStore.getToken();
     }
@@ -31,7 +39,7 @@ export class DataModelInterface {
     public logout() {
         this.loginAuthService.clear();
     }
-
+ 
     public getAllCourses() {
         return this.globalDataStore.getAllCourses();
     }   
@@ -42,6 +50,10 @@ export class DataModelInterface {
 
     public getAllStudents() {
         return this.globalDataStore.getAllStudents();
+    }
+
+    public isThisTeacherCood(teacherAndClassCode : String) {
+        return this.globalDataStore.isThisTeacherCoord(teacherAndClassCode);
     }
 
     public getAllStudentsFromCLass(thisClassURL : String) {

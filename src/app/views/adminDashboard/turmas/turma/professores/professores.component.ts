@@ -11,11 +11,11 @@ import { filter } from 'rxjs/operators';
 })
 export class ProfessoresComponent  {
 
-  private thisClassSubjects : any[];
-  private thisClassTeachers : any[];
+  public thisClassSubjects : any[];
+  public thisClassTeachers : any[];
 
-  private shouldDisplayModal : Boolean = false;
-  private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  public shouldDisplayModal : Boolean = false;
+  public thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
 
   public emailAuth : FormAuth = new FormAuth('', 'email');
   public passWordAuth : FormAuth = new FormAuth('', 'text');

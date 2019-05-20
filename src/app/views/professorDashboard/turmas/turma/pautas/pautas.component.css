@@ -1,12 +1,3 @@
-.progress { 
-    height: 5px;
-    border-radius: 0%;
-}
-
-.progress-bar {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-}
-
 tbody {
     background: lightgray;
 }
@@ -38,4 +29,8 @@ thead {
     width : 60px;
     height: 45px;
     border-radius: 5%;
+}
+
+.faltasInput {
+    width: 60px;
 }

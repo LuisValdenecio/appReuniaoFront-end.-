@@ -11,13 +11,17 @@ export class EstudantesComponent  {
 
   public _studentData : any[];
   public _thisClassSubjects : any[];
+  public _thisClassSubjectsForCoord : any[];
+  public isThisTeacherCoor : Boolean = false;
   public typeOfInput : any = {'inputType' : 'checkbox', 'class': ''};
+  public nameOfSubjectToMark : String;
 
   // esta propriedade armazenará um vector de estudantes com as suas respectivas informações de faltas de volta ao servidor
   public studentDataToSend : any[] = [];
 
   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
+  
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router) {
 
@@ -38,10 +42,19 @@ export class EstudantesComponent  {
 
     });
     
+    
     this.dataModelInterface.getThisTeachersSubjects("/"+this.dataModelInterface.parseJwt(this.dataModelInterface.getToken())['codUser']+"_"+this.formatURL()+"_teacherSubjects").subscribe(data=>{
       this._thisClassSubjects = data;
-    })
-   
+    });
+    
+    this.dataModelInterface.isThisTeacherCood("/"+this.formatURL()+"_"+this.dataModelInterface.parseJwt(this.dataModelInterface.getToken())['codUser']+"_coord").subscribe(data=>{
+      this.isThisTeacherCoor = data > 0;
+    });
+
+    this.dataModelInterface.getAllSubjects("/"+this.formatURL()).subscribe(data=>{
+      this._thisClassSubjectsForCoord = data;
+    });
+
   }
 
   // --> Substituição urgente (dependencia com o backend)
@@ -59,19 +72,18 @@ export class EstudantesComponent  {
   }
 
   // --> Método utilizado para a marcação de faltas
-  public marcarFaltas(nomeDisciplina : String) {
+  public marcarFaltas() {
     console.log(this.studentDataToSend);
 
     // actualize o objecto de faltas antes de enviar as faltas para o servidor
     var dataFaultsObjectToSend = this.studentDataToSend.filter(estudante => estudante['ausencia'] > 0 && estudante['ausencia'] > 0 && estudante['ausencia'] > 0);
 
     // adicionar ao vector do objecto de faltas, o código da turma e o nome da disciplina 
-    dataFaultsObjectToSend.push({'disciplina_nome' : nomeDisciplina});
+    dataFaultsObjectToSend.push({'disciplina_nome' : this.nameOfSubjectToMark});
     dataFaultsObjectToSend.push({'turma_id' : this.formatURL()});
 
     this.dataModelInterface.sendFaults(dataFaultsObjectToSend).subscribe((data)=>{
       this.router.navigateByUrl("homeprof/inicio");
-      console.log(this.studentDataToSend);
     }, (err)=>{
       console.log(err);
     });
@@ -105,6 +117,11 @@ export class EstudantesComponent  {
   // acualize as faltas disciplinares
   public alertWhenTypedDisc(typedInValue : any, studentInQuestion : any) {
     this.alertWhenTyped(typedInValue, studentInQuestion, 'disciplinar');
+  }
+
+  // actualize o nome da disciplina onde se marca as faltas
+  public updateSubjectName(subjectName : any) {
+    this.nameOfSubjectToMark = subjectName.value;
   }
 
   public alertWhenTyped(typedInValue : any, studentInQuestion : any, typeOfData) {
