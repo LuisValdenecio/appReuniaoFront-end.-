@@ -30,7 +30,7 @@ const appRoutes : Routes = [
                 {path: 'pautas', component: PautasComponent},
                 {
                   path : 'relatorio', component: RelatorioComponent, children : [
-                    {path : 'abc', component : RelatoriocompletoComponent}
+                    {path : ':id', component : RelatoriocompletoComponent}
                   ]
                 },
                 {path : 'justificativo', component: JustificativoComponent}

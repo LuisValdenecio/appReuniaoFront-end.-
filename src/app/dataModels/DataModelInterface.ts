@@ -28,6 +28,10 @@ export class DataModelInterface {
         return this.globalDataStore.sendGrades(gradeObject);
     }
 
+    public sendGlobalScore(globalScore : any[]) : Observable<any> {
+        return this.globalDataStore.sendGlobalScore(globalScore);
+    }
+
     public faultsDeleter(faultsObject : any) : Observable<any> {
         return this.globalDataStore.sendFaultsDeleter(faultsObject);
     }
@@ -68,6 +72,10 @@ export class DataModelInterface {
         return this.globalDataStore.getThisTeachersSubjects(teacherAndClassCode);
     }
 
+    public getMarkedSubjects(thisClassURL : String) {
+        return this.globalDataStore.getTheMarkedSubjects(thisClassURL);
+    }
+
     public getAllSubjects(thisClassURL : String) {
         return this.globalDataStore.getThisClassSubjects(thisClassURL);
     }
@@ -82,6 +90,14 @@ export class DataModelInterface {
 
     public getClassGrades(thisClassURL : String) {
         return this.globalDataStore.getClassGrades(thisClassURL);
+    }
+
+    public getPreviousTrimestreData(thisClassURL : String) {
+        return this.globalDataStore.getPreviousData(thisClassURL);
+    }
+
+    public getJustificativoData() {
+        return this.globalDataStore.getJustificativoData();
     }
 
     // -->> retorna as turmas onde este professor leciona

@@ -23,13 +23,53 @@ export class StudentDataUtils {
                 
             } else {
                 if (ele == 'Língua Portuguesa') {   //-->> para não confundir com Língua Inglesa
-                    newArray.push(" Port");
+                    newArray.push(" L.Port");
                 } else if (ele == 'Educação Laboral') { // -->> para não confundir com uma outra disciplina que começe com Educação
-                    newArray.push(" Labo");
+                    newArray.push(" Ed.Lab");
                 } else  if (ele == 'Educação Visual e Plástica') { // -->> para não confundir com uma outra disciplina que começe com Educação
                     newArray.push(" EVP");
                 } else if (ele == 'Educação Moral e Cívica') { // -->> para não confundir com uma outra disciplina que começe com Educação
                     newArray.push(" EMC");
+                } else if (ele == 'Actividades Lúdicas') {
+                    newArray.push(" Act.Lúd")
+                } else if (ele == 'Administração de Empresas') {
+                    newArray.push(' Ad.Empr')
+                } else if (ele == 'Aulas Práticas') {
+                    newArray.push(' A.Prát');
+                } else if (ele == 'Biologia') {
+                    newArray.push(" Bio");
+                } else if (ele == 'Ciências da Natureza') {
+                    newArray.push(' C.Nat');
+                } else if (ele == 'Comunicação Linguística') {
+                    newArray.push(' C.Ling');
+                } else if (ele == 'Contabilidade Financeira') {
+                    newArray.push(' C.Fina');
+                } else if (ele == 'Desenho Técnico') {
+                    newArray.push(' D.Téc')
+                } else if (ele == 'Educação Física') {
+                    newArray.push(' Ed.Fís');
+                } else if (ele == 'Educação Musical') {
+                    newArray.push(' Ed.Mús');
+                } else if (ele == 'Empreendedorismo') {
+                    newArray.push(' Empree');
+                } else if (ele == 'Estudo do Meio') {
+                    newArray.push(' E.Meio');
+                } else if (ele == 'Expressão Musical') {
+                    newArray.push(' Ex.Mús');
+                } else if (ele == 'Iniciação à Informática') {
+                    newArray.push(' In.Info');
+                } else if (ele == 'Língua Inglesa') {
+                    newArray.push(' L.Ing');
+                } else if (ele == 'Meio Físico e Social') {
+                    newArray.push(' MFS');
+                } else if (ele == 'Projecto Tecnológico') {
+                    newArray.push(' P.Técn');
+                } else if (ele == 'Representação Matemática') {
+                    newArray.push(' R.Mat');
+                } else if (ele == 'T.Medições O') {
+                    newArray.push(' TCO');
+                } else if (ele == 'Técnicas de Topografia') {
+                    newArray.push(' T.Topo');
                 } else {
                     newArray.push(" "+ele.slice(0,shortIndex)); 
                 }
@@ -42,23 +82,37 @@ export class StudentDataUtils {
     }
 
     public processQualityData(arrayOfData : any[]) {
-        var arrayOfQlyData = arrayOfData.filter(disciplina=> disciplina['disciplina_nome'] == 'Avaliação Geral');
-        
-        return {
-            'particapacao' : arrayOfQlyData[0]['participacao'],
-            'iconePart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? 'fa fa-check-circle' : 
-                (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
-            'percentPart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? '100%' : 
-            (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? '0%' : '50%',
-            'avalicaoDisciplinar' : arrayOfQlyData[0]['comportamento'],
-            'iconeComport' :  (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? 'fa fa-check-circle' : 
-            (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
-            'percentComport' : (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? '100%' : 
-            (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? '0%' : '50%',
+
+        if (arrayOfData.length != 0) {
+                
+            var arrayOfQlyData = arrayOfData.filter(disciplina=> disciplina['disciplina_nome'] == 'Avaliação Geral');
+            
+            return {
+                'particapacao' : arrayOfQlyData[0]['participacao'],
+                'iconePart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? 'fa fa-check-circle' : 
+                    (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
+                'percentPart' : (arrayOfQlyData[0]['participacao'] == 'Satistatório') ? '100%' : 
+                (arrayOfQlyData[0]['participacao'] == 'Insatisfatório') ? '0%' : '50%',
+                'avalicaoDisciplinar' : arrayOfQlyData[0]['comportamento'],
+                'iconeComport' :  (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? 'fa fa-check-circle' : 
+                (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle',
+                'percentComport' : (arrayOfQlyData[0]['comportamento'] == 'Positiva') ? '100%' : 
+                (arrayOfQlyData[0]['comportamento'] == 'Negativa') ? '0%' : '50%',
+            }
+
+        } else {
+            return {
+                'particapacao' : 'Sem dados',
+                'iconePart' : 'fa fa-plug',
+                'percentPart' :'0%',
+                'avalicaoDisciplinar' : 'Sem dados',
+                'iconeComport' : 'fa fa-plug',
+                'percentComport' : '0%'
+            }
         }
     }
 
-    public processGradesData(arrayOfData : any[]) {
+    public processGradesData(arrayOfData : any[], classGrade : String) {
         //--> first group (notas >= 14); second group (positivas < 14); third group (negativas)
         var dataToReturn = [];    
         var firstGroup = [], secondGroup = [], thirdGroup = [];
@@ -71,21 +125,35 @@ export class StudentDataUtils {
 
         for (let counter = 0; counter < arrayOfData.length; counter++) {
 
-            average += arrayOfData[counter]['pp1'];
+            if (arrayOfData[counter]['disciplina_nome'] != 'Avaliação Geral') {
 
-            if (arrayOfData[counter]['pp1'] >= 10) {
-                percentOfGrades += 1;
-            }
-            
-            if (arrayOfData[counter]['pp1'] >= 14) {
-                firstGroup.push(arrayOfData[counter]['disciplina_nome']);
-            } else if (arrayOfData[counter]['pp1'] < 14 && arrayOfData[counter]['pp1'] >= 10) {
-                pontGlobal = pontGlobal - ((100 / arrayOfData.length) / 2);
-                secondGroup.push(arrayOfData[counter]['disciplina_nome']);
-            } else {
-                pontGlobal = pontGlobal - ((100 / arrayOfData.length))
-                thirdGroup.push(arrayOfData[counter]['disciplina_nome']);
-            }
+                average += arrayOfData[counter]['pp1'];
+
+                if (arrayOfData[counter]['pp1'] >= 10 && (classGrade != '5ª Classe' && classGrade != '6ª Classe')) {
+                    percentOfGrades += 1;
+                } else if (arrayOfData[counter]['pp1'] >= 5 && (classGrade == '5ª Classe' || classGrade == '6ª Classe')) {
+                    percentOfGrades += 1;  
+                }
+                
+                if (arrayOfData[counter]['pp1'] >= 14 && (classGrade != '5ª Classe' && classGrade != '6ª Classe')) {
+                    firstGroup.push(arrayOfData[counter]['disciplina_nome']);
+                } else if (arrayOfData[counter]['pp1'] < 14 && arrayOfData[counter]['pp1'] >= 10 && (classGrade != '5ª Classe' && classGrade != '6ª Classe')) {
+                    pontGlobal = pontGlobal - (100 / (arrayOfData.length - 1)) / 4;
+                    secondGroup.push(arrayOfData[counter]['disciplina_nome']);
+                } else if (arrayOfData[counter]['pp1'] < 10 && (classGrade != '5ª Classe' && classGrade != '6ª Classe')) {
+                    pontGlobal = pontGlobal - 100 / (arrayOfData.length - 1);
+                    thirdGroup.push(arrayOfData[counter]['disciplina_nome']);
+                } else if (arrayOfData[counter]['pp1'] >= 7 && (classGrade == '5ª Classe' || classGrade == '6ª Classe')) {
+                    firstGroup.push(arrayOfData[counter]['disciplina_nome']);
+                } else if (arrayOfData[counter]['pp1'] < 7 && arrayOfData[counter]['pp1'] >= 5 && (classGrade == '5ª Classe' || classGrade == '6ª Classe')) {
+                    pontGlobal = pontGlobal - (100 / (arrayOfData.length - 1)) / 4;
+                    secondGroup.push(arrayOfData[counter]['disciplina_nome']);
+                } else if (arrayOfData[counter]['pp1'] < 5 && (classGrade == '5ª Classe' || classGrade == '6ª Classe')) {
+                    pontGlobal = pontGlobal - 100 / (arrayOfData.length - 1);
+                    thirdGroup.push(arrayOfData[counter]['disciplina_nome']);
+                }
+
+            }           
         }
 
         if (firstGroup.length > 0 && secondGroup.length > 0 && thirdGroup.length > 0) {
@@ -106,7 +174,7 @@ export class StudentDataUtils {
             });
 
             dataToReturn.push({
-                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"Sem Negativas Registadas"), 
                 'class' : 'negativas'
             });
 
@@ -117,7 +185,7 @@ export class StudentDataUtils {
             });
 
             dataToReturn.push({
-                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"Sem Negativas Registadas"), 
                 'class' : 'negativas'
             });
 
@@ -134,7 +202,7 @@ export class StudentDataUtils {
 
          } else if (secondGroup.length == 0 && firstGroup.length == 0) {            
             dataToReturn.push({
-                'vectorDasDisc': 'Sem Positivas', 
+                'vectorDasDisc': 'Sem Positivas registadas', 
                 'class' : 'soAcimaDe14'
             });
 
@@ -144,26 +212,39 @@ export class StudentDataUtils {
             });
          } else if (firstGroup.length > 0 && secondGroup.length > 0 && thirdGroup.length == 0) {
             dataToReturn.push({
+                'vectorDasDisc':  this.stringShortenerInArray(firstGroup.concat(secondGroup), 4).splice(0,4).toString()+((firstGroup.concat(secondGroup).length >= 4)?",...":"."),
+                'class' : 'mixPositivas'
+            });
+
+            dataToReturn.push({
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"Sem Negativas Registadas"), 
+                'class' : 'negativas'
+            });
+
+        } else if (firstGroup.length > 0 && secondGroup.length == 0 && thirdGroup.length > 0) {
+            dataToReturn.push({
                 'vectorDasDisc': this.stringShortenerInArray(firstGroup, 4).splice(0,4).toString()+((firstGroup.length >= 4)?",...":"."), 
                 'class' : 'soAcimaDe14'
             });
 
             dataToReturn.push({
-                'vectorDasDisc': this.stringShortenerInArray(secondGroup, 4).splice(0,4).toString()+((secondGroup.length >= 4)?",...":"."), 
-                'class' : 'positivasAbaixoDe14'
+                'vectorDasDisc': this.stringShortenerInArray(thirdGroup, 4).splice(0,4).toString()+((thirdGroup.length >= 4)?",...":"."), 
+                'class' : 'negativas'
             });
         } 
         
         dataToReturn.push([
             {
                 'mediaNotas' : {
-                    'media' : Math.trunc(average / arrayOfData.length), 
-                    'class' : Math.trunc(average / arrayOfData.length) >= 10 ? 
-                        (Math.trunc(average / arrayOfData.length) >= 14 ? 'soAcimaDe14' : 'positivasAbaixoDe14') : 'negativas' 
+                    'media' : Math.trunc(average / (arrayOfData.length - 1)), 
+                    'class' : (Math.trunc(average / (arrayOfData.length - 1)) >= 10 && (classGrade != '5ª Classe' && classGrade != '6ª Classe')) ? 
+                        (Math.trunc(average / (arrayOfData.length - 1)) >= 14 ? 'soAcimaDe14' : 'positivasAbaixoDe14') :
+                        (Math.trunc(average / (arrayOfData.length - 1)) >= 5 && (classGrade == '5ª Classe' || classGrade == '6ª Classe')) ?
+                        (Math.trunc(average / (arrayOfData.length - 1)) >= 7 ? 'soAcimaDe14' : 'positivasAbaixoDe14') : 'negativas'
                 },
                 'percentDeSucesso' : {
-                    'percent':Math.trunc((percentOfGrades / arrayOfData.length) * 100),
-                    'class' : Math.trunc((percentOfGrades / arrayOfData.length) * 100) >= 50 ? 'soAcimaDe14' : 'negativas'
+                    'percent':Math.trunc((percentOfGrades / (arrayOfData.length - 1 )) * 100),
+                    'class' : Math.trunc((percentOfGrades / (arrayOfData.length - 1)) * 100) >= 50 ? 'soAcimaDe14' : 'negativas'
                 },
                 'pontuacaoGlobal' : Math.trunc(pontGlobal) + '%' 
             }
@@ -218,10 +299,10 @@ export class StudentDataUtils {
         return [partPorDisciplina, {'pontoGlobal' : Math.trunc(pontGlobal) + '%'}];
     }
 
-    public processFaultsData(arrayOfFaults : any[], numberOfSubjects : number, theClassFaults : any[]) {
+    public processFaultsData(arrayOfFaults : any[], numberOfSubjects : number, theClassFaults : any[], justiticativos : any[]) {
 
         var nomeDisciplina = [], faltasTotal = [];
-
+        
         // --> pontuação global em %
         var pontGlobal = 100;
 
@@ -251,19 +332,29 @@ export class StudentDataUtils {
         pontGlobal = pontGlobal - ((100 / numberOfSubjects) * 2) * this.sumUtilFaults(faltasTotal, false)['faltasDisciplinar']; 
         
         // -->> coloque aqui também um campo para faltas justificadas
-
+        pontGlobal = pontGlobal - (this.justiUtilSum(justiticativos) > 0 ? 1 : 0);
 
         pontGlobal = (pontGlobal < 0) ? 0 : pontGlobal;
 
         // --> o primeiro argumento deste objecto, será usado como valores para o constructor de um objecto gráfico para representação de faltas
         return {
             'toDisplay' : {
-                'pesoDasFaltas' : Math.trunc((this.sumUtilFaults(faltasTotal, false)['totalFaltas'] / totalDeFaltasDaTurma) * 100) + '%',
-                'discFaltosas' : this.stringShortenerInArray(nomeDisciplina, 4).splice(0,3).toString()+((nomeDisciplina.length > 3)?",...":"."),
+                'pesoDasFaltas' : this.justiUtilSum(justiticativos) + ' Justificadas',
+                'discFaltosas' : this.stringShortenerInArray(nomeDisciplina, 4).splice(0,2).toString()+((nomeDisciplina.length > 2)?",...":"."),
                 'totalFaltas' : this.sumUtilFaults(faltasTotal, false)['totalFaltas']
             }, 
             'displayData' : this.sumUtilFaults(faltasTotal, false), 'pontuacaoGlobal' : Math.trunc(pontGlobal) + '%' 
         }            
+    }
+
+    private justiUtilSum(arrayOfData : any[]) {
+        var totalFaltas = 0;
+        if (arrayOfData.length > 0) {
+            for (let counter = 0; counter < arrayOfData.length; counter++) {
+                totalFaltas += arrayOfData[counter]['numeroFaltas'];
+            }
+        } 
+        return totalFaltas;
     }
 
     private sumUtilParts(arr : any[]) {
@@ -322,11 +413,22 @@ export class StudentDataUtils {
         return dadosARetornar;
     }
 
+
+    public getGlobalScore(faults, grades, numbOfSub, allFaults, justificativos, classGrade) {
+        var faltas : any = Number(this.processFaultsData(faults,numbOfSub,allFaults,justificativos)['pontuacaoGlobal'].split("%")[0]);
+        var particapacao : any = Number(this.processQualityData(grades)['percentPart'].split("%")[0]);
+        var comportamento : any = Number(this.processQualityData(grades)['percentComport'].split("%")[0]);
+        var notas : any = Number(this.processGradesData(grades, classGrade)[2][0]['pontuacaoGlobal'].split("%")[0]);
+
+        return Math.trunc((faltas + comportamento + particapacao + notas) / 4);
+    }
+
     public _situacaoNotas(arrayOfData, faultsPoints) {
 
         var disciplinasEmAlta = [], disciplinasEmBaixa = [], disciplinasNoMeio = [];
         var informatica = 0, culinaria = 0, ingles = 0, teatro = 0, xadrez = 0;
         var resolucaoTarefas = -1, avaliacaoDisciplinar = "Sem dados";
+        var evolucao = 'fa fa-times-circle';
 
         var pontuacaoGlobal = 500;
         var pontosFaltasDescontar = 100 - Number(faultsPoints.slice(0,faultsPoints.length-1)) 
@@ -421,6 +523,15 @@ export class StudentDataUtils {
                     resolucaoTarefas = 5;
                }   
 
+
+               if (disciplina['evolucao'] == 'Evoluiu') {
+                evolucao = 'fa fa-long-arrow-up'
+               } else if (disciplina['evolucao'] == 'Decresceu') {
+                evolucao = 'fa fa-long-arrow-down'    
+               } else {
+                evolucao = 'fa fa-long-arrow-right'
+               }
+
                avaliacaoDisciplinar = disciplina['avaliacaodisciplinar'];
                 if (avaliacaoDisciplinar == 'Negativa') {
                     pontuacaoGlobal -= 100;
@@ -431,29 +542,38 @@ export class StudentDataUtils {
         })
 
         // descontando as faltas
-        console.log(pontuacaoGlobal);
-        console.log(pontosFaltasDescontar);
         pontuacaoGlobal = pontuacaoGlobal - pontosFaltasDescontar;
 
         return {
             'disciplinasEmBaixa' : {
                 'valor' : (disciplinasEmBaixa.length > 0) ? 
-                    this.stringShortenerInArray(disciplinasEmBaixa, 5).splice(0,5).toString()+((disciplinasEmBaixa.length >= 5)?" ,...":".") : 'Sem disciplinas em baixa'
+                    this.stringShortenerInArray(disciplinasEmBaixa, 5).splice(0,5).toString()+((disciplinasEmBaixa.length >= 5)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasEmAlta' : {
                 'valor' : (disciplinasEmAlta.length > 0) ? 
-                    this.stringShortenerInArray(disciplinasEmAlta, 5).splice(0,5).toString()+((disciplinasEmAlta.length >= 5)?" ,...":".") : 'Sem disciplinas em alta'
+                    this.stringShortenerInArray(disciplinasEmAlta, 5).splice(0,5).toString()+((disciplinasEmAlta.length >= 5)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasNoMeio' : {
                 'valor' : (disciplinasNoMeio.length > 0) ? 
-                this.stringShortenerInArray(disciplinasNoMeio, 5).splice(0,5).toString()+((disciplinasNoMeio.length >= 5)?" ,...":".") : 'Sem disciplinas no nível intermédio'
+                this.stringShortenerInArray(disciplinasNoMeio, 5).splice(0,5).toString()+((disciplinasNoMeio.length >= 5)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasExtras' : {
                 'culinaria' : (culinaria == 0) ? 'transparente' : (culinaria == -1) ? 'vermelho' : (culinaria == 2) ? 'verde' : 'laranja',
-                'informatica' : (informatica == 0) ? 'transparente' : (informatica == -1) ? 'vermelho' : (informatica == 2) ? 'verde' : 'laranja',
-                'ingles' : (ingles == 0) ? 'transparente' : (ingles == -1) ? 'vermelho' : (ingles == 2) ? 'verde' : 'laranja',
-                'xadrez' : (xadrez == 0) ? 'transparente' : (xadrez == -1) ? 'vermelho' : (xadrez == 2) ? 'verde' : 'laranja',
-                'teatro' : (teatro == 0) ? 'transparente' : (teatro == -1) ? 'vermelho' : (teatro == 2) ? 'verde' : 'laranja'
+                'informatica' : (informatica == 0) ? { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'transparent'} : (informatica == -1) ? 
+                { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'red'} : (informatica == 2) ? 
+                { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'green'} : 
+                { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'orange'},
+                'ingles' : (ingles == 0) ? { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'transparent'} : (ingles == -1) ? 
+                {'position':'absolute', 'top' : '10px', 'left':'8px', 'width.px':90, 'height.px' : '85', 'fill' : 'red'} : (ingles == 2) ?
+                {'position':'absolute', 'top' : '10px', 'left':'8px', 'width.px':90, 'height.px' : '85', 'fill' : 'green'} : 
+                {'position':'absolute', 'top' : '10px', 'left':'8px', 'width.px':90, 'height.px' : '85', 'fill' : 'orange'},
+                'xadrez' : (xadrez == 0) ? { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'transparent'} : (xadrez == -1) ? { 'position':'absolute', 'left' : '55px', 'top' : '20px', 'width.px':40, 'height.px' : '40', 'fill' : 'red'} : (xadrez == 2) ?
+                { 'position':'absolute', 'left' : '55px', 'top' : '20px', 'width.px':40, 'height.px' : '40', 'fill' : 'green'} : 
+                { 'position':'absolute', 'left' : '55px', 'top' : '20px', 'width.px':40, 'height.px' : '40', 'fill' : 'orange'},
+                'teatro' : (teatro == 0) ? { 'position':'absolute', 'top' : '30px', 'right' : '13px' , 'width.px':80, 'height.px' : '80', 'fill' : 'transparent'} : (teatro == -1) ? { 'position':'absolute', 'top' : '55px', 'left':'15px', 'width.px':35, 'height.px' : '40', 'fill' : 'red'} 
+                : (teatro == 2) ? 
+                { 'position':'absolute', 'top' : '55px', 'left':'15px', 'width.px':35, 'height.px' : '40', 'fill' : 'green'} : 
+                { 'position':'absolute', 'top' : '55px', 'left':'15px', 'width.px':35, 'height.px' : '40', 'fill' : 'orange'}
             },
             'resolucaoDeTarefas' : {
                 'valor' : (resolucaoTarefas == -1) ? [] : (resolucaoTarefas == 0) ? [{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'},{'color' : '#c6e1c6'}] : 
@@ -467,6 +587,7 @@ export class StudentDataUtils {
                 'valor' : avaliacaoDisciplinar, 'icone' : (avaliacaoDisciplinar == 'Sem dados') ? 'fa fa-plug' : (avaliacaoDisciplinar == 'Positiva') ? 'fa fa-check-circle' : 
                 (avaliacaoDisciplinar == 'Negativa') ? 'fa fa-times-circle' : 'fa fa-exclamation-triangle'
             },
+            'evolucao' : evolucao,
             'pontuacaoGlobal' : Math.trunc(pontuacaoGlobal / 5) + '%'
         }
     }

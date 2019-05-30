@@ -9,10 +9,11 @@ import { ProfessoresComponent } from './professores/professores.component';
 import { StudentDataUtils } from './estudantes/UtilityClasses/studentsDataUtilMethods'
 import { LivroDePontoComponent } from './livro-de-ponto/livro-de-ponto.component';
 import { PautasComponent } from './pautas/pautas.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 @NgModule({
-    imports : [BrowserModule, DataModelModule, ChartsModule, RouterModule],
+    imports : [BrowserModule, DataModelModule, ChartsModule, RouterModule, AngularSvgIconModule ],
     providers : [ StudentDataUtils ],
     declarations : [TurmaComponent, EstudantesComponent, ProfessoresComponent, LivroDePontoComponent, PautasComponent],
     exports : [TurmaComponent, EstudantesComponent, ProfessoresComponent, LivroDePontoComponent, PautasComponent]

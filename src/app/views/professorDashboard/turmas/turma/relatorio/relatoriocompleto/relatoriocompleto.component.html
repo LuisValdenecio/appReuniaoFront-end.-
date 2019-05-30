@@ -1,3 +1,200 @@
-<p>
-  relatoriocompleto works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="card mt-4">
+
+      <div class="card-header">
+        <h2>Relatório Individual</h2>          
+      </div>
+
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-lg-4">
+            <img [src]="'assets/img/'+studentData[0]['foto']">
+          </div>
+          <div class="col-lg-8">
+            <h4>Nome & sobrenome</h4><br>
+            <h5>{{studentData[0]['nome']}}</h5><br>
+            <h4>Data de nascimento</h4><br>
+            <h5>{{studentData[0]['nascimento']}}</h5><br>
+            <h4>Género</h4><br>
+            <h5>{{studentData[0]['genero'] == 'F' ? 'Feminino' : 'Masculino'}}</h5>
+          </div>
+        </div>
+
+        <!-- relatório das notas para o ensino técnico -->
+        <div class="row" *ngIf="thisClassGrade[0]['nome_class'] != 'Iniciação' && thisClassGrade[0]['nome_class'] != '1ª Classe' && thisClassGrade[0]['nome_class'] != '2ª Classe' && thisClassGrade[0]['nome_class'] != '3ª Classe' && thisClassGrade[0]['nome_class'] != '4ª Classe'">
+
+          <div class="col-lg-12">
+
+            <div class="card mt-4">
+        
+              <div class="card-header">
+                <h4>Situação das Notas</h4>          
+              </div>
+        
+              <div class="card-body">
+
+                <table class="table">
+                  <thead>
+                    <th>Nome da disciplina</th>
+                    <th>classificação da PIP</th>
+                    <th>Peso na Media total em %</th>
+                    <th>Classificação Qualitativa</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let disc of dadosDasNotas()">
+                      <td>{{disc['disciplinaNome']}}</td>
+                      <td>{{disc['valor']}}</td>
+                      <td>{{disc['contribuicao']}}</td>
+                      <td>{{disc['class']}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+        
+              </div>
+        
+            </div>
+          
+          </div>
+
+
+        </div>
+
+        <!---->
+        <div class="row" *ngIf="thisClassGrade[0]['nome_class'] == 'Iniciação' || thisClassGrade[0]['nome_class'] == '1ª Classe' || thisClassGrade[0]['nome_class'] == '2ª Classe' || thisClassGrade[0]['nome_class'] == '3ª Classe' || thisClassGrade[0]['nome_class'] == '4ª Classe'">
+
+          <div class="col-lg-12">
+
+            <div class="card mt-4">
+        
+              <div class="card-header">
+                <h4>Situação das Notas</h4>          
+              </div>
+        
+              <div class="card-body">
+
+                <table class="table">
+                  <thead>
+                    <th>Nome da disciplina</th>
+                    <th>Classificação Qualitativa</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let disc of dadosDasNotas()[0]">
+                      <td>{{disc['disciplinaNome']}}</td>
+                      <td>{{disc['class']}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="row">
+                  
+                  <div class="col-lg-6">
+                    <div class="card p-2">
+                      <h3>Tarefas:</h3>
+                      <h4>{{dadosDasNotas()[1]['tarefas']}}</h4>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="card p-2">
+                      <h3>Comportamento:</h3>
+                      <h4>{{dadosDasNotas()[1]['comportamento']}}</h4>
+                    </div>
+                  </div>
+
+                </div>
+        
+              </div>
+        
+            </div>
+          
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12">
+
+            <div class="card mt-4">
+        
+              <div class="card-header">
+                <h4>Faltas Assinaladas</h4>          
+              </div>
+        
+              <div class="card-body">
+                  <table class="table">
+                      <thead>
+                        <th>Nome da disciplina</th>
+                        <th>Falta por Ausência</th>
+                        <th>Falta por Material</th>
+                        <th>Falta disciplinar</th>
+                        <th>faltas em %</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let disc of dadosFaltas()">                          
+                          <td>{{disc['disciplinaNome']}}</td>
+                          <td>{{disc['ausencia']}}</td>
+                          <td>{{disc['material']}}</td>
+                          <td>{{disc['disciplinar']}}</td>
+                          <td>{{disc['pesoFaltas']}}</td>                          
+                        </tr>                      
+                      </tbody>
+                    </table>
+        
+              </div>
+        
+            </div>
+          
+          </div>
+  
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12">
+
+            <div class="card mt-4">
+        
+              <div class="card-header">
+                <h4>Justificativos Registados</h4>          
+              </div>
+        
+              <div class="card-body">
+                  <table class="table">
+                      <thead>
+                        <th>Nome da disciplina</th>
+                        <th>Número de faltas justificadas</th>
+                        <th>Data da justificação</th>
+                      </thead>
+                      <tbody>
+                         <tr *ngFor="let just of dadosJustificativo()">
+                          <td>{{just['disciplina_nome']}}</td>
+                          <td>{{just['numeroFaltas']}}</td>
+                          <td>{{just['dataJusticacao'].split("T")[0]}}</td>
+                         </tr>        
+                      </tbody>
+                    </table>
+        
+              </div>
+        
+            </div>
+          
+          </div>
+  
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+    
+  </div>
+

@@ -52,7 +52,7 @@
                       <div class="row pt-2">
                         
                         <div class="col-lg-2">
-                          <span class="fa fa-area-chart"></span>
+                          <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                         </div>
 
                         <div class="col-lg-10">
@@ -61,7 +61,7 @@
                         
                       </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="padding:5px">
 
                       <div class="row">
 
@@ -69,13 +69,13 @@
                           
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria ">
-                                  <div class="row pl-4">
-                                    <div class="col-lg-9">
+                                <div class="card p-3 falta-categoria subjectListingcard">
+                                  <div class="row">
+                                    <div class="col-lg-12 subjectListing">
                                       <span>{{thisStudentGrades['disciplinasEmAlta']['valor']}}</span>
                                     </div>
-                                    <div class="col-lg-3 numero-faltas-indicador notas-card-aligner soAcimaDe14">
-                                      <span class="fa fa-level-up"></span>
+                                    <div class="col-lg-0 notas-aligner  soAcimaDe14">
+                                      <span class="fa fa-thumbs-up"></span>
                                     </div>
                                   </div>
                                 </div>
@@ -84,13 +84,13 @@
   
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-3 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-12 subjectListing">
                                       <span>{{thisStudentGrades['disciplinasNoMeio']['valor']}}</span>
                                     </div>
-                                    <div class="col-lg-3 numero-faltas-indicador notas-card-aligner positivasAbaixoDe14">
-                                      <span class="fa fa-level-down"></span>
+                                    <div class="col-lg-0 notas-aligner  positivasAbaixoDe14">
+                                      <span class="fa fa-thumbs-down"></span>
                                     </div>
                                   </div>
                                 </div>
@@ -99,13 +99,13 @@
   
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                  <div class="card p-2 falta-categoria">
+                                  <div class="card p-3 falta-categoria subjectListingcard">
                                     <div class="row">
-                                      <div class="col-lg-9">
+                                      <div class="col-lg-12 subjectListing">
                                         <span>{{thisStudentGrades['disciplinasEmBaixa']['valor']}}</span>
                                       </div>
-                                      <div class="col-lg-3 numero-faltas-indicador notas-card-aligner negativas">
-                                        <span class="fa fa-level-down"></span>
+                                      <div class="col-lg-0 notas-aligner negativas">
+                                        <span class="fa fa-thumbs-down"></span>
                                       </div>
                                     </div>
                                   </div>
@@ -131,7 +131,7 @@
                       <div class="row pt-2">
                       
                         <div class="col-lg-2">
-                          <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/actividades.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                         </div>
 
                         <div class="col-lg-10">
@@ -151,38 +151,49 @@
 
                             <!-- div para o ícone de l.inglesa -->
                             <div class="col-lg-4 icone-ingles icone" >
-                              <span class="fa fa-globe" [ngClass]="thisStudentGrades['disciplinasExtras']['ingles']"></span>
+                              <div>
+                                  <svg-icon src="assets/svg/ingles.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['ingles']"></svg-icon>
+                              </div>
                             </div>
                             
                             <!-- div para o icone de informática -->
                             <div class="col-lg-4 icone-informatica icone">
-                              <span class="fa fa-laptop" [ngClass]="thisStudentGrades['disciplinasExtras']['informatica']"></span>
+                              <div>
+                                  <svg-icon src="assets/svg/informatica.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['informatica']"></svg-icon>
+                              </div>
                             </div>
                             
                             <!-- div para o icone de outras actividades -->
                             <div class="col-lg-4 icone-outras icone">
+
                               <span class="fa fa-cutlery icone-culinaria" [ngClass]="thisStudentGrades['disciplinasExtras']['culinaria']" ></span>
-                              <span class="fas fa-chess-rock icone-xadrez" [ngClass]="thisStudentGrades['disciplinasExtras']['xadrez']"></span>
-                              <span class="fa fa-globe icone-teatro" [ngClass]="thisStudentGrades['disciplinasExtras']['teatro']"></span>
+                              
+                              <div>
+                                  <svg-icon src="assets/svg/xadrez.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['xadrez']"></svg-icon>
+                              </div>
+                              <div>
+                                  <svg-icon src="assets/svg/teatro.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['teatro']"></svg-icon>
+                              </div>                           
+                           
                             </div>
 
                           </div>
 
                           <div class="row subject-list">
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3 extra-subject">
                               <div class="card">
-                                <span>L.Inglesa</span>
+                                <span>Ingles</span>
                               </div>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-6 extra-subject">
                               <div class="card">
                                 <span>Informática</span>
                               </div>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3 extra-subject">
                               <div class="card">
                                 <span>Outras</span>
                               </div>
@@ -205,7 +216,7 @@
                       <div class="row pt-2">
                       
                         <div class="col-lg-2">
-                          <span class="fa fa-calendar-times-o"></span>
+                          <svg-icon src="assets/svg/faltas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                         </div>
 
                         <div class="col-lg-10">
@@ -215,16 +226,16 @@
                         </div>
                     </div>
                     <div class="card-body">
-                      <div class="row">
+                      <div class="row paddingEraserInFaults faultsMainRow">
 
                         <!-- secção do gráfico de faltas -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 paddingEraserInFaults">
                            
                           <div class="row mb-2">
                             <div class="col-lg-12">
-                              <div class="card p-2 falta-categoria">
+                              <div class="card p-2 falta-categoria subjectListingcard">
                                 <div class="row">
-                                  <div class="col-lg-12">
+                                  <div class="col-lg-12 subject-faults-list">
                                     <span>{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
                                   </div>
                                 </div>
@@ -234,9 +245,9 @@
   
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 subject-faults-list theWorstSubjects">
                                       <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
                                     </div>
                                   </div>
@@ -246,9 +257,9 @@
 
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 subject-faults-list">
                                       <span>{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
                                     </div>
                                   </div>
@@ -259,13 +270,13 @@
                           </div>
 
                         <!-- secçao dos cards das diferentes faltas -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 paddingEraserInFaults">
                           
                           <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9 subject-faults-list">
                                       <span>Ausência</span>
                                     </div>
                                     <div class="col-lg-3 numero-faltas-indicador">
@@ -278,9 +289,9 @@
   
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9 subject-faults-list">
                                       <span>Disciplinar</span>
                                     </div>
                                     <div class="col-lg-3 numero-faltas-indicador negativas">
@@ -293,9 +304,9 @@
 
                             <div class="row mb-2">
                               <div class="col-lg-12">
-                                <div class="card p-2 falta-categoria">
+                                <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9 subject-faults-list">
                                       <span>Material</span>
                                     </div>
                                     <div class="col-lg-3 numero-faltas-indicador pretas">
@@ -326,7 +337,7 @@
                         <div class="row pt-2">
                           
                           <div class="col-lg-2">
-                            <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/comportamento.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
   
                           <div class="col-lg-10">
@@ -360,7 +371,7 @@
                         <div class="row pt-2">
                         
                           <div class="col-lg-2">
-                            <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/tarefas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
   
                           <div class="col-lg-10">
@@ -377,7 +388,7 @@
                              <!-- secção do ícone da resolução de tarefas -->
                             <div class="row">
                               <div class="col-lg-4 tarefas-icone">
-                                <span class="fa fa-pencil-square-o"></span>
+                                <svg-icon src="assets/svg/tarefasIcon.svg" [svgStyle]="{ 'width.px': '90', 'height.px' : '90'}"></svg-icon>
                               </div>
                             </div>
                             
@@ -399,18 +410,17 @@
 
                         <div class="row" *ngIf="thisStudentGrades['resolucaoDeTarefas']['valor'].length == 0">
                             
-                            <!-- secção do ícone da avaliação disciplinar -->
-                            <div class="col-lg-12 mb-2">
-                              <span class="fa fa-plug" style="font-size:90px"></span>
-                            </div>
-
-                            <!-- secção do classificação textual da avaliação disciplinar -->
-                            <div class="col-lg-12 mb-2 avaliacao-disc-text">
-                              <h3>Sem dados</h3>
-                            </div>
-
+                          <!-- secção do ícone da avaliação disciplinar -->
+                          <div class="col-lg-12 mb-2">
+                            <span class="fa fa-plug" style="font-size:90px"></span>
                           </div>
 
+                          <!-- secção do classificação textual da avaliação disciplinar -->
+                          <div class="col-lg-12 mb-2 avaliacao-disc-text">
+                            <h3>Sem dados</h3>
+                          </div>
+
+                        </div>
 
                       </div>
                     </div>
@@ -423,11 +433,17 @@
                         <div class="row pt-2">
                         
                           <div class="col-lg-2">
-                            <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/global.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
   
                           <div class="col-lg-10">
                             <h6>Avaliação Global</h6>
+                          </div>
+
+                          <div class="col-lg-2 desempenho-perc">
+                            <h6>
+                              <span [ngClass]="thisStudentGrades['evolucao']"></span>
+                            </h6>
                           </div>
                           
                           </div>
@@ -538,7 +554,7 @@
                         <div class="row pt-2">
                           
                           <div class="col-lg-2">
-                            <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
   
                           <div class="col-lg-8">
@@ -562,18 +578,18 @@
                       
                       <div class="card-body">
                         
-                        <div class="row">
+                        <div class="row notas-tecnico-row">
 
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" style="padding:0px">
                             
                                 <div class="row mb-2">
                                   <div class="col-lg-12">
                                     <div class="card p-2 falta-categoria">
                                       <div class="row pl-4">
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-12">
                                           <span>{{thisStudentGrades[0]['vectorDasDisc']}}</span>
                                         </div>
-                                        <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[0]['class']">
+                                        <div class="col-lg-0 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[0]['class']">
                                           <span class="fa fa-level-up"></span>
                                         </div>
                                       </div>
@@ -585,10 +601,10 @@
                                   <div class="col-lg-12">
                                     <div class="card p-2 falta-categoria">
                                       <div class="row">
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-12">
                                           <span>{{thisStudentGrades[1]['vectorDasDisc']}}</span>
                                         </div>
-                                        <div class="col-lg-3 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[1]['class']">
+                                        <div class="col-lg-0 numero-faltas-indicador notas-card-aligner" [ngClass]="thisStudentGrades[1]['class']">
                                           <span class="fa fa-level-down"></span>
                                         </div>
                                       </div>
@@ -596,13 +612,13 @@
                                   </div>
                                 </div>
     
-                                <div class="row mb-2">
+                                <div class="row mb-2" style="padding:0px">
 
                                   <!-- -->
-                                  <div class="col-lg-6">
-                                    <div class="card p-2 falta-categoria" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['class']">
-                                      <div class="row">
-                                        <div class="col-lg-12" >
+                                  <div class="col-lg-4">
+                                    <div class="card p-2 falta-categoria subjectListingcard" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['class']">
+                                      <div class="row" style="padding:0px">
+                                        <div class="col-lg-12 subject-faults-list theWorstSubjects" >
                                           <span>Média: {{thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['media']}}</span>
                                         </div>
                                       </div>
@@ -610,10 +626,10 @@
                                   </div>
 
                                   <!-- -->
-                                  <div class="col-lg-6" >
-                                    <div class="card p-2 falta-categoria" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['class']">
+                                  <div class="col-lg-8">
+                                    <div class="card p-2 falta-categoria subjectListingcard" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['class']">
                                       <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 subject-faults-list theWorstSubjects">
                                           <span>% de Sucesso : {{thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['percent']}}</span>
                                         </div>
                                       </div>
@@ -647,7 +663,7 @@
                           </div>
 
                           <div class="col-lg-2 desempenho-perc">
-                            <h6>{{thisStudentParticipation['percentPart']}}</h6>
+                            <h6>{{ thisStudentParticipation['percentPart']}}</h6>
                           </div>
                             
                         </div>
@@ -686,7 +702,7 @@
                         <div class="row pt-2">
                         
                           <div class="col-lg-2">
-                            <span class="fa fa-globe"></span>
+                            <svg-icon src="assets/svg/faltas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>  
                           </div>
   
                           <div class="col-lg-8">
@@ -709,10 +725,10 @@
 
                       <div class="card-body">
                         
-                       <div class="row">
+                       <div class="row notas-tecnico-row">
 
                           <!-- secção do gráfico de faltas -->
-                          <div class="col-lg-6">
+                          <div class="col-lg-6" style="padding:0px">
                              
                             <div class="row mb-2">
                                 <div class="col-lg-12">
@@ -728,9 +744,9 @@
     
                               <div class="row mb-2">
                                 <div class="col-lg-12">
-                                  <div class="card p-2 falta-categoria">
+                                  <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
-                                      <div class="col-lg-12">
+                                      <div class="col-lg-12 subject-faults-list theWorstSubjects">
                                         <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
                                       </div>
                                     </div>
@@ -753,7 +769,7 @@
                           </div>
 
                           <!-- secçao dos cards das diferentes faltas -->
-                          <div class="col-lg-6">
+                          <div class="col-lg-6" style="padding:0px">
                             
                             <div class="row mb-2">
                               <div class="col-lg-12">
@@ -822,7 +838,7 @@
                           <div class="row pt-2">
                             
                             <div class="col-lg-2">
-                              <span class="fa fa-globe"></span>
+                              <svg-icon src="assets/svg/comportamento.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
     
                             <div class="col-lg-8">
@@ -867,7 +883,7 @@
                           <div class="row pt-2">
                           
                             <div class="col-lg-2">
-                              <span class="fa fa-globe"></span>
+                              <svg-icon src="assets/svg/global.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
     
                             <div class="col-lg-10">
@@ -989,7 +1005,7 @@
               <button (click)="openModal(i)" class="btn"><i class="fa fa-eye"></i> Relatório</button>
             </td>
             <td class="text-center pt-3">
-              <button class="btn" (click)="deleteParentView()" routerLink="abc"><i class="fa fa-eye"></i> Relatório completo</button>
+              <button class="btn" (click)="deleteParentView()" [routerLink]="urlFriendlyFormat(student['estudantecod'])"><i class="fa fa-eye"></i> Relatório completo</button>
             </td>
           </tr>
         </tbody>
@@ -1003,3 +1019,7 @@
 
 </div>
 
+<div>
+  <router-outlet></router-outlet>
+</div>
+  

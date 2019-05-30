@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {LoginModel , UserModel, ClassModel} from './AllDataModel';
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import {Observable, from} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ClassModel } from './AllDataModel';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl;
@@ -64,6 +64,10 @@ export class GlobalDataStore {
         return this.http.post<any>(API_URL + '/justificativo', {'faultsObject' : faultsObject})
     }
 
+    public sendGlobalScore(globalScoreObj : any[]) : Observable<any> {
+        return this.http.post<any>(API_URL + globalScoreObj[0], {'globalScore' : globalScoreObj})
+    }
+
     public getAllStudentsFromClass(classURL : String) : any {
         return this.request('get', classURL);
     }
@@ -93,7 +97,15 @@ export class GlobalDataStore {
         return this.request('get', classURL);   
     }
 
+    public getPreviousData(classURL) : any {
+        return this.request('get', classURL);   
+    }
+
     public getThisClassSubjects(classURL : String) : any {
+        return this.request('get', classURL);
+    }
+
+    public getTheMarkedSubjects(classURL : String) : any {
         return this.request('get', classURL);
     }
 
@@ -109,6 +121,10 @@ export class GlobalDataStore {
         return this.request('get', '/students');
     }
 
+    public getJustificativoData() : any {
+        return this.request('get', '/justificativos');
+    }
+    
     public getThisTeacherClasses(teacherCode : String) {
         return this.request('get', teacherCode);
     }

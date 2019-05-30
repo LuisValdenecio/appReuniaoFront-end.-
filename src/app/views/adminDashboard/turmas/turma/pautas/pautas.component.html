@@ -4,9 +4,9 @@
 
     <!-- campo que seleciona a disciplina a marcar  -->
     <div class="input-group mb-4">
-      <select class="form-control" data-index="0">  
-        <option *ngFor="let disc of _thisClassSubjects">
-          {{disc["disciplina_nome"]}}
+      <select class="form-control" data-index="0" (input)="alertWhenChangedDisciplina($event.target)" #disciplinaNome>  
+        <option *ngFor="let disc of theRealSubjectsToShow">
+           {{disc["disciplina_nome"]}}
         </option>
       </select>
     </div>
@@ -20,9 +20,12 @@
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
               <th scope="col">Nº</th>
-              <th scope="col" class="text-center">Avaliação Disciplinar</th>
-              <th scope="col" class="text-center">Participação nas Aulas</th>
+              <th scope="col" class="text-center">A.Disciplinar</th>
+              <th scope="col" class="text-center">P. nas Aulas</th>
               <th scope="col" class="text-center">CPP</th>
+              <th scope="col" class="text-center">A.Recuperacao</th>
+              <!-- to eliminate soon -->
+              <th scope="col" class="text-center">%global</th>
             </tr>
 
             <!-- Iniciação,... 4ª -->
@@ -30,9 +33,11 @@
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
               <th scope="col">Nº</th>
-              <th scope="col" class="text-center">Resolução de Tarefas</th>
-              <th scope="col" class="text-center">Situação de Notas</th>
+              <th scope="col" class="text-center">R.Tarefas</th>
+              <th scope="col" class="text-center">S.Notas</th>
               <th scope="col" class="text-center">Outras</th>
+              <th scope="col" class="text-center">Evolução</th>
+              <th scope="col" class="text-center">A.Recuperacao</th>
             </tr>
 
           </thead>
@@ -52,7 +57,8 @@
                     <span>{{i+1}}</span> 
                   </td>
                   <td class="text-center pt-4">
-                    <select class="form-control" data-index="0">  
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="resolucaoTarefas($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
                       <option>Nunca Resolve</option>
                       <option>Resolve Raras vezes</option>
                       <option>Resolve Mal</option>
@@ -62,20 +68,32 @@
                     </select>
                   </td>
                   <td class="text-center pt-4">
-                      <select class="form-control" data-index="0">  
+                      <select [disabled]="!flagToDisableSelect" class="form-control" data-index="0" (input)="mediaDeNotas($event.target, student)">  
+                        <option disabled>Marque uma opção</option>
                         <option>Em Alta</option>
                         <option>Nível Intermédio</option>
                         <option>Em Baixa</option>
                       </select>
                   </td>
                   <td class="text-center pt-4">
-                    <select class="form-control" data-index="0">  
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="avaliacaoDisciplinar($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
                       <option>Positiva</option>
                       <option>Negativa</option>
                       <option>Regular</option>
                     </select>
                   </td>
-    
+                  <td class="text-center pt-4">
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="evolucaoDados($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
+                      <option>Evoluiu</option>
+                      <option>Decresceu</option>
+                      <option>Manteve</option>
+                    </select>
+                  </td>
+                  <td class="text-center pt-4">
+                    <input [disabled]="!flagToDisableSelect"  type="checkbox" (input)="aulasDeRecuperacao($event.target, student)">  
+                  </td>
               </tr>
   
           </tbody>
@@ -88,28 +106,44 @@
                 <th scope="row">
                   <img [src]="'assets/img/'+student.foto" class="img-student">
                 </th>
+                
                 <td class="pt-4">
                   <span>{{student.nome}}</span>
                 </td>
+                
                 <td class="pt-4">
                   <span>{{i+1}}</span> 
                 </td>
+                
                 <td class="text-center pt-4">
-                  <select class="form-control" data-index="0">  
+                  <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="avaliacaoDisciplinar($event.target, student)">  
+                    <option disabled>Marque uma opção</option>
                     <option>Positiva</option>
                     <option>Negativa</option>
                     <option>Regular</option>
                   </select>
                 </td>
+                
                 <td class="text-center pt-4">
-                  <select class="form-control" data-index="0">  
+                  <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="participacaoAulas($event.target, student)">  
+                    <option disabled>Marque uma opção</option>  
                     <option>Satistatório</option>
                     <option>Regular</option>
                     <option>Insatisfatório</option>
                   </select>
                 </td>
+
                 <td class="text-center pt-4">
-                  <input type="input" class="faltasInput">
+                  <input [disabled]="!flagToDisableSelect" type="input" class="faltasInput" (input)="mediaDeNotas($event.target, student)">
+                </td>
+
+                <td class="text-center pt-4">
+                  <input [disabled]="!flagToDisableSelect" type="checkbox" (input)="aulasDeRecuperacao($event.target, student)">  
+                </td>
+
+                <!-- it will be removed ASAP -->
+                <td class="text-center pt-4">
+                  <input [disabled]="flagToDisableSelect" type="input" class="faltasInput" (input)="mediaGlobalAnterior($event.target, student)">
                 </td>
   
             </tr>
@@ -121,7 +155,7 @@
 
       <!-- botão de marcação de faltas -->
       <div class="input-group mb-4">
-        <button class="btn p-2">SALVAR NOTAS</button>
+        <button (click)="salvarNotas(disciplinaNome.value)" class="btn p-2">SALVAR NOTAS</button>
       </div>
 
 

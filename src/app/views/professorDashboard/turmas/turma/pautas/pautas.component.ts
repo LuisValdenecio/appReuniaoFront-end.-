@@ -9,11 +9,15 @@ import { DataModelInterface } from 'src/app/dataModels/DataModelInterface';
 })
 export class PautasComponent {
 
-  public isThisTeacherCoor : Boolean = false;
   public _thisClassSubjects : any[];
+  public _studentData : any[];
+  public _markedSubjects : any[] = [];
+
   public thisClassGrade : String;
   public tipoDePauta : String;
-  public _studentData : any[];
+
+  public isThisTeacherCoor : Boolean = false;
+  public theRealSubjectsToShow : any[] = [];
 
   public flagToDisableSelect : Boolean = true;
 
@@ -35,7 +39,25 @@ export class PautasComponent {
 
     this.dataInterface.getThisTeachersSubjects("/"+this.dataInterface.parseJwt(this.dataInterface.getToken())['codUser']+"_"+this.formatURL()+"_teacherSubjects").subscribe(data=>{
       this._thisClassSubjects = data;
-    })
+    });
+
+    this.dataInterface.getMarkedSubjects("/"+this.formatURL()+"_markedSubjects").subscribe(data=>{
+     
+      data.forEach((disc)=>{
+        if (this._markedSubjects.indexOf(disc['disciplina_nome']) == -1){
+          this._markedSubjects.push(disc['disciplina_nome']);
+        }
+      });
+
+      this._thisClassSubjects.forEach((disc)=>{
+        if (this._markedSubjects.indexOf(disc['disciplina_nome']) != -1) {
+          this.theRealSubjectsToShow.push({'disciplina_nome' : disc['disciplina_nome']+"(notas ja lançadas nesta disciplina)"})
+        } else {
+          this.theRealSubjectsToShow.push({'disciplina_nome' : disc['disciplina_nome']});
+        }
+      });
+
+    });
 
     // -->> determina qual modal mostrar para cada estudante
     this.dataInterface.getClassGrade("/"+this.formatURL()+"_classe").subscribe(data=>{
@@ -54,7 +76,9 @@ export class PautasComponent {
               'estudantecod' : this._studentData[estudante]['estudantecod'], 
               'avaliacaodisciplinar' : '', 
               'situacaonotas' : '', 
-              'resolucao_de_tarefas' : ''
+              'resolucao_de_tarefas' : '',
+              'evolucao' : '',
+              'recuperacao' : false
             });
 
           }
@@ -72,7 +96,8 @@ export class PautasComponent {
               'pp1' : 0,
               'pp2' : 0,
               'ct' : 0,
-              'participacao' : ''
+              'participacao' : '',
+              'recuperacao' : false
             })
           }          
         }
@@ -96,7 +121,7 @@ export class PautasComponent {
   }
 
   public alertWhenChangedDisciplina(value : any) {
-    if (value.value != 'Avaliação Geral') {
+    if (value.value.split("(")[0] != 'Avaliação Geral') {
       this.flagToDisableSelect = true;
     } else {
       this.flagToDisableSelect = false;
@@ -105,11 +130,20 @@ export class PautasComponent {
 
   // -> métodos para processar os dados de estudantes do ensino primário 
   public resolucaoTarefas(classificacao, estudante) {
-      this.gradeDataToSend.forEach((cadaEstudate)=>{  
-          if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
-            cadaEstudate['resolucao_de_tarefas'] = classificacao.value;
-          }
-      });
+    this.gradeDataToSend.forEach((cadaEstudate)=>{  
+        if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
+          cadaEstudate['resolucao_de_tarefas'] = classificacao.value;
+        }
+    });
+  }
+
+   // -> métodos para processar os dados de estudantes do ensino primário 
+   public evolucaoDados(classificacao, estudante) {
+    this.gradeDataToSend.forEach((cadaEstudate)=>{  
+        if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
+          cadaEstudate['evolucao'] = classificacao.value;
+        }
+    });
   }
 
   // -> métodos para procesar os dados de estudantes do ensino técnico
@@ -126,6 +160,15 @@ export class PautasComponent {
     this.gradeDataToSend.forEach((cadaEstudate)=>{  
       if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
         cadaEstudate['avaliacaodisciplinar'] = classificacao.value;
+      }
+    });
+  }
+
+  // -> 
+  public aulasDeRecuperacao(classificacao, estudante) {
+    this.gradeDataToSend.forEach((cadaEstudate)=>{  
+      if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
+        cadaEstudate['recuperacao'] = (classificacao.value == 'on' ? true : false);
       }
     });
   }
@@ -158,16 +201,11 @@ export class PautasComponent {
     this.gradeDataToSend[0]['turma_id'] = this.formatURL();
 
     this.dataInterface.sendGrades(this.gradeDataToSend).subscribe((data)=>{
-      this.router.navigateByUrl("homeprof/inicio");
-      console.log(this.gradeDataToSend);
+      this.router.navigateByUrl("homeprof/inicio")
     }, (err)=>{
       console.log(err);
     });
+    
   }
-
-
-
-
-
   
 }

@@ -5,11 +5,10 @@ import { ProfessorDashboardComponent } from './professor-dashboard.component';
 import { HomeMainRoutes } from './home-main-routes';
 import { TurmasModule } from './turmas/turmas-module';
 import { InicioComponent } from './inicio/inicio.component';
-import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
-    imports : [DataModelModule, BrowserModule, HomeMainRoutes, ChartsModule, TurmasModule],
+    imports : [DataModelModule, BrowserModule, HomeMainRoutes, TurmasModule],
     declarations : [ProfessorDashboardComponent, InicioComponent],
     exports : [ProfessorDashboardComponent, InicioComponent]
 })

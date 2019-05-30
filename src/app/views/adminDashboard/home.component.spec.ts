@@ -22,4 +22,11 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should equal', ()=>{
+    expect(4+4).toBe(9);
+  })
+
+
+
 });

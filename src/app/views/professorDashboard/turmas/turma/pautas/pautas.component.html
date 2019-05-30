@@ -5,8 +5,8 @@
     <!-- campo que seleciona a disciplina a marcar  -->
     <div class="input-group mb-4">
       <select class="form-control" data-index="0" (input)="alertWhenChangedDisciplina($event.target)" #disciplinaNome>  
-        <option *ngFor="let disc of _thisClassSubjects">
-          {{disc["disciplina_nome"]}}
+        <option *ngFor="let disc of theRealSubjectsToShow">
+           {{disc["disciplina_nome"]}}
         </option>
       </select>
     </div>
@@ -20,9 +20,10 @@
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
               <th scope="col">Nº</th>
-              <th scope="col" class="text-center">Avaliação Disciplinar</th>
-              <th scope="col" class="text-center">Participação nas Aulas</th>
+              <th scope="col" class="text-center">A.Disciplinar</th>
+              <th scope="col" class="text-center">P. nas Aulas</th>
               <th scope="col" class="text-center">CPP</th>
+              <th scope="col" class="text-center">A.Recuperacao</th>
             </tr>
 
             <!-- Iniciação,... 4ª -->
@@ -30,9 +31,11 @@
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
               <th scope="col">Nº</th>
-              <th scope="col" class="text-center">Resolução de Tarefas</th>
-              <th scope="col" class="text-center">Situação de Notas</th>
+              <th scope="col" class="text-center">R.Tarefas</th>
+              <th scope="col" class="text-center">S.Notas</th>
               <th scope="col" class="text-center">Outras</th>
+              <th scope="col" class="text-center">Evolução</th>
+              <th scope="col" class="text-center">A.Recuperacao</th>
             </tr>
 
           </thead>
@@ -78,7 +81,17 @@
                       <option>Regular</option>
                     </select>
                   </td>
-    
+                  <td class="text-center pt-4">
+                    <select [disabled]="flagToDisableSelect" class="form-control" data-index="0" (input)="evolucaoDados($event.target, student)">  
+                      <option disabled>Marque uma opção</option>
+                      <option>Evoluiu</option>
+                      <option>Decresceu</option>
+                      <option>Manteve</option>
+                    </select>
+                  </td>
+                  <td class="text-center pt-4">
+                    <input [disabled]="!flagToDisableSelect"  type="checkbox" (input)="aulasDeRecuperacao($event.target, student)">  
+                  </td>
               </tr>
   
           </tbody>
@@ -120,6 +133,10 @@
 
                 <td class="text-center pt-4">
                   <input [disabled]="!flagToDisableSelect" type="input" class="faltasInput" (input)="mediaDeNotas($event.target, student)">
+                </td>
+
+                <td class="text-center pt-4">
+                  <input [disabled]="!flagToDisableSelect" type="checkbox" (input)="aulasDeRecuperacao($event.target, student)">  
                 </td>
   
             </tr>

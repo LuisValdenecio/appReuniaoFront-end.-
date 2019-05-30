@@ -9,9 +9,14 @@ import { PautasComponent } from './pautas/pautas.component'
 import { JustificativoComponent } from './justificativo/justificativo.component';
 import { RelatorioModule } from './relatorio/relatorio.module';
 
-
 @NgModule({
-    imports : [BrowserModule, DataModelModule, ChartsModule, RouterModule, RelatorioModule],
+    imports : [
+        BrowserModule, 
+        DataModelModule, 
+        ChartsModule, 
+        RouterModule, 
+        RelatorioModule
+    ],
     declarations : [
         TurmaComponent, 
         EstudantesComponent, 

@@ -1,510 +1,618 @@
 .progress { 
-    height: 5px;
-    border-radius: 0%;
+  height: 5px;
+  border-radius: 0%;
 }
 
 .progress-bar {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 }
 
 tbody {
-    background: lightgray;
+  background: lightgray;
 }
 
 thead {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
-    border: none;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  color: #fff;
+  border: none;
 }
 
 .btn {
-    background-color: DodgerBlue;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: RoyalBlue;
-  }
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  .text-center {
-      text-align: center;
-  }
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+.text-center {
+    text-align: center;
+}
 
 .img-student {
-    width : 60px;
-    height: 45px;
-    border-radius: 5%;
+  width : 60px;
+  height: 45px;
+  border-radius: 5%;
 }
 
 /*
-    Importando a fonte do modal
+  Importando a fonte do modal
 */
 
 @font-face {
-    font-family: Montserrat-Bold;
-    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/Monseratt/Montserrat-Bold.ttf');
+  font-family: Montserrat-Bold;
+  src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/Monseratt/Montserrat-Bold.ttf');
 }
 
 
 /*==================================================================
 [ Content container ]*/
 .container-contact100 {
-    width: 100%;  
-    min-height: 100vh;
-    padding: 15px;
-    background: rgba(132,106,221,0.8);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-  }
+  width: 100%;  
+  min-height: 100vh;
+  padding: 15px;
+  background: rgba(132,106,221,0.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
 
-  .wrap-contact100:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: linear-gradient(#fff, #4fa087 ,#276552 );
-    opacity: .9;
-  }
+.wrap-contact100:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(#fff, #4fa087 ,#276552 );
+  opacity: .9;
+}
+
+.wrap-contact100 {
+  width: 1310px;
+  background: #fff; 
+  border-radius: 3px;
+  position: relative;
+  background: url("C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/img/2.jpg") center center no-repeat;
+  background-size: cover;
+  top: .5%;
+  left: 1.5%;
+  height: 95vh;
+}
+
+
+
+/*==================================================================
+[ Title form ]*/
+.contact100-form-title {
+  font-family: Montserrat-Bold;
+  font-size: 30px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 80px;
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  overflow: hidden;
   
-  .wrap-contact100 {
-    width: 1310px;
-    background: #fff; 
-    border-radius: 3px;
-    position: relative;
-    background: url("C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/img/2.jpg") center center no-repeat;
-    background-size: cover;
-    top: .5%;
-    left: 1.5%;
-    height: 95vh;
-  }
+  padding: 30px 15px 30px 15px;
+}
+
+.contact100-form-title::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(67,67,67,0.6);
+}
 
 
-  
-  /*==================================================================
-  [ Title form ]*/
-  .contact100-form-title {
-    font-family: Montserrat-Bold;
-    font-size: 30px;
-    color: #fff;
-    line-height: 1.2;
-    text-transform: uppercase;
-  
-    width: 100%;
-    height: 80px;
-    position: relative;
-    z-index: 1;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    overflow: hidden;
-    
-    padding: 30px 15px 30px 15px;
-  }
-  
-  .contact100-form-title::before {
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(67,67,67,0.6);
-  }
-  
-  
-  /*------------------------------------------------------------------
-  [ Responsive ]*/
-  
-  
-  
-  /*//////////////////////////////////////////////////////////////////
-  [ Button show / hide ]*/
-  .btn-hide-contact100 {
-    font-size: 30px;
-    color: #fff;
-    opacity: 0.6;
-    position: absolute;
-    right: 0;
-    top: -44px;
-    background : transparent;
-    border: none;
-    -webkit-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    transition: all 0.4s;
-  }
-  
-  .btn-hide-contact100:hover {
-    opacity: 1;
-  }
-  
-
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação dos Modals do relatório académico ]*/
-  
-  .academicModal-body {
-    width: 100%;
-    height: 90%;
-    text-align: center; 
-  }
-
-  .student-number {
-    font-weight: bold;
-  }
-
-  .photoFrame img {
-    width: 40%;
-    height: 170px;
-    border-radius: 0% 10% 10% 0%;
-    border: solid 3px lightblue;
-  }
-
-  .nameAndNumber {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
-  }
-
-  .card {
-    border-radius: 0%;
-  }
-
-  .card-body h1 {
-    font-size: 120px;
-    font-weight: bold;
-  }
-
-  .card-header h6, .card-header span {
-    text-align: center;
-  }
-
-  .card-header span {
-    font-size : 20px;
-  }
-
-  
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação dos botões especiais ]*/
-  
-
-  
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação dos botões de transição dos carousels ]*/
-
-  .arrow-right a, .arrow-left a {
-    cursor : pointer;
-    position: absolute;
-    font-size: 30px;
-  }
-
-  .arrow-right a {
-    top: 52%;
-    left: 92%;
-    right: 0;
-    padding: 0px;
-  }
-
-
-  .arrow-left a {
-    top: 52%;
-    left: 0%;
-    right: 0;
-    width: 40px;
-  }
-
-  .active-faults-item span {
-    color: lightgray;
-  }
-
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação dos ícones de classificação]*/
-  .fa-times-circle {
-    color: red;
-    font-size: 22px;
-  }
-
-  .fa-exclamation-triangle {
-    color: orange;
-    font-size: 22px;
-  }
-
-  .fa-check-circle {
-    color: green;
-    font-size: 22px;
-  }
-
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação dos títulos de classificação]*/
-  .col-lg-10 h6, .col-lg-8 h6 {
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1pt;
-    text-align: center;
-  }
-
-  /*//////////////////////////////////////////////////////////////////
-  [ Formatação das percentagem de desempenho por categoria]*/
-  .desempenho-perc {
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    position: absolute;
-    left: 85%;
-    top: 3%;
-    padding: 2px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    color: #fff;
-  }
-
-  .desempenho-perc h6 {
-    position: relative;
-    top: 10px;
-    font-weight: bold;
-  }
-
-  .disc-option-index {
-    background : green;
-    position: absolute;
-    top: -5px;
-    padding: 2px;
-    width: 30px;
-    height: 30px;
-    border-radius: 5%;
-    color: #fff;
-  }
-
-  /*//////////////////////////////////////////////////////////////////
-  [Formatação dos indicadores de classificação]*/
-  .indicador-notas {
-    border-radius : 5px 0px 5px 0px;
-    border: none;
-    color: #fff;
-  }  
-
-  .indicador-notas .col-lg-10 span {
-    text-transform: uppercase;
-    letter-spacing: 1.5pt;
-    position: relative;
-    left: -20px;
-    font-weight: bold;
-  }
-
-  .fa-puzzle-piece {
-    font-size: 35px;
-  }
-
-
-  
-
-  /*//////////////////////////////////////////////////////////////////
-  [Toda a formataçao abaixo é para o ensino primário]*/
-  
-  /*
-    Actividades Extracurriculares
-  */
-  .card-ens-prim {
-    height: 260px;
-    border-radius: 7% 0% 7% 0%;
-  }
- 
-  .icone-balancer {
-    position: relative;
-    left: 2%;
-    top: -40%;
-  }
-
-  .icone {
-    background:#FFF;
-    position: absolute;
-    top: 35%;
-    border-radius: 50%; 
-    border: solid 7px #76dae5; 
-    height:120px;
-    width:120px;
-  }
-
-  .icone-ingles {
-    right:272px; 
-  }
-
-  .icone-ingles span {
-    font-size: 620%;
-    position: absolute;
-    left: 10%;
-    top: 2%;
-  }
-
-  .icone-informatica span {
-    font-size: 500%;
-    position: absolute;
-    left: 10%;
-    top: 8%;
-  }
-
-  .icone-informatica {
-    right:144px; 
-  }
-
-  .icone-outras {
-    right:15px; 
-  }
-
-  .icone-culinaria, .icone-xadrez, .icone-teatro {
-    position: absolute;
-  }
-
-  .icone-culinaria {
-    left: 20px;
-    top: 14px;
-    font-size: 32px;
-  }
-
-  .icone-xadrez {
-    left: 60px;
-    top: 14px;
-    font-size: 32px;
-  }
-
-  .icone-teatro {
-    left: 40px;
-    top: 60px;
-    font-size: 32px;
-  }
-
-  .subject-list {
-    position: relative;
-    top: 117px;
-  }
-
-  .subject-list .card {
-    border-radius: 5px 0px 5px 0px;
-    padding: 2px;
-    font-weight: bold;
-  } 
-
-  .falta-categoria {
-    border-radius: 6px 0px 6px 0px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: solid 2px lightgray;
-  }
-
-  .numero-faltas-indicador {
-    background: #4facfe;
-    position: absolute;
-    left: 78%;
-    top: 5%;
-    padding: 2px;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    color: #fff;
-  }
-
-  .numero-faltas-indicador span {
-    position: relative;
-    top: 10%;
-  }
-
-  .tarefas-icone {
-    background:#76dae5;
-    position: absolute;
-    top: 35%;
-    border-radius: 50%; 
-    border: solid 7px #76dae5; 
-    height:90px;
-    width:90px;
-    left: 40%;
-  }
-
-  .tarefas-icone span {
-    font-size: 350%;
-    position: absolute;
-    left: 15%;
-    top: 15%;
-    color: #fff;
-  }
-
-  .linha-das-estrelas {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-  }
-
-  .linha-das-estrelas .col-lg-2 span {
-    font-size: 55px;
-    color: green;
-  }
-
-  .avaliacao-disc-text h3 {
-    font-size: 55px;
-  }
-
-  .percentagem-global h1 {
-    font-size: 165px;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .percentagem-global {
-    position: absolute;
-    top: 25%;
-  }
-
-  /*Formatação para o gráfico*/
-
-
-  .notas-card-aligner {
-    left: 90%;
-  }
+/*------------------------------------------------------------------
+[ Responsive ]*/
 
 
 
-  /***/
-  
-  .soAcimaDe14 {
-    background : green;
-  }
-  
-  .positivasAbaixoDe14 {
-    background: orange; 
-  }
+/*//////////////////////////////////////////////////////////////////
+[ Button show / hide ]*/
+.btn-hide-contact100 {
+  font-size: 30px;
+  color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  right: 0;
+  top: -44px;
+  background : transparent;
+  border: none;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
 
-  .negativas {
-    background: red;
-  }
+.btn-hide-contact100:hover {
+  opacity: 1;
+}
 
-  .mixPositivas {
-    background : blue;
-  }
 
-  .pretas {
-    background : black;
-  }
+/*//////////////////////////////////////////////////////////////////
+[ Formatação dos Modals do relatório académico ]*/
 
-  .soAcimaDe14, .positivasAbaixoDe14, .negativas, .mixPositivas {
-    color: #fff;
-    border: none;
-    font-weight: bold;
-  }
+.academicModal-body {
+  width: 100%;
+  height: 90%;
+  text-align: center; 
+}
+
+.student-number {
+  font-weight: bold;
+}
+
+.photoFrame img {
+  width: 40%;
+  height: 170px;
+  border-radius: 0% 10% 10% 0%;
+  border: solid 3px lightblue;
+}
+
+.nameAndNumber {
+  background-image: linear-gradient(to right, #183853 0%, #1a8e94 100%);
+  color: #fff;
+}
+
+.card {
+  border-radius: 0%;
+}
+
+.card-body h1 {
+  font-size: 120px;
+  font-weight: bold;
+}
+
+.card-header h6, .card-header span {
+  text-align: center;
+}
+
+.card-header span {
+  font-size : 20px;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Formatação dos botões especiais ]*/
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Formatação dos botões de transição dos carousels ]*/
+
+.arrow-right a, .arrow-left a {
+  cursor : pointer;
+  position: absolute;
+  font-size: 30px;
+}
+
+.arrow-right a {
+  top: 52%;
+  left: 92%;
+  right: 0;
+  padding: 0px;
+}
+
+
+.arrow-left a {
+  top: 52%;
+  left: 0%;
+  right: 0;
+  width: 40px;
+}
+
+.active-faults-item span {
+  color: lightgray;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Formatação dos ícones de classificação]*/
+.fa-times-circle {
+  color: red;
+  font-size: 22px;
+}
+
+.fa-exclamation-triangle {
+  color: orange;
+  font-size: 22px;
+}
+
+.fa-check-circle {
+  color: green;
+  font-size: 22px;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Formatação dos títulos de classificação]*/
+.col-lg-10 h6, .col-lg-8 h6 {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1pt;
+  text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Formatação das percentagem de desempenho por categoria]*/
+.desempenho-perc {
+  background: #183853;
+  position: absolute;
+  left: 85%;
+  top: 2%;
+  padding: 2px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.desempenho-perc h6 {
+  position: relative;
+  top: 12px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+.disc-option-index {
+  background : green;
+  position: absolute;
+  top: -5px;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5%;
+  color: #fff;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[Formatação dos indicadores de classificação]*/
+.indicador-notas {
+  border-radius : 5px 0px 5px 0px;
+  border: none;
+  color: #fff;
+}  
+
+.indicador-notas .col-lg-10 span {
+  text-transform: uppercase;
+  letter-spacing: 1.5pt;
+  position: relative;
+  left: -20px;
+  font-weight: bold;
+}
+
+.fa-puzzle-piece {
+  font-size: 35px;
+}
+
+.fa-thumbs-up, .fa-thumbs-down {
+  font-size: 40px;
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[Toda a formataçao abaixo é para o ensino primário]*/
+
+/*
+  Actividades Extracurriculares
+*/
+.card-ens-prim {
+  height: 270px;
+  border-radius: 7% 0% 7% 0%;
+  border: none;
+}
+
+.card-ens-prim .card-header {
+  background: #1a8e94;
+  color: #fff;
+}
+
+.icone-balancer {
+  position: relative;
+  left: 2%;
+  top: -15%;
+}
+
+.icone {
+  background:#FFF;
+  position: absolute;
+  top: 35%;
+  border-radius: 50%; 
+  border: solid 7px #1a8e94; 
+  height:120px;
+  width:120px;
+}
+
+.icone-ingles {
+  right:272px; 
+}
+
+.icone-ingles span {
+  font-size: 620%;
+  position: absolute;
+  left: 10%;
+  top: 2%;
+}
+
+.icone-informatica span {
+  font-size: 500%;
+  position: absolute;
+  left: 10%;
+  top: 8%;
+}
+
+.icone-informatica {
+  right:144px; 
+}
+
+.icone-outras {
+  right:15px; 
+}
+
+.icone-culinaria, .icone-xadrez, .icone-teatro {
+  position: absolute;
+}
+
+.icone-culinaria {
+  left: 20px;
+  top: 14px;
+  font-size: 32px;
+}
+
+.icone-xadrez {
+  left: 60px;
+  top: 14px;
+  font-size: 32px;
+}
+
+.icone-teatro {
+  left: 40px;
+  top: 60px;
+  font-size: 32px;
+}
+
+.subject-list {
+  position: relative;
+  top: 130px;
+  padding: 0px;
+}
+
+.subject-list .card {
+  border-radius: 5px 0px 5px 0px;
+  padding: 2px;
+  font-weight: bold;
+} 
+
+.falta-categoria {
+  border-radius: 6px 0px 6px 0px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #ffff0066;
+  border: solid 2px #3c020269;
+}
+
+.falta-categoria .col-lg-9 span, .falta-categoria .col-lg-12 span {
+  font-size: 20px;
+  text-align: left;
+}
+
+.falta-categoria .col-lg-9, .falta-categoria .col-lg-12 {
+  text-align: left;
+}
+
+.numero-faltas-indicador {
+  background: #4facfe;
+  position: absolute;
+  left: 73%;
+  top: 7%;
+  padding: 2px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.numero-faltas-indicador span {
+  position: relative;
+  font-size: 25px;
+  top: 10%;
+}
+
+.notas-aligner {
+  background: #4facfe;
+  position: absolute;
+  right: 1%;
+  top: 8%;
+  padding: 2px;
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.tarefas-icone {
+  position: absolute;
+  top: 35%;
+  border-radius: 50%; 
+  height:90px;
+  width:90px;
+  left: 35%;
+}
+
+.linha-das-estrelas {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+}
+
+.linha-das-estrelas .col-lg-2 span {
+  font-size: 55px;
+  color: green;
+}
+
+.avaliacao-disc-text h3 {
+  font-size: 55px;
+}
+
+.percentagem-global h1 {
+  font-size: 165px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.percentagem-global {
+  position: absolute;
+  top: 25%;
+}
+
+/*Formatação para o gráfico*/
+
+
+.notas-card-aligner {
+  left: 90%;
+}
+
+
+
+/***/
+
+.soAcimaDe14 {
+  background : green;
+}
+
+.verde {
+  color: green;
+}
+
+.laranja {
+  color: orange;
+}
+
+.vermelho {
+  color: red;
+}
+
+.positivasAbaixoDe14 {
+  background: orange; 
+}
+
+.negativas {
+  background: red;
+}
+
+.transparente {
+  color: transparent;
+}
+
+.mixPositivas {
+  background : blue;
+}
+
+.pretas {
+  background : black;
+}
+
+.soAcimaDe14, .positivasAbaixoDe14, .negativas, .mixPositivas {
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+
+.subjectListing {
+  position: absolute;
+  top: 10px;
+  height: 55px;
+  width: 490px;
+  text-align: left;
+}
+
+.subjectListing span {
+  font-size: 25px;
+  color: #050b13;
+}
+
+.subjectListingcard {
+  position: relative;
+  height: 60px;
+}
+
+.extra-subject {
+  font-size: 25px;
+  padding: 1px;
+}
+
+.paddingEraserInFaults {
+  padding: 1px;
+}
+
+.faultsMainRow {
+  position: relative;
+  top: -17px;
+}
+
+.subject-faults-list span {
+  position : relative;
+  top: 5px;
+}
+
+.theWorstSubjects span {
+  position: absolute;
+}
+
+.notas-tecnico-row {
+  position: relative;
+  top: -15px;
+}
+
+.notas-tecnico-row .card {
+  position: relative; 
+  height: 58px;
+}
+
+.notas-tecnico-row .card .col-lg-12 {
+  position: absolute;
+  left: 2px;
+  width: 100%;
+}
+
+.notas-tecnico-row .card .notas-card-aligner {
+  position: absolute;
+  left: 87%;
+}
+
+.fa-level-up, .fa-level-down {
+  font-size: 25px;
+}

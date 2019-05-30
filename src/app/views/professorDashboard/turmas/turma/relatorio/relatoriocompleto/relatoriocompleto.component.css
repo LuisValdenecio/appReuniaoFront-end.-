@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url('C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/fonts/Monseratt/Montserrat-Bold.ttf');
+}
+
+
+* {
+    font-family: Montserrat-Bold
+}
+
+.card-header {
+    background-image: linear-gradient(to right, #183853 0%, #1a8e94 100%);
+    color: #fff;
+    border: none;
+}
+
+img {
+    width: 100%;
+    height: 310px;
+    border-radius: 0% 10% 10% 0%;
+}

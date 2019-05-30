@@ -1,7 +1,7 @@
-import { AppMainRoutes.Ts } from './app-main-routes';
+import { AppMainRoutes } from './app-main-routes';
 
 describe('AppMainRoutes.Ts', () => {
   it('should create an instance', () => {
-    expect(new AppMainRoutes.Ts()).toBeTruthy();
+    expect(new AppMainRoutes()).toBeTruthy();
   });
 });

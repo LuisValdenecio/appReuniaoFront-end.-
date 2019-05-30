@@ -4,7 +4,8 @@
 
     <!-- campo que seleciona a disciplina a marcar  -->
     <div class="input-group mb-4">
-      <select class="form-control" data-index="0">  
+      <select class="form-control" data-index="0" (input)="updateSubjectName($event.target)">  
+        <option disabled>Marque uma disciplina</option>
         <option *ngFor="let disc of _thisClassSubjects">
           {{disc["disciplina_nome"]}}
         </option>
@@ -30,7 +31,7 @@
             <tr>
               <th scope="col" >Foto</th>
               <th scope="col">Nome</th>
-              <th scope="col">Nº de Ordem</th>
+              <th scope="col">Nº</th>
               <th scope="col" class="text-center">Falta por Ausência</th>
               <th scope="col" class="text-center">Falta de Material</th>
               <th scope="col" class="text-center">Falta Disciplinar</th>
@@ -48,13 +49,13 @@
                <span>{{i+1}}</span> 
               </td>
               <td class="text-center pt-4">
-                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']"  (input)="alertWhenTypedAusencias($event.target, student)">
               </td>
               <td class="text-center pt-4">
-                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']" (input)="alertWhenTypedMateriais($event.target, student)">
               </td>
               <td class="text-center pt-4">
-                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']">
+                <input [type]="typeOfInput['inputType']" [ngClass]="typeOfInput['class']" (input)="alertWhenTypedDisc($event.target, student)">
               </td>
             </tr>
           </tbody>

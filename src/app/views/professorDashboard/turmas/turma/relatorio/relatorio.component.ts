@@ -14,6 +14,7 @@ export class RelatorioComponent  {
   public _faultsData : any[];
   public _gradesData : any[];
   public _thisClassSubjects : any[];
+  public _justificativos : any[];
 
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view 
 
@@ -32,7 +33,11 @@ export class RelatorioComponent  {
   public thisStudentBehavior : any[];
   public thisStudentParticipation : any;
   public thisStudentAvaliationInPercent : any;
-  
+  public thisStudentJust : any[] = [];
+
+  // -->> atributos que serão enviados ao servidor
+  public studentsGlobalAverage : any[] = [];
+
   // -->> a seguir vão os atributos usados como indexes no data binding
   public topLevelIndexGrades : number = 0;
   public subGroupIndexGrades : number = 0;
@@ -62,9 +67,40 @@ export class RelatorioComponent  {
       this._thisClassSubjects = data;
     });
 
+    this.dataModelInterface.getJustificativoData().subscribe(data=>{
+      this._justificativos = data;
+    })
+
     // -->> determina qual modal mostrar para cada estudante
     this.dataModelInterface.getClassGrade("/"+this.formatURL()+"_classe").subscribe(data=>{
       this.thisClassGrade = data;
+
+      if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
+        this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
+        || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
+        
+
+      } else {
+
+          // -> crie um objecto para cada estudante com a sua respectiva média global para o trimestre (ensino técnico)
+          this._studentData.forEach((student)=>{
+
+            this.studentsGlobalAverage.push({
+
+              'studentcod' : student['estudantecod'],
+              'mediaGlobal' : this.studentDataUtils.getGlobalScore(
+                this._faultsData.filter(stu => stu['estudantecod'] == student['estudantecod']),
+                this._gradesData.filter(stu => stu['estudantecod'] == student['estudantecod']), 
+                this._thisClassSubjects.length, 
+                this._faultsData,
+                this._justificativos.filter(stu => stu['estudantecod'] == student['estudantecod']),
+                this.thisClassGrade[0]['nome_class']
+              )
+            })
+          });
+          
+      }
+
     });
   }
   
@@ -91,7 +127,15 @@ export class RelatorioComponent  {
     this.studentDisplayed = this._studentData[index];
 
     //-> Esta propriedade armazena toda informação relativa a faltas de um determinado estudante
-    this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
+    this.thisStudentFaults = this.studentDataUtils.processFaultsData(
+      this._faultsData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']), 
+      this._thisClassSubjects.length, 
+      this._faultsData,
+      this._justificativos.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod'])
+    );
+
+    // envie as médias globais a base de dados (para o ensino primário é melhor que esse linha fique depois do thisStudentFaults)
+    this.sendGlobalAvg();
 
     if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
     this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
@@ -101,8 +145,6 @@ export class RelatorioComponent  {
       // toda lógica associada ao modal do ensino primárop será colocada aqui.
       
       this.thisStudentGrades = this.studentDataUtils._situacaoNotas(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']), this.thisStudentFaults['pontuacaoGlobal']);
-      console.log(this.thisStudentGrades);
-
 
     } else {
    
@@ -112,11 +154,16 @@ export class RelatorioComponent  {
       this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']));
 
       //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
-      this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']));
-      
+      this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']), this.thisClassGrade[0]['nome_class']);
+              
       // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
-      //this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
-      
+      this.thisStudentAvaliationInPercent = Math.trunc((
+        Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + 
+        Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0]) + 
+        Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
+        Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
+        ) / 4) + '%';
+
     }
 
     this.firtsThreeAppear = true;
@@ -132,21 +179,32 @@ export class RelatorioComponent  {
 
   public nextModal(studenObj : any) {
     if (this._studentData.indexOf(studenObj) < this._studentData.length - 1) {
+
+      //-> Esta propriedade armazena toda informação relativa a faltas de um determinado estudante
+      this.thisStudentFaults = this.studentDataUtils.processFaultsData(
+        this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']),
+        this._thisClassSubjects.length, 
+        this._faultsData,
+        this._justificativos.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod'])
+      );
             
       if (this.shouldDisplaySecondModal) {
 
         this.studentDisplayed = this._studentData[this._studentData.indexOf(studenObj)+1];
 
-        //-> Esta propriedade armazena toda informação relativa a faltas de um determinado estudante
-        this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
         //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
-        this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']))
+        this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']), this.thisClassGrade[0]['nome_class'])
         
         // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
         this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']));
    
          // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
-        this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
+        this.thisStudentAvaliationInPercent = Math.trunc((
+          Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + 
+          Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0]) + 
+          Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
+          Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
+          ) / 4) + '%';
 
         this.thisStudentPhoto = 'assets/img/';
         this.thisStudentPhoto += this._studentData[this._studentData.indexOf(studenObj)+1].foto;
@@ -155,13 +213,10 @@ export class RelatorioComponent  {
         this.firtsThreeAppear = true;
         this.topLevelIndexGrades = 0;
         this.subGroupIndexGrades = 0;
-      
+
       } else {
 
         this.studentDisplayed = this._studentData[this._studentData.indexOf(studenObj)+1];
-
-        //-> Esta propriedade armazena toda informação relativa a faltas de um determinado estudante
-        this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
 
         this.thisStudentGrades = this.studentDataUtils._situacaoNotas(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']), this.thisStudentFaults['pontuacaoGlobal']);
 
@@ -190,24 +245,33 @@ export class RelatorioComponent  {
       this.studentDisplayed = this._studentData[this._studentData.indexOf(studenObj)-1]; 
 
       //-> Esta propriedade armazena toda informação relativa a faltas de um determinado estudante
-      this.thisStudentFaults = this.studentDataUtils.processFaultsData(this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']), this._thisClassSubjects.length, this._faultsData);
+      this.thisStudentFaults = this.studentDataUtils.processFaultsData(
+        this._faultsData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']), 
+        this._thisClassSubjects.length, 
+        this._faultsData,
+        this._justificativos.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod'])      
+      );
        
       // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
       if (this.shouldDisplaySecondModal) {
         this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']));
         //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
-        this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']))
+        this.thisStudentGrades = this.studentDataUtils.processGradesData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']), this.thisClassGrade[0]['nome_class'])
+        
+        // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
+        this.thisStudentAvaliationInPercent = Math.trunc((
+        Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + 
+        Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0]) + 
+        Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
+        Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
+        ) / 4) + '%';
+        
       } else {
         //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
         this.thisStudentGrades = this.studentDataUtils._situacaoNotas(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']), this.thisStudentFaults['pontuacaoGlobal']);
       } 
       
-      console.log(this.thisStudentGrades);
-
-      // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
-      //this.thisStudentAvaliationInPercent = Math.trunc((Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0])) / 5) + '%';
-
-
+    
       this.thisStudentPhoto = 'assets/img/';  
       this.thisStudentPhoto += this._studentData[this._studentData.indexOf(studenObj)-1].foto;   
       
@@ -270,6 +334,59 @@ export class RelatorioComponent  {
       }
     }   
     return this.newestURL;
+ }
+
+ private sendGlobalAvg() {
+
+  this.studentsGlobalAverage = [];  // empty the array
+
+  // --> actualize as informações sobre o código da turma 
+  this.studentsGlobalAverage.push("/"+this.formatURL()+"_globalScores");
+
+  if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
+    this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
+    || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
+    
+      // -> crie um objecto para cada estudante com a sua respectiva média global para o trimestre (ensino técnico)
+    this._studentData.forEach((student)=>{
+
+      this.studentsGlobalAverage.push({
+
+        'studentcod' : student['estudantecod'],
+        'mediaGlobal' : Number(this.studentDataUtils._situacaoNotas(this._gradesData.filter(stu => stu['estudantecod'] == student['estudantecod']), this.thisStudentFaults['pontuacaoGlobal'])['pontuacaoGlobal'].split("%")[0])
+      })
+    });
+
+    
+  } else {
+
+    // -> crie um objecto para cada estudante com a sua respectiva média global para o trimestre (ensino técnico)
+    this._studentData.forEach((student)=>{
+
+      this.studentsGlobalAverage.push({
+
+        'studentcod' : student['estudantecod'],
+        'mediaGlobal' : this.studentDataUtils.getGlobalScore(
+          this._faultsData.filter(stu => stu['estudantecod'] == student['estudantecod']),
+          this._gradesData.filter(stu => stu['estudantecod'] == student['estudantecod']), 
+          this._thisClassSubjects.length, 
+          this._faultsData,
+          this._justificativos.filter(stu => stu['estudantecod'] == student['estudantecod']),
+          this.thisClassGrade[0]['nome_class']
+        )
+      })
+    });
+      
+  }
+
+  // guardar as médias globais na base de dados 
+  this.dataModelInterface.sendGlobalScore(this.studentsGlobalAverage).subscribe((data)=>{
+    console.log("médias enviadas para a DB");
+  }, (err)=>{
+    console.log(err);
+  });
+
+
  }
 
 }
