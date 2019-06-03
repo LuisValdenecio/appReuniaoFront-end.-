@@ -3,6 +3,7 @@ import { RelatorioComponent } from './relatorio.component';
 import { BrowserModule } from "@angular/platform-browser";
 import {RouterModule} from '@angular/router';
 import { RelatoriocompletoComponent } from './relatoriocompleto/relatoriocompleto.component';
+import { ChartsModule } from 'ng2-charts';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
@@ -10,7 +11,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
   imports: [
     BrowserModule,
     RouterModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    ChartsModule
   ],
   declarations: [
     RelatorioComponent, 

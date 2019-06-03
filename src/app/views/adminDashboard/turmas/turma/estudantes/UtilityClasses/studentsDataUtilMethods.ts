@@ -593,5 +593,20 @@ export class StudentDataUtils {
     }
 
 
+    // -> este método calcula o créscimento, decréscimo ou estaticidade de desempenho de um estudante no relatório académico
+    public desempenhoComparativo(trimAnterior : any, esteTrimestre : any) {
+        if (trimAnterior.length > 0) {
+            if (trimAnterior[0]['percentagem'] != -1) {
+                return [
+                    {data: [trimAnterior[0]['percentagem']], label: 'Iº Trimestre'},
+                    {data: [esteTrimestre], label: 'IIº Trimestre'}
+                ]
+            } else {
+                return [];
+            }
+        } else {
+            return [];
+        }             
+    }
 
 }

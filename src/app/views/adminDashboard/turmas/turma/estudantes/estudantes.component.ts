@@ -17,6 +17,15 @@ export class EstudantesComponent  {
   public _thisClassSubjects : any[];
   public _justificativos : any[];
 
+  // --> propriedades para o trimestre anterior
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  
+  public barChartType = 'bar';
+  public barChartData : any[] = [];
+
   ///
   public _comparacaoTrimestre : any[];
 
@@ -150,6 +159,15 @@ export class EstudantesComponent  {
         Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
         ) / 4) + '%';
 
+      // gráfico de comparação 
+      if (this._comparacaoTrimestre.length > 0) {
+        this.barChartData = this.studentDataUtils.desempenhoComparativo(
+          this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[index]['estudantecod']),
+          this.thisStudentAvaliationInPercent.split("%")[0]
+        )
+      }
+      
+
     }
 
     this.firtsThreeAppear = true;
@@ -191,6 +209,12 @@ export class EstudantesComponent  {
           Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
           Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
           ) / 4) + '%';
+
+        // gráfico de comparação 
+        this.barChartData = this.studentDataUtils.desempenhoComparativo(
+          this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']),
+          this.thisStudentAvaliationInPercent.split("%")[0]
+        )
 
         this.thisStudentPhoto = 'assets/img/';
         this.thisStudentPhoto += this._studentData[this._studentData.indexOf(studenObj)+1].foto;
@@ -251,6 +275,12 @@ export class EstudantesComponent  {
         Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
         Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
         ) / 4) + '%';
+
+        // gráfico de comparação 
+        this.barChartData = this.studentDataUtils.desempenhoComparativo(
+          this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']),
+          this.thisStudentAvaliationInPercent.split("%")[0]
+        )
         
       } else {
         //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
@@ -364,6 +394,8 @@ export class EstudantesComponent  {
     });
       
   }
+
+  console.log(this.studentsGlobalAverage);
 
   // guardar as médias globais na base de dados 
   this.dataModelInterface.sendGlobalScore(this.studentsGlobalAverage).subscribe((data)=>{

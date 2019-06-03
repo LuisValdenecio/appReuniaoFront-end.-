@@ -5,7 +5,6 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { AppComponent } from './app.component';
 import {AppMainRoutes} from './app-main-routes';
 import { LoginModule } from './views/login/login-module';
-import { SignupModule } from './views/signin/signup-module';
 import { HomeModule} from './views/adminDashboard/home-module';
 import { HomeModuleProfDash} from './views/professorDashboard/home-module';
 import { AppSelectDisabledDirective } from './views/professorDashboard/turmas/turma/custom_directives/app-select-disabled.directive';
@@ -20,7 +19,6 @@ import { AppSelectDisabledDirective } from './views/professorDashboard/turmas/tu
     BrowserModule,
     AppMainRoutes,
     LoginModule,
-    SignupModule,
     HttpClientModule,
     AngularSvgIconModule,
     HomeModule,

@@ -16,12 +16,24 @@ export class RelatorioComponent  {
   public _thisClassSubjects : any[];
   public _justificativos : any[];
 
+  // --> propriedades para o trimestre anterior
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  
+  public barChartType = 'bar';
+  public barChartData : any[];
+
+  ///
+  public _comparacaoTrimestre : any[];
+
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view 
 
   public shouldDisplayFirstModal : Boolean = false;
   public shouldDisplaySecondModal : Boolean = false;
   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
-  
+
   //-->> a seguir vão os atributos dos data-binding 
   public studentDisplayed : any;
   public thisStudentNumber : number = 1;
@@ -35,17 +47,20 @@ export class RelatorioComponent  {
   public thisStudentAvaliationInPercent : any;
   public thisStudentJust : any[] = [];
 
+  ///
+  public comparacao : any[];
+
   // -->> atributos que serão enviados ao servidor
   public studentsGlobalAverage : any[] = [];
 
   // -->> a seguir vão os atributos usados como indexes no data binding
   public topLevelIndexGrades : number = 0;
   public subGroupIndexGrades : number = 0;
-  
+
   //-->> a seguir vão os atributos booleanos usados como indexes no data binding
   public firtsThreeAppear : Boolean = true;
   public mostrarNenhumaDisc : Boolean = false;
-  
+
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
   public newestURL : String = "";
 
@@ -74,36 +89,15 @@ export class RelatorioComponent  {
     // -->> determina qual modal mostrar para cada estudante
     this.dataModelInterface.getClassGrade("/"+this.formatURL()+"_classe").subscribe(data=>{
       this.thisClassGrade = data;
-
-      if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
-        this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
-        || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
-        
-
-      } else {
-
-          // -> crie um objecto para cada estudante com a sua respectiva média global para o trimestre (ensino técnico)
-          this._studentData.forEach((student)=>{
-
-            this.studentsGlobalAverage.push({
-
-              'studentcod' : student['estudantecod'],
-              'mediaGlobal' : this.studentDataUtils.getGlobalScore(
-                this._faultsData.filter(stu => stu['estudantecod'] == student['estudantecod']),
-                this._gradesData.filter(stu => stu['estudantecod'] == student['estudantecod']), 
-                this._thisClassSubjects.length, 
-                this._faultsData,
-                this._justificativos.filter(stu => stu['estudantecod'] == student['estudantecod']),
-                this.thisClassGrade[0]['nome_class']
-              )
-            })
-          });
-          
-      }
-
     });
+
+    this.dataModelInterface.getPreviousTrimestreData("/"+this.formatURL()+"_comparacao").subscribe(data=>{
+      this._comparacaoTrimestre = data;
+      console.log(this._comparacaoTrimestre);
+    });
+
   }
-  
+
   // --> Substituição urgente (dependencia com o backend)
   public formatURL() {
 
@@ -139,7 +133,7 @@ export class RelatorioComponent  {
 
     if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
     this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
-     || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
+    || this.thisClassGrade[0]['nome_class'] == '4ª Classe') {
       this.shouldDisplayFirstModal = true;
 
       // toda lógica associada ao modal do ensino primárop será colocada aqui.
@@ -147,9 +141,9 @@ export class RelatorioComponent  {
       this.thisStudentGrades = this.studentDataUtils._situacaoNotas(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']), this.thisStudentFaults['pontuacaoGlobal']);
 
     } else {
-   
+  
       // toda lógica associada ao modal do ensino técnico será colocada aqui.
-   
+  
       this.shouldDisplaySecondModal = true;
       this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']));
 
@@ -163,6 +157,12 @@ export class RelatorioComponent  {
         Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
         Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
         ) / 4) + '%';
+
+      // gráfico de comparação 
+      this.barChartData = this.studentDataUtils.desempenhoComparativo(
+        this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[index]['estudantecod']),
+        this.thisStudentAvaliationInPercent.split("%")[0]
+      )
 
     }
 
@@ -197,14 +197,20 @@ export class RelatorioComponent  {
         
         // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
         this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']));
-   
-         // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
+  
+        // --> Esta propriedade soma os pontos de todos os critérios de avaliação.
         this.thisStudentAvaliationInPercent = Math.trunc((
           Number(this.thisStudentGrades[this.thisStudentGrades.length - 1][0].pontuacaoGlobal.split("%")[0]) + 
           Number(this.thisStudentFaults['pontuacaoGlobal'].split("%")[0]) + 
           Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
           Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
           ) / 4) + '%';
+
+        // gráfico de comparação 
+        this.barChartData = this.studentDataUtils.desempenhoComparativo(
+          this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']),
+          this.thisStudentAvaliationInPercent.split("%")[0]
+        )
 
         this.thisStudentPhoto = 'assets/img/';
         this.thisStudentPhoto += this._studentData[this._studentData.indexOf(studenObj)+1].foto;
@@ -237,7 +243,7 @@ export class RelatorioComponent  {
       }
       
     }
-  
+
   }
 
   public previousModal(studenObj : any) {
@@ -251,7 +257,7 @@ export class RelatorioComponent  {
         this._faultsData,
         this._justificativos.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod'])      
       );
-       
+      
       // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
       if (this.shouldDisplaySecondModal) {
         this.thisStudentParticipation = this.studentDataUtils.processQualityData(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']));
@@ -265,6 +271,12 @@ export class RelatorioComponent  {
         Number(this.thisStudentParticipation['percentComport'].split("%")[0]) + 
         Number(this.thisStudentParticipation['percentPart'].split("%")[0])          
         ) / 4) + '%';
+
+        // gráfico de comparação 
+        this.barChartData = this.studentDataUtils.desempenhoComparativo(
+          this._comparacaoTrimestre.filter(student=> student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']),
+          this.thisStudentAvaliationInPercent.split("%")[0]
+        )
         
       } else {
         //--> Esta propriedade armazena toda informação relativa as notas de um determinado estudante
@@ -306,20 +318,20 @@ export class RelatorioComponent  {
   }
 
   public previousGradeItem() {
-   if (this.topLevelIndexGrades == 0 && this.subGroupIndexGrades > 0) {
+  if (this.topLevelIndexGrades == 0 && this.subGroupIndexGrades > 0) {
     this.subGroupIndexGrades--;
-   } else if (this.topLevelIndexGrades > 0 && this.subGroupIndexGrades == 0) {
-     this.topLevelIndexGrades--;
-     this.subGroupIndexGrades = this.thisStudentGrades[this.topLevelIndexGrades].length - 1;
-   } else if (this.topLevelIndexGrades > 0  && this.subGroupIndexGrades > 0) {
-     this.subGroupIndexGrades--;
-   }
+  } else if (this.topLevelIndexGrades > 0 && this.subGroupIndexGrades == 0) {
+    this.topLevelIndexGrades--;
+    this.subGroupIndexGrades = this.thisStudentGrades[this.topLevelIndexGrades].length - 1;
+  } else if (this.topLevelIndexGrades > 0  && this.subGroupIndexGrades > 0) {
+    this.subGroupIndexGrades--;
+  }
   }
 
   public organizeGradeGroups() {
     return this.thisStudentGrades[this.topLevelIndexGrades][this.subGroupIndexGrades];
   }
-  
+
   // --> isto é somente um hack para fazer desaparecer o view da turma
   public deleteParentView() {
     this.display = false;
@@ -327,6 +339,7 @@ export class RelatorioComponent  {
 
   // --> a implementação deste método precisa de substituição urgente (dependencia com o backend)
   public urlFriendlyFormat(url : String) {
+    console.log(url);
     this.newestURL = "";
     for (let counter = 0; counter < url.length; counter++) {
       if (url.charAt(counter) != '-') {
@@ -334,9 +347,9 @@ export class RelatorioComponent  {
       }
     }   
     return this.newestURL;
- }
+  }
 
- private sendGlobalAvg() {
+  private sendGlobalAvg() {
 
   this.studentsGlobalAverage = [];  // empty the array
 
@@ -386,7 +399,7 @@ export class RelatorioComponent  {
     console.log(err);
   });
 
-
- }
+  }
+  
 
 }

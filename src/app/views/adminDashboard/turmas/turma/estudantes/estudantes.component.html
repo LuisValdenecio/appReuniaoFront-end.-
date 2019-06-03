@@ -912,16 +912,41 @@
                               </div>
       
                               <div class="col-lg-10">
-                                <h6>Trimestre anterior:</h6>
+                                <h6>Timestre anterior:</h6>
                               </div>
                               
                               </div>
                           </div>
                             
                           <div class="card-body">
-                            <div class="percentagem-global">
-                              <h1>80%</h1>
-                            </div>
+                            <div class="card-body">
+                              <div class="percentagem-global" *ngIf="barChartData.length > 0">
+                                <!-- para estudantes que estiverem na escola também no primeiro trimestre -->
+                                <div style="position:absolute;left:-12px" >
+                                  <canvas height="200px" width="400px"  baseChart
+                                          [datasets]="barChartData"
+                                          [labels]="barChartLabels"
+                                          [options]="barChartOptions"
+                                          [legend]="barChartLegend"
+                                          [chartType]="barChartType">
+                                  </canvas>
+                                </div>
+                              </div>
+  
+                              <!-- para estudantes que estiverem na escola também no primeiro trimestre -->
+                              <div class="row" *ngIf="barChartData.length == 0">
+                              
+                                <div class="col-lg-12 mb-2">
+                                  <span class="fa fa-minus-circle" style="font-size:90px;color:orange"></span>
+                                </div>
+    
+                                <div class="col-lg-12 mb-2 avaliacao-disc-text">
+                                  <h4 style="font-weight: bold">Sem dados no trimestre anterior</h4>
+                                </div>
+      
+                              </div>
+    
+                            </div>>
                           </div>
                         </div>
                       </div>
