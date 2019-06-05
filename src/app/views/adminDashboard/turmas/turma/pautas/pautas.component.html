@@ -24,8 +24,6 @@
               <th scope="col" class="text-center">P. nas Aulas</th>
               <th scope="col" class="text-center">CPP</th>
               <th scope="col" class="text-center">A.Recuperacao</th>
-              <!-- to eliminate soon -->
-              <th scope="col" class="text-center">%global</th>
             </tr>
 
             <!-- Iniciação,... 4ª -->
@@ -141,11 +139,6 @@
                   <input [disabled]="!flagToDisableSelect" type="checkbox" (input)="aulasDeRecuperacao($event.target, student)">  
                 </td>
 
-                <!-- it will be removed ASAP -->
-                <td class="text-center pt-4">
-                  <input [disabled]="flagToDisableSelect" type="input" class="faltasInput" (input)="mediaGlobalAnterior($event.target, student)">
-                </td>
-  
             </tr>
 
           </tbody>

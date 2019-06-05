@@ -7,13 +7,35 @@
    <!-- 1º Modal (ensino primario) -->
    <div *ngIf="shouldDisplayFirstModal" class="container-contact100">
     <div class="wrap-contact100 row">
-        <div class="contact100-form-title" style="background-image: url(public/img/1.GIF);">
+        <div class="contact100-form-title">
             <span>Relatório académico</span>
         </div>
         <div class="academicModal-body">
   
           <div class="container-fluid">
-  
+            
+               <!-- para aulas de recuperacao -->
+               <div class="row aulas-recuper" style="position: absolute;top:90px;left:15px" *ngIf="aulasRecuperacao.length > 0">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="pt-2">Aulas de Recuperação</h4>
+                    </div>
+                    <div class="card-body">
+                      <a class="recuperacao-arr-left" *ngIf="aulasRecuperacao.length > 1" (click)="nextGroupRecupLeft()">
+                        <i class="fa fa-chevron-left"></i>
+                      </a>
+                      <div class="mais-part" *ngIf="aulasRecuperacao.length > 1">
+                        <h3 *ngFor="let disc of aulasRecuperacao[grupoIndex]">{{disc}}</h3>
+                      </div>
+                      <div class="uma-part" *ngIf="aulasRecuperacao.length == 1">
+                        <h3 *ngFor="let disc of aulasRecuperacao[grupoIndex]">{{disc}}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>                    
+
               <!-- linha da fotografia -->
               <div class="row">
                 <div class="col-lg-4 offset-4 p-4">
@@ -47,7 +69,7 @@
   
                   <!-- 1º -->
                   <div class="col-lg-4">
-                    <div class="card card-ens-prim">
+                    <div class="card card-ens-prim p-0">
                       <div class="card-header">
                         <div class="row pt-2">
                           
@@ -56,7 +78,7 @@
                           </div>
   
                           <div class="col-lg-10">
-                            <h6>Desempenho ao nível de notas</h6>
+                            <h6>Desempenho de notas</h6>
                           </div>
                           
                         </div>
@@ -183,7 +205,7 @@
   
                               <div class="col-lg-3 extra-subject">
                                 <div class="card">
-                                  <span>Ingles</span>
+                                  <span>Inglês</span>
                                 </div>
                               </div>
   
@@ -236,7 +258,7 @@
                                 <div class="card p-2 falta-categoria subjectListingcard">
                                   <div class="row">
                                     <div class="col-lg-12 subject-faults-list">
-                                      <span>{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
+                                      <span style="font-size:22px">{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
                                     </div>
                                   </div>
                                 </div>
@@ -248,7 +270,7 @@
                                   <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
                                       <div class="col-lg-12 subject-faults-list theWorstSubjects">
-                                        <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
+                                        <span style="font-size:22px">{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -260,7 +282,7 @@
                                   <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
                                       <div class="col-lg-12 subject-faults-list">
-                                        <span>{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
+                                        <span style="font-size:22px">{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -277,7 +299,7 @@
                                   <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
                                       <div class="col-lg-9 subject-faults-list">
-                                        <span>Ausência</span>
+                                        <span style="font-size:22px">Ausência</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador">
                                         <span>{{thisStudentFaults.displayData.faltasAusencia}}</span>
@@ -292,7 +314,7 @@
                                   <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
                                       <div class="col-lg-9 subject-faults-list">
-                                        <span>Disciplinar</span>
+                                        <span style="font-size:20px">Disciplinar</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador negativas">
                                         <span>{{thisStudentFaults.displayData.faltasDisciplinar}}</span>
@@ -307,7 +329,7 @@
                                   <div class="card p-2 falta-categoria subjectListingcard">
                                     <div class="row">
                                       <div class="col-lg-9 subject-faults-list">
-                                        <span>Material</span>
+                                        <span style="font-size:22px">Material</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador pretas">
                                         <span>{{thisStudentFaults.displayData.faltasMaterial}}</span>
@@ -479,7 +501,7 @@
                     </div>
                     <div class="col-lg-4">
                       <button (click)="closeModal()" class="btn p-2" >
-                        Feixar
+                        Fechar
                         <i class="fa fa-close" aria-hidden="true"></i>
                       </button>
                     </div>
@@ -515,6 +537,28 @@
         <div class="academicModal-body">
   
             <div class="container-fluid">
+
+                <!-- para aulas de recuperacao -->
+                <div class="row aulas-recuper" style="position: absolute;top:90px;left:15px" *ngIf="aulasRecuperacao.length > 0">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4 class="pt-2">Aulas de Recuperação</h4>
+                      </div>
+                      <div class="card-body">
+                        <a class="recuperacao-arr-left" *ngIf="aulasRecuperacao.length > 1" (click)="nextGroupRecupLeft()">
+                          <i class="fa fa-chevron-left"></i>
+                        </a>
+                        <div class="mais-part" *ngIf="aulasRecuperacao.length > 1">
+                          <h3 *ngFor="let disc of aulasRecuperacao[grupoIndex]">{{disc}}</h3>
+                        </div>
+                        <div class="uma-part" *ngIf="aulasRecuperacao.length == 1">
+                          <h3 *ngFor="let disc of aulasRecuperacao[grupoIndex]">{{disc}}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>          
   
                 <!-- linha da fotografia -->
                 <div class="row">
@@ -619,7 +663,7 @@
                                       <div class="card p-2 falta-categoria subjectListingcard" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['class']">
                                         <div class="row" style="padding:0px">
                                           <div class="col-lg-12 subject-faults-list theWorstSubjects" >
-                                            <span>Média: {{thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['media']}}</span>
+                                            <span style="font-size:22px">Média: {{thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['media']}}</span>
                                           </div>
                                         </div>
                                       </div>
@@ -655,7 +699,7 @@
                           <div class="row pt-2">
                           
                             <div class="col-lg-2">
-                              <span class="fa fa-globe"></span>
+                              <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
     
                             <div class="col-lg-8">
@@ -735,7 +779,7 @@
                                     <div class="card p-2 falta-categoria">
                                       <div class="row">
                                         <div class="col-lg-12">
-                                          <span>{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
+                                          <span style="font-size:22px">{{thisStudentFaults['toDisplay']['totalFaltas']}} Registadas</span>
                                         </div>
                                       </div>
                                     </div>
@@ -747,7 +791,7 @@
                                     <div class="card p-2 falta-categoria subjectListingcard">
                                       <div class="row">
                                         <div class="col-lg-12 subject-faults-list theWorstSubjects">
-                                          <span>{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
+                                          <span style="font-size:22px">{{thisStudentFaults['toDisplay']['discFaltosas']}}</span>
                                         </div>
                                       </div>
                                     </div>
@@ -759,7 +803,7 @@
                                     <div class="card p-2 falta-categoria">
                                       <div class="row">
                                         <div class="col-lg-12">
-                                          <span>{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
+                                          <span style="font-size:20px">{{thisStudentFaults['toDisplay']['pesoDasFaltas']}}</span>
                                         </div>
                                       </div>
                                     </div>
@@ -776,7 +820,7 @@
                                   <div class="card p-2 falta-categoria">
                                     <div class="row">
                                       <div class="col-lg-9">
-                                        <span>Ausência</span>
+                                        <span style="font-size:22px">Ausência</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador">
                                         <span>{{thisStudentFaults.displayData.faltasAusencia}}</span>
@@ -791,7 +835,7 @@
                                   <div class="card p-2 falta-categoria">
                                     <div class="row">
                                       <div class="col-lg-9">
-                                        <span>Disciplinar</span>
+                                        <span style="font-size:22px">Disciplinar</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador negativas">
                                         <span>{{thisStudentFaults.displayData.faltasDisciplinar}}</span>
@@ -806,7 +850,7 @@
                                   <div class="card p-2 falta-categoria">
                                     <div class="row">
                                       <div class="col-lg-9">
-                                        <span>Material</span>
+                                        <span style="font-size:22px">Material</span>
                                       </div>
                                       <div class="col-lg-3 numero-faltas-indicador pretas">
                                         <span>{{thisStudentFaults.displayData.faltasMaterial}}</span>
@@ -908,7 +952,7 @@
                             <div class="row pt-2">
                             
                               <div class="col-lg-2">
-                                <span class="fa fa-globe"></span>
+                                <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                               </div>
       
                               <div class="col-lg-10">
@@ -922,8 +966,8 @@
                             <div class="card-body">
                               <div class="percentagem-global" *ngIf="barChartData.length > 0">
                                 <!-- para estudantes que estiverem na escola também no primeiro trimestre -->
-                                <div style="position:absolute;left:-12px" >
-                                  <canvas height="200px" width="400px"  baseChart
+                                <div style="position:absolute;left:-20px">
+                                  <canvas height="200px" width="380px"  baseChart
                                           [datasets]="barChartData"
                                           [labels]="barChartLabels"
                                           [options]="barChartOptions"

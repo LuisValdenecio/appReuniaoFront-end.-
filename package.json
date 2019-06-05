@@ -1,6 +1,10 @@
 {
   "name": "app-reunioes",
   "version": "0.0.0",
+  "license": "MIT",
+  "main" : "src/electronMain.js",
+  "author" : "Luís Valdenêncio",
+  "description": "Aplicativo de apresentação do relatório académico no CEPPH",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,9 +12,43 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "json": "json-server data.json -p 3500"
+    "forge-start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "private": true,
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "ng-example"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "ngExample"
+      }
+    }
+  },
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
@@ -20,10 +58,14 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
+    "angular-svg-icon": "^7.2.1",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "core-js": "^2.5.4",
+    "electron-compile": "^6.4.2",
+    "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "^4.7.0",
     "ng2-charts": "^2.2.2",
     "rxjs": "~6.3.3",
@@ -39,6 +81,9 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "electron": "^5.0.1",
+    "electron-forge": "^5.2.0",
+    "electron-prebuilt-compile": "^2.0.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "json-server": "^0.14.2",

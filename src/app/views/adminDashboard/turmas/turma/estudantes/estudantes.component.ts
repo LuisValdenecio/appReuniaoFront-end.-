@@ -48,6 +48,11 @@ export class EstudantesComponent  {
   public thisStudentAvaliationInPercent : any;
   public thisStudentJust : any[] = [];
 
+  // -> aulas de recuperação 
+  public aulasRecuperacao : any[] = [];
+  public grupoIndex = 0;
+
+
   ///
   public comparacao : any[];
 
@@ -94,7 +99,6 @@ export class EstudantesComponent  {
 
     this.dataModelInterface.getPreviousTrimestreData("/"+this.formatURL()+"_comparacao").subscribe(data=>{
       this._comparacaoTrimestre = data;
-      console.log(this._comparacaoTrimestre);
     });
 
   }
@@ -129,8 +133,14 @@ export class EstudantesComponent  {
       this._justificativos.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod'])
     );
 
+    // -> somente se o estudante andou a ter aulas de preparação
+    this.aulasRecuperacao = this.studentDataUtils.aulasRecuperacao(this._gradesData.filter(student => student['estudantecod'] == this._studentData[index]['estudantecod']));
+
     // envie as médias globais a base de dados (para o ensino primário é melhor que esse linha fique depois do thisStudentFaults)
     this.sendGlobalAvg();
+
+    //
+    this.grupoIndex = 0;
 
     if (this.thisClassGrade[0]['nome_class'] == 'Iniciação' || this.thisClassGrade[0]['nome_class'] == '1ª Classe' || 
     this.thisClassGrade[0]['nome_class'] == '2ª Classe' || this.thisClassGrade[0]['nome_class'] == '3ª Classe'
@@ -191,7 +201,13 @@ export class EstudantesComponent  {
         this._faultsData,
         this._justificativos.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod'])
       );
-            
+
+      // -> somente se o estudante andou a ter aulas de preparação
+      this.aulasRecuperacao = this.studentDataUtils.aulasRecuperacao(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)+1]['estudantecod']));
+      
+      //
+      this.grupoIndex = 0;
+
       if (this.shouldDisplaySecondModal) {
 
         this.studentDisplayed = this._studentData[this._studentData.indexOf(studenObj)+1];
@@ -261,6 +277,12 @@ export class EstudantesComponent  {
         this._faultsData,
         this._justificativos.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod'])      
       );
+
+       // -> somente se o estudante andou a ter aulas de preparação
+       this.aulasRecuperacao = this.studentDataUtils.aulasRecuperacao(this._gradesData.filter(student => student['estudantecod'] == this._studentData[this._studentData.indexOf(studenObj)-1]['estudantecod']));
+      
+       //
+       this.grupoIndex = 0;
       
       // --> Esta propriedade armazena toda informação relativa a participação nas aulas e ao comportamento
       if (this.shouldDisplaySecondModal) {
@@ -309,6 +331,16 @@ export class EstudantesComponent  {
   public previousThree() {
     this.firtsThreeAppear = true;
   }
+
+  // Métodos de apoio a caixa de texto as aulas de recuperação 
+  public nextGroupRecupLeft() {
+    if (this.grupoIndex != this.aulasRecuperacao.length - 1) {
+      this.grupoIndex++;
+    } else {
+      this.grupoIndex = 0;
+    }
+  }
+
 
   public nextGradeItem() {
     if (this.thisStudentGrades[this.topLevelIndexGrades].length - 1 > this.subGroupIndexGrades) {
@@ -395,7 +427,6 @@ export class EstudantesComponent  {
       
   }
 
-  console.log(this.studentsGlobalAverage);
 
   // guardar as médias globais na base de dados 
   this.dataModelInterface.sendGlobalScore(this.studentsGlobalAverage).subscribe((data)=>{

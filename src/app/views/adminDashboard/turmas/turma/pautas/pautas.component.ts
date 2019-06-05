@@ -91,8 +91,7 @@ export class PautasComponent  {
                 'pp2' : 0,
                 'ct' : 0,
                 'participacao' : '',
-                'recuperacao' : false,
-                'mediaGlobalAnterior' : 0
+                'recuperacao' : false
               })
             }          
           }
@@ -147,15 +146,6 @@ export class PautasComponent  {
     this.gradeDataToSend.forEach((cadaEstudate)=>{  
       if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
         cadaEstudate['participacao'] = classificacao.value;
-      }
-    });
-  }
-
-  // --> to be removed ASAP
-  public mediaGlobalAnterior(classificacao, estudante) {
-    this.gradeDataToSend.forEach((cadaEstudate)=>{  
-      if (cadaEstudate['estudantecod'] == estudante['estudantecod']) {
-        cadaEstudate['mediaGlobalAnterior'] = classificacao.value;
       }
     });
   }

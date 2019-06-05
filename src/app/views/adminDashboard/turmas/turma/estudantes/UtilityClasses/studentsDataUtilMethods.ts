@@ -547,15 +547,15 @@ export class StudentDataUtils {
         return {
             'disciplinasEmBaixa' : {
                 'valor' : (disciplinasEmBaixa.length > 0) ? 
-                    this.stringShortenerInArray(disciplinasEmBaixa, 5).splice(0,5).toString()+((disciplinasEmBaixa.length >= 5)?" ,...":".") : 'Sem disciplinas'
+                    this.stringShortenerInArray(disciplinasEmBaixa, 4).splice(0,4).toString()+((disciplinasEmBaixa.length >= 4)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasEmAlta' : {
                 'valor' : (disciplinasEmAlta.length > 0) ? 
-                    this.stringShortenerInArray(disciplinasEmAlta, 5).splice(0,5).toString()+((disciplinasEmAlta.length >= 5)?" ,...":".") : 'Sem disciplinas'
+                    this.stringShortenerInArray(disciplinasEmAlta, 4).splice(0,4).toString()+((disciplinasEmAlta.length >= 4)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasNoMeio' : {
                 'valor' : (disciplinasNoMeio.length > 0) ? 
-                this.stringShortenerInArray(disciplinasNoMeio, 5).splice(0,5).toString()+((disciplinasNoMeio.length >= 5)?" ,...":".") : 'Sem disciplinas'
+                this.stringShortenerInArray(disciplinasNoMeio, 4).splice(0,4).toString()+((disciplinasNoMeio.length >= 4)?" ,...":".") : 'Sem disciplinas'
             },
             'disciplinasExtras' : {
                 'culinaria' : (culinaria == 0) ? 'transparente' : (culinaria == -1) ? 'vermelho' : (culinaria == 2) ? 'verde' : 'laranja',
@@ -607,6 +607,47 @@ export class StudentDataUtils {
         } else {
             return [];
         }             
+    }
+
+    public aulasRecuperacao(arrayOfData : any[]) {
+        var disciplinasRecupe : any[] = [];
+        var dataToReturn : any[] = [];
+        
+        var grupoDeDois = 0;
+        
+        arrayOfData.forEach((disc)=>{
+            if (disc['recuperacao']) {
+                disciplinasRecupe.push(disc['disciplina_nome']);
+            }
+        });
+
+        // criando o primeiro grupo
+        dataToReturn.push([]);
+
+        // divide em 2 grupos as disciplinas em recuperação 
+        disciplinasRecupe.forEach((disc)=>{
+            
+            if (grupoDeDois <= 1) {
+                dataToReturn[dataToReturn.length-1].push(disc);
+                grupoDeDois++;
+            } else {
+
+                // inicialize o construtor
+                grupoDeDois = 0;
+
+                // criar mais um grupo 
+                dataToReturn.push([]);
+
+                dataToReturn[dataToReturn.length-1].push(disc);     
+                
+                // incrementa o cont do grupo 
+                grupoDeDois++;
+
+            }
+        
+        });
+
+        return (dataToReturn[0].length == 0) ? [] : dataToReturn;
     }
 
 }

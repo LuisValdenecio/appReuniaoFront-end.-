@@ -66,14 +66,14 @@ thead {
 }
 
 .wrap-contact100:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(#fff, #4fa087 ,#276552 );
-  opacity: .9;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(#6d8da1, #7acbeb);
+    opacity: .9;
 }
 
 .wrap-contact100 {
@@ -336,8 +336,16 @@ thead {
 }
 
 .card-ens-prim .card-header {
-  background: #1a8e94;
+  background: #105c60;
   color: #fff;
+}
+
+.card-ens-prim .card-header .col-lg-8 h6, 
+.card-ens-prim .card-header .col-lg-10 h6 {
+  font-size: 20px;
+  position: absolute;
+  width: 500px;
+  left: -120px;
 }
 
 .icone-balancer {
@@ -425,7 +433,7 @@ thead {
 }
 
 .falta-categoria .col-lg-9 span, .falta-categoria .col-lg-12 span {
-  font-size: 20px;
+  font-size: 23px;
   text-align: left;
 }
 
@@ -615,4 +623,57 @@ thead {
 
 .fa-level-up, .fa-level-down {
   font-size: 25px;
+}
+
+/*formatação para o anúncio de aulas de recuperação*/
+.aulas-recuper .card-header {
+  background : #183853;
+  font-weight: bold;
+  color: #fff;
+}
+
+.aulas-recuper .card {
+  border: none;
+  text-transform: uppercase;
+  width: 450px;
+  height: 5%;
+}
+
+.aulas-recuper .card-body {
+  background: #1a8e94;
+  color: #fff;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  height: 920%;
+}
+
+.aulas-recuper .card-body .mais-part h3{
+  position: relative;
+  top: -30px;
+  margin: 5px;
+}
+
+.aulas-recuper .card-body .uma-part h3{
+  position: relative;
+  top: 1.5px;
+  margin: 5px;
+}
+
+.recuperacao-arr-left {
+  position: relative;
+  left: -200px;
+  font-size: 25px;
+  top: -50px;
+  cursor: pointer;
+  width: 60px;
+}
+
+.recuperacao-arr-right {
+  position: relative;
+  right: -200px;
+  font-size: 25px;
+  top: -170px;
+  cursor: pointer;
+  width: 60px;
 }
