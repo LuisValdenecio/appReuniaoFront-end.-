@@ -16,7 +16,8 @@ export class JustificativoComponent {
   
   public shoudlDisplayFaltasModal : Boolean = false;
   public filteredAttribute : String;
-  private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
+    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
 
   //--> atributos que activam ou desactivam erros no form do justificativo de faltas
   public erroSemDisciplinas : Boolean = false;

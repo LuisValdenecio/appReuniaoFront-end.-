@@ -12,7 +12,9 @@ export class TurmaComponent  {
   public display : Boolean = true; // --> isto é somente um hack para fazer desaparecer o view da turma
   public isThisTeacherCoor : Boolean = false;
 
-  private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
+    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
   constructor(private dataInterface : DataModelInterface) {

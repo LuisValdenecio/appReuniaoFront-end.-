@@ -17,8 +17,8 @@ export class PautasComponent  {
     public theRealSubjectsToShow : any[] = [];
     public _markedSubjects : any[] = [];
 
-
-    private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+    private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
+    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
     private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
     // --> esta propriedade conterá o conjunto de informações sobre as notas da turma 
