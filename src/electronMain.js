@@ -10,7 +10,7 @@ function isDev() {
 function createWindow() {
     win = new BrowserWindow({ width : 1300, height: 800, frame : false}); 
     win.loadURL(url.format({
-        pathname : path.join(__dirname, '../dist/appReunioes/index.html'),
+        pathname : path.join(__dirname, './dist/index.html'),
         protocol : 'file',
         slashes : true
     }));

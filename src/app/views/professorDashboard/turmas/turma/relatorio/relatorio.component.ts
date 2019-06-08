@@ -32,8 +32,10 @@ export class RelatorioComponent  {
  
    public shouldDisplayFirstModal : Boolean = false;
    public shouldDisplaySecondModal : Boolean = false;
-   private thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
- 
+
+   private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
+   window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend) 
+
    //-->> a seguir vão os atributos dos data-binding 
    public studentDisplayed : any;
    public thisStudentNumber : number = 1;

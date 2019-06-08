@@ -1,5 +1,5 @@
 {
-  "name": "app-reunioes",
+  "name": "app_reunioes",
   "version": "0.0.0",
   "license": "MIT",
   "main": "src/electronMain.js",
@@ -35,7 +35,7 @@
         "packageManager": "npm"
       },
       "electronWinstallerConfig": {
-        "name": "ng-example"
+        "name": "AppReunioes"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
@@ -45,7 +45,7 @@
       },
       "windowsStoreConfig": {
         "packageName": "",
-        "name": "ngExample"
+        "name": "AppReunioes"
       }
     }
   },

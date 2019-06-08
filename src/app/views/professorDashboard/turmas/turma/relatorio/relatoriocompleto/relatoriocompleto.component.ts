@@ -19,22 +19,26 @@ export class RelatoriocompletoComponent  {
   private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
     window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
 
+  private thisStudentCod = (window.location.href.split("/")[7].length != 32) ? 
+    window.location.href.split("/")[16] : window.location.href.split("/")[7];
+
+
   constructor(private dataInterface : DataModelInterface, private utilMethods : SharedRelatorioMethodsService) {
     
     this.dataInterface.getAllStudentsFromCLass("/"+this.formatURL(this.thisClassesURL)+"_students").subscribe(data=>{
-      this.studentData = data.filter(student => student['estudantecod'] == this.formatURL(window.location.href.split("/")[7]));
+      this.studentData = data.filter(student => student['estudantecod'] == this.formatURL(this.thisStudentCod));
     });
 
     this.dataInterface.getThisClassFaults("/"+this.formatURL(this.thisClassesURL)+"_faults").subscribe(data=>{
-      this.faultsData = data.filter(student => student['estudantecod'] == this.formatURL(window.location.href.split("/")[7]));
+      this.faultsData = data.filter(student => student['estudantecod'] == this.formatURL(this.thisStudentCod));
     });
 
     this.dataInterface.getClassGrades("/"+this.formatURL(this.thisClassesURL)+"_grades").subscribe(data=>{
-      this.gradesData = data.filter(student => student['estudantecod'] == this.formatURL(window.location.href.split("/")[7]));
+      this.gradesData = data.filter(student => student['estudantecod'] == this.formatURL(this.thisStudentCod));
     });
 
     this.dataInterface.getJustificativoData().subscribe(data=>{
-      this.justificativosData = data.filter(student => student['estudantecod'] == this.formatURL(window.location.href.split("/")[7]));
+      this.justificativosData = data.filter(student => student['estudantecod'] == this.formatURL(this.thisStudentCod));
     });
 
     // -->> determina qual modal mostrar para cada estudante
