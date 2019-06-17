@@ -14,12 +14,21 @@ export class TurmaComponent  {
   public _studentData : any[];
   public _thisClassSubjects : any[];
   
-  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
-   window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  private thisClassesURL : any;
 
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
   constructor(private activeRoute : ActivatedRoute, private dataModelInterface : DataModelInterface) {
+  
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[17];
+    }
+  
     this.activeRoute.url.subscribe(data=>{
       this.routeInfo = data;
     });

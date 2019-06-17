@@ -14,14 +14,23 @@ export class LivroDePontoComponent  {
   public typeOfInput : any = {'inputType' : 'checkbox', 'class': ''};
   public nameOfSubjectToMark : String;
 
-  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
-   window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
-  private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
+  private thisClassesURL : any;
+
+   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
   // esta propriedade armazenará um vector de estudantes com as suas respectivas informações de faltas de volta ao servidor
   public studentDataToSend : any[] = [];
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router) {
+
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[17];
+    }
 
     this.dataModelInterface.getAllStudentsFromCLass("/"+this.formatURL()+"_students").subscribe(data=>{
       this._studentData = data;

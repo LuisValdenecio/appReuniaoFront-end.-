@@ -16,15 +16,30 @@ export class RelatoriocompletoComponent  {
   public justificativosData : any[];
   public thisClassGrade : String;
 
-  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
-    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
-
-  private thisStudentCod = (window.location.href.split("/")[7].length != 32) ? 
-    window.location.href.split("/")[16] : window.location.href.split("/")[7];
-
+  private thisClassesURL : any;
+  private thisStudentCod : any;
 
   constructor(private dataInterface : DataModelInterface, private utilMethods : SharedRelatorioMethodsService) {
     
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+        this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+        this.thisClassesURL = window.location.href.split("/")[17];
+    }
+
+    // esta condição é muito importante para relatórios individuais
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[7] != undefined && window.location.href.split("/")[7].length == 32) {
+      this.thisStudentCod = window.location.href.split("/")[7];
+    } else if (window.location.href.split("/")[16] != undefined && window.location.href.split("/")[16].length == 32) {
+        this.thisStudentCod = window.location.href.split("/")[16];
+    }  else if (window.location.href.split("/")[19] != undefined && window.location.href.split("/")[19].length == 32) {
+        this.thisStudentCod = window.location.href.split("/")[19];
+    }
+
     this.dataInterface.getAllStudentsFromCLass("/"+this.formatURL(this.thisClassesURL)+"_students").subscribe(data=>{
       this.studentData = data.filter(student => student['estudantecod'] == this.formatURL(this.thisStudentCod));
     });

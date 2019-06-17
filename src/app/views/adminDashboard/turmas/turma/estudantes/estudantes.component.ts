@@ -33,8 +33,8 @@ export class EstudantesComponent  {
 
   public shouldDisplayFirstModal : Boolean = false;
   public shouldDisplaySecondModal : Boolean = false;
-  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
-    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  
+  private thisClassesURL : any;
 
   //-->> a seguir vão os atributos dos data-binding 
   public studentDisplayed : any;
@@ -72,7 +72,16 @@ export class EstudantesComponent  {
   public newestURL : String = "";
 
   constructor(private dataModelInterface : DataModelInterface, private studentDataUtils : StudentDataUtils) {
-    
+
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[17];
+    }
+
     this.dataModelInterface.getAllStudentsFromCLass("/"+this.formatURL()+"_students").subscribe(data=>{
       this._studentData = data;
     });

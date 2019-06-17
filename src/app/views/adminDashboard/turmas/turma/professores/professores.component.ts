@@ -15,7 +15,8 @@ export class ProfessoresComponent  {
   public thisClassTeachers : any[];
 
   public shouldDisplayModal : Boolean = false;
-  public thisClassesURL = window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
+  
+  private thisClassesURL : any;
 
   public emailAuth : FormAuth = new FormAuth('', 'email');
   public passWordAuth : FormAuth = new FormAuth('', 'text');
@@ -24,6 +25,16 @@ export class ProfessoresComponent  {
   public filteredAttribute : String;
 
   constructor(private dataModelInterface : DataModelInterface, private router : Router) {
+
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[17];
+    }
+
     this.dataModelInterface.getThisClassTeachers("/"+this.formatURL()+"_teachers").subscribe(data=>{
       this.thisClassTeachers = data;
     })

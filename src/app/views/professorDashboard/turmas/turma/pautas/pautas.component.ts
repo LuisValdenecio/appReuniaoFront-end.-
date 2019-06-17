@@ -21,15 +21,23 @@ export class PautasComponent {
 
   public flagToDisableSelect : Boolean = true;
 
-  private thisClassesURL = (window.location.href.split("/")[5].length != 32) ? 
-    window.location.href.split("/")[14] : window.location.href.split("/")[5]; // --> Substituição urgente (dependencia com o backend)
- 
+  private thisClassesURL : any;
+
   private filteredAttribute : String = ""; // --> Substituição urgente (dependencia com o backend)
 
   // --> esta propriedade conterá o conjunto de informações sobre as notas da turma 
   private gradeDataToSend : any[] = [];
   
   constructor(private dataInterface : DataModelInterface, private router : Router) {
+
+    // esta condição é muito importante antes de inserir setar o valor do thisClassesURL 
+    if (window.location.href.split("/")[5] != undefined && window.location.href.split("/")[5].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[5];
+    } else if (window.location.href.split("/")[14] != undefined && window.location.href.split("/")[14].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[14];
+    }  else if (window.location.href.split("/")[17] != undefined && window.location.href.split("/")[17].length == 32) {
+      this.thisClassesURL = window.location.href.split("/")[17];
+    }
     
     this.dataInterface.isThisTeacherCood("/"+this.formatURL()+"_"+this.dataInterface.parseJwt(this.dataInterface.getToken())['codUser']+"_coord").subscribe(data=>{
       this.isThisTeacherCoor = data > 0;
