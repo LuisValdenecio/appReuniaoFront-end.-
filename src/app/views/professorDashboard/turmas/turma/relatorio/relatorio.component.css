@@ -1,4 +1,4 @@
-.progress { 
+.progress {
   height: 5px;
   border-radius: 0%;
 }
@@ -53,7 +53,7 @@ thead {
 /*==================================================================
 [ Content container ]*/
 .container-contact100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   padding: 15px;
   background: rgba(132,106,221,0.8);
@@ -78,7 +78,7 @@ thead {
 
 .wrap-contact100 {
   width: 1310px;
-  background: #fff; 
+  background: #fff;
   border-radius: 3px;
   position: relative;
   background: url("C:/Users/casa/Documents/Eu/appReunioes/appReunioes/src/assets/img/2.jpg") center center no-repeat;
@@ -117,7 +117,7 @@ thead {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   overflow: hidden;
-  
+
   padding: 30px 15px 30px 15px;
 }
 
@@ -167,7 +167,7 @@ thead {
 .academicModal-body {
   width: 100%;
   height: 90%;
-  text-align: center; 
+  text-align: center;
 }
 
 .student-number {
@@ -302,7 +302,7 @@ thead {
   border-radius : 5px 0px 5px 0px;
   border: none;
   color: #fff;
-}  
+}
 
 .indicador-notas .col-lg-10 span {
   text-transform: uppercase;
@@ -340,7 +340,7 @@ thead {
   color: #fff;
 }
 
-.card-ens-prim .card-header .col-lg-8 h6, 
+.card-ens-prim .card-header .col-lg-8 h6,
 .card-ens-prim .card-header .col-lg-10 h6 {
   font-size: 20px;
   position: absolute;
@@ -358,14 +358,14 @@ thead {
   background:#FFF;
   position: absolute;
   top: 35%;
-  border-radius: 50%; 
-  border: solid 7px #1a8e94; 
+  border-radius: 50%;
+  border: solid 7px #1a8e94;
   height:120px;
   width:120px;
 }
 
 .icone-ingles {
-  right:272px; 
+  right:272px;
 }
 
 .icone-ingles span {
@@ -383,11 +383,11 @@ thead {
 }
 
 .icone-informatica {
-  right:144px; 
+  right:144px;
 }
 
 .icone-outras {
-  right:15px; 
+  right:15px;
 }
 
 .icone-culinaria, .icone-xadrez, .icone-teatro {
@@ -422,7 +422,7 @@ thead {
   border-radius: 5px 0px 5px 0px;
   padding: 2px;
   font-weight: bold;
-} 
+}
 
 .falta-categoria {
   border-radius: 6px 0px 6px 0px;
@@ -474,7 +474,7 @@ thead {
 .tarefas-icone {
   position: absolute;
   top: 35%;
-  border-radius: 50%; 
+  border-radius: 50%;
   height:90px;
   width:90px;
   left: 35%;
@@ -534,7 +534,7 @@ thead {
 }
 
 .positivasAbaixoDe14 {
-  background: orange; 
+  background: orange;
 }
 
 .negativas {
@@ -542,7 +542,7 @@ thead {
 }
 
 .transparente {
-  color: transparent;
+  color: #cbd1d8;
 }
 
 .mixPositivas {
@@ -606,7 +606,7 @@ thead {
 }
 
 .notas-tecnico-row .card {
-  position: relative; 
+  position: relative;
   height: 58px;
 }
 
