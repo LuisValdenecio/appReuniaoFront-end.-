@@ -90,6 +90,7 @@ export class RelatorioComponent  {
 
      this.dataModelInterface.getClassGrades("/"+this.formatURL()+"_grades").subscribe(data=>{
        this._gradesData = data;
+       console.log(this._gradesData);
      });
 
      this.dataModelInterface.getAllSubjects("/"+this.formatURL()).subscribe(data=>{

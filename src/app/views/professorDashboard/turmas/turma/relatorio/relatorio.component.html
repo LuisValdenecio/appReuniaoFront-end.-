@@ -2,8 +2,8 @@
 
   <!--
     Para efeitos de simplicidade, decidi colocar aqui os dois modals
-   -->  
-  
+   -->
+
    <!-- 1º Modal (ensino primario) -->
    <div *ngIf="shouldDisplayFirstModal" class="container-contact100">
     <div class="wrap-contact100 row">
@@ -11,9 +11,9 @@
             <span>Relatório académico</span>
         </div>
         <div class="academicModal-body">
-  
+
           <div class="container-fluid">
-            
+
                <!-- para aulas de recuperacao -->
                <div class="row aulas-recuper" style="position: absolute;top:90px;left:15px" *ngIf="aulasRecuperacao.length > 0">
                 <div class="col-lg-12">
@@ -34,7 +34,7 @@
                     </div>
                   </div>
                 </div>
-              </div>                    
+              </div>
 
               <!-- linha da fotografia -->
               <div class="row">
@@ -43,10 +43,10 @@
                   <div class="photoFrame">
                     <img [src]="thisStudentPhoto">
                   </div>
-  
+
                 </div>
               </div>
-  
+
               <!-- linha do nº e nome do estudante -->
               <div class="row">
                 <div class="col-lg-8 offset-2 mb-4">
@@ -58,37 +58,37 @@
                       <h3>{{studentDisplayed.nome}}</h3>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
-  
+
               <div [ngSwitch]="firtsThreeAppear">
-                
+
                 <!-- linha dos primeiros três critérios de classificação -->
                 <div class="row" *ngSwitchCase="true">
-  
+
                   <!-- 1º -->
                   <div class="col-lg-4">
                     <div class="card card-ens-prim p-0">
                       <div class="card-header">
                         <div class="row pt-2">
-                          
+
                           <div class="col-lg-2">
                             <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
-  
+
                           <div class="col-lg-10">
                             <h6>Desempenho de notas</h6>
                           </div>
-                          
+
                         </div>
                       </div>
                       <div class="card-body" style="padding:5px">
-  
+
                         <div class="row">
-  
+
                           <div class="col-lg-12">
-                            
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-3 falta-categoria subjectListingcard">
@@ -103,7 +103,7 @@
                                   </div>
                                 </div>
                               </div>
-    
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-3 falta-categoria subjectListingcard">
@@ -118,7 +118,7 @@
                                   </div>
                                 </div>
                               </div>
-    
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                     <div class="card p-3 falta-categoria subjectListingcard">
@@ -133,126 +133,126 @@
                                     </div>
                                 </div>
                               </div>
-      
+
                           </div>
-  
-  
+
+
                         </div>
-                        
-  
-  
-  
+
+
+
+
                       </div>
                     </div>
                   </div>
-  
+
                   <!-- 2º -->
                   <div class="col-lg-4">
                     <div class="card card-ens-prim">
                       <div class="card-header">
                         <div class="row pt-2">
-                        
+
                           <div class="col-lg-2">
                               <svg-icon src="assets/svg/actividades.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
-  
+
                           <div class="col-lg-10">
                             <h6>Act. Extracurriculares</h6>
                           </div>
-                            
+
                         </div>
                       </div>
                       <div class="card-body">
-                        
+
                         <!-- linha dos 3 círculos de actividades extras -->
                         <div class="row">
-  
+
                           <div class="col-lg-12">
-  
+
                             <div class="row icone-balancer">
-  
+
                               <!-- div para o ícone de l.inglesa -->
                               <div class="col-lg-4 icone-ingles icone" >
                                 <div>
                                     <svg-icon src="assets/svg/ingles.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['ingles']"></svg-icon>
                                 </div>
                               </div>
-                              
+
                               <!-- div para o icone de informática -->
                               <div class="col-lg-4 icone-informatica icone">
                                 <div>
                                     <svg-icon src="assets/svg/informatica.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['informatica']"></svg-icon>
                                 </div>
                               </div>
-                              
+
                               <!-- div para o icone de outras actividades -->
                               <div class="col-lg-4 icone-outras icone">
-  
+
                                 <span class="fa fa-cutlery icone-culinaria" [ngClass]="thisStudentGrades['disciplinasExtras']['culinaria']" ></span>
-                                
+
                                 <div>
                                     <svg-icon src="assets/svg/xadrez.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['xadrez']"></svg-icon>
                                 </div>
                                 <div>
                                     <svg-icon src="assets/svg/teatro.svg" [svgStyle]="thisStudentGrades['disciplinasExtras']['teatro']"></svg-icon>
-                                </div>                           
-                             
+                                </div>
+
                               </div>
-  
+
                             </div>
-  
+
                             <div class="row subject-list">
-  
+
                               <div class="col-lg-3 extra-subject">
                                 <div class="card">
                                   <span>Inglês</span>
                                 </div>
                               </div>
-  
+
                               <div class="col-lg-6 extra-subject">
                                 <div class="card">
                                   <span>Informática</span>
                                 </div>
                               </div>
-  
+
                               <div class="col-lg-3 extra-subject">
                                 <div class="card">
                                   <span>Outras</span>
                                 </div>
                               </div>
-  
+
                             </div>
-  
+
                           </div>
-  
+
                         </div>
-                      
+
                       </div>
                     </div>
                   </div>
-  
+
                   <!-- 3º -->
                   <div class="col-lg-4">
                     <div class="card card-ens-prim">
                       <div class="card-header">
                         <div class="row pt-2">
-                        
+
                           <div class="col-lg-2">
                             <svg-icon src="assets/svg/faltas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                           </div>
-  
+
                           <div class="col-lg-10">
                             <h6>Situação das Faltas</h6>
                           </div>
-                          
+
                           </div>
                       </div>
                       <div class="card-body">
                         <div class="row paddingEraserInFaults faultsMainRow">
-  
+
                           <!-- secção do gráfico de faltas -->
                           <div class="col-lg-6 paddingEraserInFaults">
-                             
+
                             <div class="row mb-2">
                               <div class="col-lg-12">
                                 <div class="card p-2 falta-categoria subjectListingcard">
@@ -264,7 +264,7 @@
                                 </div>
                                 </div>
                               </div>
-    
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria subjectListingcard">
@@ -276,7 +276,7 @@
                                   </div>
                                 </div>
                               </div>
-  
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria subjectListingcard">
@@ -288,12 +288,12 @@
                                   </div>
                                 </div>
                               </div>
-  
+
                             </div>
-  
+
                           <!-- secçao dos cards das diferentes faltas -->
                           <div class="col-lg-6 paddingEraserInFaults">
-                            
+
                             <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria subjectListingcard">
@@ -308,7 +308,7 @@
                                   </div>
                                 </div>
                               </div>
-    
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria subjectListingcard">
@@ -323,7 +323,7 @@
                                   </div>
                                 </div>
                               </div>
-  
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria subjectListingcard">
@@ -338,139 +338,139 @@
                                   </div>
                                 </div>
                               </div>
-                          
+
                           </div>
-                    
+
                         </div>
                       </div>
                     </div>
                   </div>
-  
-  
+
+
                 </div>
-  
+
                 <!-- linha dos últimos três critérios de classificação -->
                 <div class="row" *ngSwitchCase="false">
-  
+
                     <!-- 1º -->
                     <div class="col-lg-4">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                            
+
                             <div class="col-lg-2">
                               <svg-icon src="assets/svg/comportamento.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-10">
                               <h6>Avaliação Disciplinar</h6>
                             </div>
-                            
+
                           </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                              
+
                               <!-- secção do ícone da avaliação disciplinar -->
                               <div class="col-lg-12 mb-2">
                                 <span [ngClass]="thisStudentGrades['avaliacao_disciplinar']['icone']" style="font-size:90px"></span>
                               </div>
-  
+
                               <!-- secção do classificação textual da avaliação disciplinar -->
                               <div class="col-lg-12 mb-2 avaliacao-disc-text">
                                 <h3>{{thisStudentGrades['avaliacao_disciplinar']['valor']}}</h3>
                               </div>
-  
+
                             </div>
                         </div>
                       </div>
                     </div>
-    
+
                     <!-- 2º -->
                     <div class="col-lg-4">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                          
+
                             <div class="col-lg-2">
                               <svg-icon src="assets/svg/tarefas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-10">
                               <h6>Resolução de Tarefas</h6>
                             </div>
-                              
+
                           </div>
                         </div>
                         <div class="card-body">
                           <div class="row" *ngIf="thisStudentGrades['resolucaoDeTarefas']['valor'].length > 0">
-                            
+
                             <div class="col-lg-12">
-                              
+
                                <!-- secção do ícone da resolução de tarefas -->
                               <div class="row">
                                 <div class="col-lg-4 tarefas-icone">
                                   <svg-icon src="assets/svg/tarefasIcon.svg" [svgStyle]="{ 'width.px': '90', 'height.px' : '90'}"></svg-icon>
                                 </div>
                               </div>
-                              
+
                               <!-- secção das estrelas da resolução de tarefas -->
                               <div class="row">
                                 <div class="col-lg-12">
-  
+
                                   <div class="row linha-das-estrelas">
                                     <div class="col-lg-2" *ngFor="let stars of thisStudentGrades['resolucaoDeTarefas']['valor']">
                                       <span class="fa fa-star" [style.color]="stars['color']"></span>
                                     </div>
                                   </div>
-                                
+
                                 </div>
                               </div>
                             </div>
-                            
+
                           </div>
-  
+
                           <div class="row" *ngIf="thisStudentGrades['resolucaoDeTarefas']['valor'].length == 0">
-                              
+
                             <!-- secção do ícone da avaliação disciplinar -->
                             <div class="col-lg-12 mb-2">
                               <span class="fa fa-plug" style="font-size:90px"></span>
                             </div>
-  
+
                             <!-- secção do classificação textual da avaliação disciplinar -->
                             <div class="col-lg-12 mb-2 avaliacao-disc-text">
                               <h3>Sem dados</h3>
                             </div>
-  
+
                           </div>
-  
+
                         </div>
                       </div>
                     </div>
-    
+
                     <!-- 3º -->
                     <div class="col-lg-4">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                          
+
                             <div class="col-lg-2">
                               <svg-icon src="assets/svg/global.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-10">
                               <h6>Avaliação Global</h6>
                             </div>
-  
+
                             <div class="col-lg-2 desempenho-perc">
                               <h6>
                                 <span [ngClass]="thisStudentGrades['evolucao']"></span>
                               </h6>
                             </div>
-                            
+
                             </div>
                         </div>
-  
+
                         <!-- secção da percentagem global -->
                         <div class="card-body">
                           <div class="percentagem-global">
@@ -479,18 +479,18 @@
                         </div>
                       </div>
                     </div>
-    
-    
+
+
                   </div>
-  
+
               </div>
-  
+
               <!-- linha dos botões de opções -->
               <div class="row mt-4">
                 <div class="col-lg-4">
                   <button (click)="previousModal(studentDisplayed)" class="btn p-3"><i class="fa fa-mail-reply "></i> Estudante Anterior</button>
                 </div>
-  
+
                 <div class="col-lg-4">
                   <div class="row">
                     <div class="col-lg-4">
@@ -512,22 +512,22 @@
                       </button>
                     </div>
                   </div>
-                  
+
                 </div>
-  
+
                 <div class="col-lg-4">
                     <button (click)="nextModal(studentDisplayed)" class="btn p-3">Próximo Estudante <i class="fa fa-mail-forward"></i></button>
                 </div>
-  
+
               </div>
-  
+
           </div>
-  
-         
+
+
         </div>
     </div>
   </div>
-  
+
   <!-- 2º Modal (ensino Técnico) -->
   <div *ngIf="shouldDisplaySecondModal" class="container-contact100">
     <div class="wrap-contact100 row">
@@ -535,7 +535,7 @@
             <span>Relatório académico</span>
         </div>
         <div class="academicModal-body">
-  
+
             <div class="container-fluid">
 
                 <!-- para aulas de recuperacao -->
@@ -558,8 +558,8 @@
                       </div>
                     </div>
                   </div>
-                </div>          
-  
+                </div>
+
                 <!-- linha da fotografia -->
                 <div class="row">
                   <div class="col-lg-4 offset-4 p-4">
@@ -567,10 +567,10 @@
                     <div class="photoFrame">
                       <img [src]="thisStudentPhoto">
                     </div>
-  
+
                   </div>
                 </div>
-  
+
                 <!-- linha do nº e nome do estudante -->
                 <div class="row">
                   <div class="col-lg-8 offset-2 mb-4">
@@ -582,50 +582,50 @@
                         <h3>{{studentDisplayed.nome}}</h3>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
-  
+
                 <div [ngSwitch]="firtsThreeAppear">
-                  
+
                   <!-- linha dos primeiros três critérios de classificação -->
                   <div class="row" *ngSwitchCase="true">
-  
+
                     <!-- 1º -->
                     <div class="col-lg-4 card-father">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                            
+
                             <div class="col-lg-2">
                               <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-8">
                               <h6>Desempenho de notas</h6>
                             </div>
-  
+
                             <div class="col-lg-2 desempenho-perc">
                               <h6>{{thisStudentGrades[thisStudentGrades.length - 1][0].pontuacaoGlobal}}</h6>
                             </div>
-                            
+
                           </div>
                         </div>
-  
+
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
                             <div class="progress-bar" role="progressbar" [style.width]="thisStudentGrades[thisStudentGrades.length - 1][0].pontuacaoGlobal" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
-  
-                        
+
+
                         <div class="card-body">
-                          
+
                           <div class="row notas-tecnico-row">
-  
+
                               <div class="col-lg-12" style="padding:0px">
-                              
+
                                   <div class="row mb-2">
                                     <div class="col-lg-12">
                                       <div class="card p-2 falta-categoria">
@@ -640,7 +640,7 @@
                                       </div>
                                     </div>
                                   </div>
-        
+
                                   <div class="row mb-2">
                                     <div class="col-lg-12">
                                       <div class="card p-2 falta-categoria">
@@ -655,9 +655,9 @@
                                       </div>
                                     </div>
                                   </div>
-      
+
                                   <div class="row mb-2" style="padding:0px">
-  
+
                                     <!-- -->
                                     <div class="col-lg-4">
                                       <div class="card p-2 falta-categoria subjectListingcard" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['mediaNotas']['class']">
@@ -668,7 +668,7 @@
                                         </div>
                                       </div>
                                     </div>
-  
+
                                     <!-- -->
                                     <div class="col-lg-8">
                                       <div class="card p-2 falta-categoria subjectListingcard" [ngClass]="thisStudentGrades[thisStudentGrades.length - 1][0]['percentDeSucesso']['class']">
@@ -679,101 +679,101 @@
                                         </div>
                                       </div>
                                     </div>
-  
+
                                   </div>
-        
+
                                 </div>
-  
-  
+
+
                           </div>
-                        
+
                         </div>
-                      
+
                       </div>
                     </div>
-    
+
                     <!-- 2º -->
                     <div class="col-lg-4 card-father">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                          
+
                             <div class="col-lg-2">
                               <svg-icon src="assets/svg/partaulas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-8">
                               <h6>Participação nas Aulas</h6>
                             </div>
-  
+
                             <div class="col-lg-2 desempenho-perc">
                               <h6>{{ thisStudentParticipation['percentPart']}}</h6>
                             </div>
-                              
+
                           </div>
                         </div>
-  
+
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
                             <div class="progress-bar" role="progressbar" [style.width]="thisStudentParticipation['percentPart']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
-  
+
                         <div class="card-body">
-                          
+
                           <div class="row">
-                            
+
                               <div class="col-lg-12 mb-2">
                                 <span [ngClass]="thisStudentParticipation['iconePart']" style="font-size:90px"></span>
                               </div>
-  
+
                               <div class="col-lg-12 mb-2 avaliacao-disc-text">
                                 <h3 style="font-weight: bold">{{thisStudentParticipation["particapacao"]}}</h3>
-                                
+
                               </div>
-  
+
                             </div>
-                         
+
                         </div>
                       </div>
                     </div>
-    
+
                     <!-- 3º -->
                     <div class="col-lg-4 card-father">
                       <div class="card card-ens-prim">
                         <div class="card-header">
                           <div class="row pt-2">
-                          
+
                             <div class="col-lg-2">
-                              <svg-icon src="assets/svg/faltas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>  
+                              <svg-icon src="assets/svg/faltas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                             </div>
-    
+
                             <div class="col-lg-8">
                               <h6>Situação das Faltas</h6>
                             </div>
-                      
+
                             <div class="col-lg-2 desempenho-perc">
                               <h6>{{thisStudentFaults['pontuacaoGlobal']}}</h6>
                             </div>
-  
+
                           </div>
                       </div>
-  
+
                         <!-- barra de desempenho -->
                         <div class="progress-group-bars">
                           <div class="progress progress-xs">
                             <div class="progress-bar" role="progressbar" [style.width]="thisStudentFaults['pontuacaoGlobal']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
-  
+
                         <div class="card-body">
-                          
+
                          <div class="row notas-tecnico-row">
-  
+
                             <!-- secção do gráfico de faltas -->
                             <div class="col-lg-6" style="padding:0px">
-                               
+
                               <div class="row mb-2">
                                   <div class="col-lg-12">
                                     <div class="card p-2 falta-categoria">
@@ -785,7 +785,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <div class="row mb-2">
                                   <div class="col-lg-12">
                                     <div class="card p-2 falta-categoria subjectListingcard">
@@ -797,7 +797,7 @@
                                     </div>
                                   </div>
                                 </div>
-    
+
                                 <div class="row mb-2">
                                   <div class="col-lg-12">
                                     <div class="card p-2 falta-categoria">
@@ -809,12 +809,12 @@
                                     </div>
                                   </div>
                                 </div>
-  
+
                             </div>
-  
+
                             <!-- secçao dos cards das diferentes faltas -->
                             <div class="col-lg-6" style="padding:0px">
-                              
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria">
@@ -829,7 +829,7 @@
                                   </div>
                                 </div>
                               </div>
-    
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria">
@@ -844,7 +844,7 @@
                                   </div>
                                 </div>
                               </div>
-  
+
                               <div class="row mb-2">
                                 <div class="col-lg-12">
                                   <div class="card p-2 falta-categoria">
@@ -859,84 +859,84 @@
                                   </div>
                                 </div>
                               </div>
-    
+
                             </div>
-                      
+
                           </div>
-                                    
-                         
+
+
                         </div>
                       </div>
                     </div>
-    
-    
+
+
                   </div>
-  
+
                   <!-- linha dos últimos três critérios de classificação -->
                   <div class="row" *ngSwitchCase="false">
-  
+
                       <!-- 1º -->
                       <div class="col-lg-4 card-father">
                         <div class="card card-ens-prim">
                           <div class="card-header">
                             <div class="row pt-2">
-                              
+
                               <div class="col-lg-2">
                                 <svg-icon src="assets/svg/comportamento.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                               </div>
-      
+
                               <div class="col-lg-8">
                                 <h6>Avaliação Disciplinar</h6>
                               </div>
-  
+
                               <div class="col-lg-2 desempenho-perc">
                                 <h6>{{thisStudentParticipation['percentComport']}}</h6>
                               </div>
-                              
+
                             </div>
                           </div>
-  
+
                           <!-- barra de desempenho -->
                           <div class="progress-group-bars">
                             <div class="progress progress-xs">
                               <div class="progress-bar" role="progressbar" [style.width]="thisStudentParticipation['percentComport']" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                           </div>
-  
+
                           <div class="card-body">
                             <div class="row">
-                              
+
                               <div class="col-lg-12 mb-2">
                                 <span [ngClass]="thisStudentParticipation['iconeComport']" style="font-size:90px"></span>
                               </div>
-  
+
                               <div class="col-lg-12 mb-2 avaliacao-disc-text">
                                 <h3 style="font-weight: bold">{{thisStudentParticipation['avalicaoDisciplinar']}}</h3>
-                                
+
                               </div>
-  
+
                             </div>
                           </div>
                         </div>
                       </div>
-      
+
                       <!-- 2º -->
                       <div class="col-lg-4 card-father">
                         <div class="card card-ens-prim">
                           <div class="card-header">
                             <div class="row pt-2">
-                            
+
                               <div class="col-lg-2">
                                 <svg-icon src="assets/svg/global.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                               </div>
-      
+
                               <div class="col-lg-10">
                                 <h6>Avaliação Global</h6>
                               </div>
-                                
+
                             </div>
                           </div>
-                            
+
                           <div class="card-body">
                             <div class="percentagem-global">
                               <h1>{{thisStudentAvaliationInPercent}}</h1>
@@ -944,24 +944,24 @@
                           </div>
                         </div>
                       </div>
-      
+
                       <!-- 3º -->
                       <div class="col-lg-4 card-father">
                         <div class="card card-ens-prim">
                           <div class="card-header">
                             <div class="row pt-2">
-                            
+
                               <div class="col-lg-2">
                                 <svg-icon src="assets/svg/notas.svg" [svgStyle]="{ 'width.px':30, 'height.px' : '30', 'fill' : 'white'}"></svg-icon>
                               </div>
-      
+
                               <div class="col-lg-10">
-                                <h6>Trimestre anterior:</h6>
+                                <h6>Análise Global</h6>
                               </div>
-                              
+
                               </div>
                           </div>
-                            
+
                           <div class="card-body">
                             <div class="card-body">
                               <div class="percentagem-global" *ngIf="barChartData.length > 0">
@@ -976,36 +976,36 @@
                                   </canvas>
                                 </div>
                               </div>
-  
+
                               <!-- para estudantes que estiverem na escola também no primeiro trimestre -->
                               <div class="row" *ngIf="barChartData.length == 0">
-                              
+
                                 <div class="col-lg-12 mb-2">
                                   <span class="fa fa-minus-circle" style="font-size:90px;color:orange"></span>
                                 </div>
-    
+
                                 <div class="col-lg-12 mb-2 avaliacao-disc-text">
                                   <h4 style="font-weight: bold">Sem dados no trimestre anterior</h4>
                                 </div>
-      
+
                               </div>
-    
+
                             </div>
                           </div>
                         </div>
                       </div>
-      
-      
+
+
                     </div>
-  
+
                 </div>
-  
+
                 <!-- linha dos botões de opções -->
                 <div class="row mt-4">
                   <div class="col-lg-4">
                     <button (click)="previousModal(studentDisplayed)" class="btn p-3"><i class="fa fa-mail-reply "></i> Estudante Anterior</button>
                   </div>
-  
+
                   <div class="col-lg-4">
                       <div class="row">
                         <div class="col-lg-4">
@@ -1027,27 +1027,27 @@
                           </button>
                         </div>
                       </div>
-                      
+
                     </div>
-  
+
                   <div class="col-lg-4">
                       <button (click)="nextModal(studentDisplayed)" class="btn p-3">Próximo Estudante <i class="fa fa-mail-forward"></i></button>
-  
+
                   </div>
-  
+
                 </div>
-  
+
             </div>
-  
-           
+
+
           </div>
     </div>
   </div>
-  
+
   <div class="row mt-4">
-  
+
   <div class="col-lg-12">
-  
+
     <div class="table-responsive">
       <table class="table table-striped">
           <thead>
@@ -1068,7 +1068,7 @@
                 <span>{{student.nome}}</span>
               </td>
               <td class="pt-4">
-               <span>{{i+1}}</span> 
+               <span>{{i+1}}</span>
               </td>
               <td class="text-center pt-3">
                 <button (click)="openModal(i)" class="btn"><i class="fa fa-eye"></i> Relatório</button>
@@ -1080,16 +1080,15 @@
           </tbody>
         </table>
       </div>
-  
-  
+
+
   </div>
-  
+
   </div>
-  
+
   </div>
-  
+
   <div>
     <router-outlet></router-outlet>
   </div>
-    
-  
+
